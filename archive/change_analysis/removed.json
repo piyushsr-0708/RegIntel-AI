@@ -1,0 +1,47 @@
+[
+    {
+        "source_file": "41YC01072013KF.pdf",
+        "chunk_id": 43,
+        "trigger_word": "preserve",
+        "requirement": "copies of documents like passports, identity cards, driving licenses, \nPAN card, utility bills etc.) obtained while opening the account and during the course \nof business relationship, as indicated in paragraph 4 of the of the above said Master \nCircular dated July 1, 2009, would continue to be preserved for at least five years \nafter the business relationship is ended as required under Rule 10 of the Rules ibid.",
+        "obligation_type": "Informational",
+        "entity": "res",
+        "deadline": "ten years"
+    },
+    {
+        "source_file": "73IKYC010709_F.pdf",
+        "chunk_id": 64,
+        "trigger_word": "report",
+        "requirement": "2.17   Cash and Suspicious Transaction Reports  \n \na)   Cash Transaction Report ( CTR ) \nWhile detailed instructions for filing all types of reports are given in the \ninstructions part of the related formats, banks should scrupulously adhere to the \nfollowing: \ni)  The Cash Transaction Report (CTR) for each month should be submitted \nto FIU-IND by 20th of the succeeding month.",
+        "obligation_type": "Recommended",
+        "entity": "banks",
+        "deadline": "by 15th of"
+    },
+    {
+        "source_file": "OLD_MASTER_DIRECTION.pdf",
+        "chunk_id": 1,
+        "trigger_word": "shall",
+        "requirement": "Banks shall retain customer records for five years.",
+        "obligation_type": "Mandatory",
+        "entity": "banks",
+        "deadline": "five years"
+    },
+    {
+        "source_file": "OLD_MASTER_DIRECTION.pdf",
+        "chunk_id": 2,
+        "trigger_word": "shall",
+        "requirement": "Banks shall submit CTR reports by the 20th of the succeeding month.",
+        "obligation_type": "Mandatory",
+        "entity": "banks",
+        "deadline": "20th"
+    },
+    {
+        "source_file": "OLD_MASTER_DIRECTION.pdf",
+        "chunk_id": 3,
+        "trigger_word": "shall",
+        "requirement": "Banks shall review KYC records every six months.",
+        "obligation_type": "Mandatory",
+        "entity": "banks",
+        "deadline": "six months"
+    }
+]

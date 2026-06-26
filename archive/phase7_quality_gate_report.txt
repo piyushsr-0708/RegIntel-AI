@@ -1,0 +1,49 @@
+================================================================================
+PHASE 7 QUALITY GATE REPORT
+================================================================================
+
+Generated: 2026-06-21 08:39:56
+SuRaksha RBI Regulatory Intelligence Platform
+
+NOTE: Golden Set Evaluation measures CORRECTNESS, not just success rate.
+      A module can have 100% success but low accuracy if it returns wrong answers.
+
+--------------------------------------------------------------------------------
+MODULE RESULTS
+--------------------------------------------------------------------------------
+
+✓ Taxonomy Audit                 : PASS
+   Validates taxonomy classification quality
+
+✓ Cross-Reference Audit          : PASS
+   Validates cross-reference extraction coverage
+
+✓ Resolver Benchmark             : PASS
+   Benchmarks resolver performance
+
+✗ Golden Set Evaluation          : FAIL
+   Evaluates resolver accuracy against verified query-answer pairs
+
+--------------------------------------------------------------------------------
+OVERALL ASSESSMENT
+--------------------------------------------------------------------------------
+
+Overall Status: NEEDS REVIEW
+
+⚠ One or more validation modules require attention
+
+Actions Required:
+  • Review Golden Set Evaluation report for issues
+
+--------------------------------------------------------------------------------
+DETAILED REPORTS
+--------------------------------------------------------------------------------
+
+  • Taxonomy Audit: taxonomy_audit_report.txt
+  • Cross-Reference Audit: cross_reference_audit_report.txt
+  • Resolver Benchmark: resolver_benchmark_report.txt
+  • Golden Set Evaluation: golden_set_evaluation_report.txt
+
+================================================================================
+END OF REPORT
+================================================================================

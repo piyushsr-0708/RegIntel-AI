@@ -1,0 +1,56 @@
+{
+  "AML Compliance Cell": {
+    "critical": 3,
+    "high": 107,
+    "medium": 96,
+    "low": 189
+  },
+  "Compliance Department": {
+    "critical": 43,
+    "high": 614,
+    "medium": 263,
+    "low": 525
+  },
+  "KYC Operations": {
+    "critical": 18,
+    "high": 162,
+    "medium": 143,
+    "low": 138
+  },
+  "Regulatory Reporting Department": {
+    "critical": 2,
+    "high": 42,
+    "medium": 27,
+    "low": 99
+  },
+  "Records Management Department": {
+    "critical": 3,
+    "high": 51,
+    "medium": 18,
+    "low": 81
+  },
+  "Information Security Department": {
+    "critical": 0,
+    "high": 26,
+    "medium": 13,
+    "low": 40
+  },
+  "Risk Management Department": {
+    "critical": 0,
+    "high": 7,
+    "medium": 8,
+    "low": 11
+  },
+  "Board & Compliance Department": {
+    "critical": 0,
+    "high": 50,
+    "medium": 24,
+    "low": 42
+  },
+  "IT Department": {
+    "critical": 0,
+    "high": 44,
+    "medium": 25,
+    "low": 27
+  }
+}

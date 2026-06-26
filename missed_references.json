@@ -1,0 +1,59 @@
+{
+  "metadata": {
+    "generated_at": "2026-06-24T13:02:54.718175",
+    "total_missed": 7,
+    "source_taxonomy": "D:\\SuRaksha\\data\\requirements\\requirements_taxonomy.json",
+    "source_cross_refs": "D:\\SuRaksha\\cross_references.json"
+  },
+  "missed_references": [
+    {
+      "requirement_id": "REQ_25KY0107_0026_73F207",
+      "source_document": "25KY010711F.pdf",
+      "detected_reference": "Master Circular No 184",
+      "pattern_type": "Master Circular",
+      "requirement_text": "Politically Exposed Persons (PEPs) \nIn terms of instructions contained in Para 15(1) of the Master Circular No 184 dated \nJuly 1, 2010 in the event of an existing customer or the beneficial owner of a"
+    },
+    {
+      "requirement_id": "REQ_25KY0107_0057_90A3AC",
+      "source_document": "25KY010711F.pdf",
+      "detected_reference": "Master Circular \nNo.152",
+      "pattern_type": "Master Circular",
+      "requirement_text": "Accordingly, in modification of paragraph 4 of the Master Circular \nNo.152/03.10.42/2009-10 dated July 1, 2009, NBFCs (including RNBCs)  are \nadvised to maintain for at least ten years from the date o"
+    },
+    {
+      "requirement_id": "REQ_25KY0107_0074_76A611",
+      "source_document": "25KY010711F.pdf",
+      "detected_reference": "CCNo212",
+      "pattern_type": "CC No",
+      "requirement_text": "(DNBS.(PD)CCNo212/03.10.42/2010-11dated March 8, 2011) \n \nKnow Your Customer (KYC) Norms/ Anti- Money Laundering (AML) Standards/ \nCombating of Financing of Terrorism (CFT)  \n \nFinancial Action Task F"
+    },
+    {
+      "requirement_id": "REQ_41YC0107_0060_0A0BEE",
+      "source_document": "41YC01072013KF.pdf",
+      "detected_reference": "Master Circular No 231",
+      "pattern_type": "Master Circular",
+      "requirement_text": "Prevention of Money Laundering Act, 2002 - Obligations of NBFCs in terms \nof Rules notified thereunder’-Reporting Format under Project  FINnet  \nReference was invited to Master Circular No 231 dated J"
+    },
+    {
+      "requirement_id": "REQ_42AM69D4_0136_2C0008",
+      "source_document": "42AM69D4F812CC124178937DFD5CFD37FE7E.pdf",
+      "detected_reference": "DBOD.No.",
+      "pattern_type": "DBOD",
+      "requirement_text": "9 \n \n \nDBOD.No.GC.BC.46/17.04.0\n01 dated 22nd April, 1994 \nThe Committee to \nenquire into various \naspects relating to \nfrauds and \nClarifications \ngiven \nto \nbanks \nregarding obtaining photographs"
+    },
+    {
+      "requirement_id": "REQ_42AM69D4_0202_4159AE",
+      "source_document": "42AM69D4F812CC124178937DFD5CFD37FE7E.pdf",
+      "detected_reference": "RPCD.CO.",
+      "pattern_type": "RPCD",
+      "requirement_text": "No.36/03.05.33(E)/2012-13 @1 \n15.10.2012 \nUploading of reports on FINnet \nGateway \n23 \nRPCD.CO.RRB.RCB.AML.BC."
+    },
+    {
+      "requirement_id": "REQ_KYC09062_0005_295259",
+      "source_document": "KYC09062025.pdf",
+      "detected_reference": "Master Direction",
+      "pattern_type": "Master Direction",
+      "requirement_text": "The Small Account shall remain operational initially for a period of twelve months and is \nsubject to conditions as given under paragraph 23 of the Master Direction on KYC."
+    }
+  ]
+}

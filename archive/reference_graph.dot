@@ -1,0 +1,50 @@
+digraph RegulatoryKnowledgeGraph {
+  rankdir=LR;
+  node [fontname="Arial"];
+  edge [fontname="Arial", fontsize=10];
+
+  // Document Nodes
+  "25KY010711F.pdf" [shape=box, style=filled, fillcolor=lightblue, label="25KY010711F"];
+  "41YC01072013KF.pdf" [shape=box, style=filled, fillcolor=lightblue, label="41YC01072013KF"];
+  "70MK010714FL.pdf" [shape=box, style=filled, fillcolor=lightblue, label="70MK010714FL"];
+  "92MY30062014FS.pdf" [shape=box, style=filled, fillcolor=lightblue, label="92MY30062014FS"];
+  "NOTI 1520AFA79636AA41F1B43761270226A59F.pdf" [shape=box, style=filled, fillcolor=lightblue, label="NOTI 1520AFA79636AA41F1B43761270226A59F"];
+
+  // Regulatory Reference Nodes
+  "cc no 46" [shape=ellipse, style=filled, fillcolor=lightgreen, label="Cc no 46"];
+  "cc no 184" [shape=ellipse, style=filled, fillcolor=lightgreen, label="Cc no 184"];
+  "cc no215" [shape=ellipse, style=filled, fillcolor=lightgreen, label="Cc No215"];
+  "cc no 152" [shape=ellipse, style=filled, fillcolor=lightgreen, label="Cc no 152"];
+  "notification no 13" [shape=ellipse, style=filled, fillcolor=lightgreen, label="Notification no 13"];
+  "notification no 10" [shape=ellipse, style=filled, fillcolor=lightgreen, label="Notification no 10"];
+  "cc no 231" [shape=ellipse, style=filled, fillcolor=lightgreen, label="Cc no 231"];
+  "notification no 14" [shape=ellipse, style=filled, fillcolor=lightgreen, label="Notification no 14"];
+  "rbi/2016-17/11" [shape=ellipse, style=filled, fillcolor=lightgreen, label="Rbi/2016-17/11"];
+
+  // Edges
+  // refers_to relationships
+  "25KY010711F.pdf" -> "cc no 46" [label="refers to", color="gray"];
+  "25KY010711F.pdf" -> "cc no 184" [label="refers to", color="gray"];
+  "25KY010711F.pdf" -> "cc no215" [label="refers to", color="gray"];
+  "25KY010711F.pdf" -> "notification no 13" [label="refers to", color="gray"];
+  "25KY010711F.pdf" -> "notification no 10" [label="refers to", color="gray"];
+  "41YC01072013KF.pdf" -> "cc no 46" [label="refers to", color="gray"];
+  "41YC01072013KF.pdf" -> "cc no 46" [label="refers to", color="gray"];
+  "41YC01072013KF.pdf" -> "cc no 184" [label="refers to", color="gray"];
+  "41YC01072013KF.pdf" -> "notification no 13" [label="refers to", color="gray"];
+  "41YC01072013KF.pdf" -> "cc no 231" [label="refers to", color="gray"];
+  "70MK010714FL.pdf" -> "notification no 14" [label="refers to", color="gray"];
+  "92MY30062014FS.pdf" -> "notification no 14" [label="refers to", color="gray"];
+
+  // consolidates relationships
+  "25KY010711F.pdf" -> "cc no 184" [label="consolidates", color="blue"];
+  "25KY010711F.pdf" -> "cc no 152" [label="consolidates", color="blue"];
+  "25KY010711F.pdf" -> "cc no 152" [label="consolidates", color="blue"];
+  "41YC01072013KF.pdf" -> "cc no 184" [label="consolidates", color="blue"];
+  "41YC01072013KF.pdf" -> "cc no 231" [label="consolidates", color="blue"];
+  "41YC01072013KF.pdf" -> "cc no 231" [label="consolidates", color="blue"];
+
+  // modifies relationships
+  "NOTI 1520AFA79636AA41F1B43761270226A59F.pdf" -> "rbi/2016-17/11" [label="modifies", color="red"];
+
+}

@@ -1,0 +1,315 @@
+{
+  "metadata": {
+    "generated_at": "2026-06-20T12:16:27.862383",
+    "source_file": "D:\\SuRaksha\\cross_references.json",
+    "total_nodes": 14,
+    "total_edges": 19
+  },
+  "nodes": [
+    {
+      "id": "25KY010711F.pdf",
+      "type": "DOCUMENT",
+      "display_label": "25KY010711F.pdf"
+    },
+    {
+      "id": "cc no 46",
+      "type": "REGULATORY_REFERENCE",
+      "display_label": "Cc no 46"
+    },
+    {
+      "id": "cc no 184",
+      "type": "REGULATORY_REFERENCE",
+      "display_label": "Cc no 184"
+    },
+    {
+      "id": "cc no215",
+      "type": "REGULATORY_REFERENCE",
+      "display_label": "Cc No215"
+    },
+    {
+      "id": "cc no 152",
+      "type": "REGULATORY_REFERENCE",
+      "display_label": "Cc no 152"
+    },
+    {
+      "id": "notification no 13",
+      "type": "REGULATORY_REFERENCE",
+      "display_label": "Notification no 13"
+    },
+    {
+      "id": "notification no 10",
+      "type": "REGULATORY_REFERENCE",
+      "display_label": "Notification no 10"
+    },
+    {
+      "id": "41YC01072013KF.pdf",
+      "type": "DOCUMENT",
+      "display_label": "41YC01072013KF.pdf"
+    },
+    {
+      "id": "cc no 231",
+      "type": "REGULATORY_REFERENCE",
+      "display_label": "Cc no 231"
+    },
+    {
+      "id": "70MK010714FL.pdf",
+      "type": "DOCUMENT",
+      "display_label": "70MK010714FL.pdf"
+    },
+    {
+      "id": "notification no 14",
+      "type": "REGULATORY_REFERENCE",
+      "display_label": "Notification no 14"
+    },
+    {
+      "id": "92MY30062014FS.pdf",
+      "type": "DOCUMENT",
+      "display_label": "92MY30062014FS.pdf"
+    },
+    {
+      "id": "NOTI 1520AFA79636AA41F1B43761270226A59F.pdf",
+      "type": "DOCUMENT",
+      "display_label": "NOTI 1520AFA79636AA41F1B43761270226A59F.pdf"
+    },
+    {
+      "id": "rbi/2016-17/11",
+      "type": "REGULATORY_REFERENCE",
+      "display_label": "Rbi/2016-17/11"
+    }
+  ],
+  "edges": [
+    {
+      "source": "25KY010711F.pdf",
+      "target": "cc no 46",
+      "relationship_type": "refers_to",
+      "domain": "Reporting",
+      "requirement_id": "REQ_25KY0107_0009_FA1F88",
+      "chunk_id": 9
+    },
+    {
+      "source": "25KY010711F.pdf",
+      "target": "cc no 184",
+      "relationship_type": "consolidates",
+      "domain": "AML",
+      "requirement_id": "REQ_25KY0107_0026_73F207",
+      "chunk_id": 26
+    },
+    {
+      "source": "25KY010711F.pdf",
+      "target": "cc no 184",
+      "relationship_type": "refers_to",
+      "domain": "AML",
+      "requirement_id": "REQ_25KY0107_0026_73F207",
+      "chunk_id": 26
+    },
+    {
+      "source": "25KY010711F.pdf",
+      "target": "cc no215",
+      "relationship_type": "refers_to",
+      "domain": "AML",
+      "requirement_id": "REQ_25KY0107_0039_0C2AD0",
+      "chunk_id": 39
+    },
+    {
+      "source": "25KY010711F.pdf",
+      "target": "cc no 152",
+      "relationship_type": "consolidates",
+      "domain": "Record Retention",
+      "requirement_id": "REQ_25KY0107_0057_90A3AC",
+      "chunk_id": 57
+    },
+    {
+      "source": "25KY010711F.pdf",
+      "target": "cc no 152",
+      "relationship_type": "consolidates",
+      "domain": "Record Retention",
+      "requirement_id": "REQ_25KY0107_0058_377D68",
+      "chunk_id": 58
+    },
+    {
+      "source": "25KY010711F.pdf",
+      "target": "notification no 13",
+      "relationship_type": "refers_to",
+      "domain": "Record Retention",
+      "requirement_id": "REQ_25KY0107_0064_A40D62",
+      "chunk_id": 64
+    },
+    {
+      "source": "25KY010711F.pdf",
+      "target": "notification no 10",
+      "relationship_type": "refers_to",
+      "domain": "Record Retention",
+      "requirement_id": "REQ_25KY0107_0066_2DC0B4",
+      "chunk_id": 66
+    },
+    {
+      "source": "41YC01072013KF.pdf",
+      "target": "cc no 46",
+      "relationship_type": "refers_to",
+      "domain": "Reporting",
+      "requirement_id": "REQ_41YC0107_0013_5A799A",
+      "chunk_id": 13
+    },
+    {
+      "source": "41YC01072013KF.pdf",
+      "target": "cc no 46",
+      "relationship_type": "refers_to",
+      "domain": "Reporting",
+      "requirement_id": "REQ_41YC0107_0014_FA1F88",
+      "chunk_id": 14
+    },
+    {
+      "source": "41YC01072013KF.pdf",
+      "target": "cc no 184",
+      "relationship_type": "consolidates",
+      "domain": "KYC",
+      "requirement_id": "REQ_41YC0107_0027_89C402",
+      "chunk_id": 27
+    },
+    {
+      "source": "41YC01072013KF.pdf",
+      "target": "cc no 184",
+      "relationship_type": "refers_to",
+      "domain": "KYC",
+      "requirement_id": "REQ_41YC0107_0027_89C402",
+      "chunk_id": 27
+    },
+    {
+      "source": "41YC01072013KF.pdf",
+      "target": "notification no 13",
+      "relationship_type": "refers_to",
+      "domain": "Record Retention",
+      "requirement_id": "REQ_41YC0107_0055_6FE6D3",
+      "chunk_id": 55
+    },
+    {
+      "source": "41YC01072013KF.pdf",
+      "target": "cc no 231",
+      "relationship_type": "refers_to",
+      "domain": "AML",
+      "requirement_id": "REQ_41YC0107_0057_127497",
+      "chunk_id": 57
+    },
+    {
+      "source": "41YC01072013KF.pdf",
+      "target": "cc no 231",
+      "relationship_type": "consolidates",
+      "domain": "AML",
+      "requirement_id": "REQ_41YC0107_0060_0A0BEE",
+      "chunk_id": 60
+    },
+    {
+      "source": "41YC01072013KF.pdf",
+      "target": "cc no 231",
+      "relationship_type": "consolidates",
+      "domain": "AML",
+      "requirement_id": "REQ_41YC0107_0061_DD9261",
+      "chunk_id": 61
+    },
+    {
+      "source": "70MK010714FL.pdf",
+      "target": "notification no 14",
+      "relationship_type": "refers_to",
+      "domain": "AML",
+      "requirement_id": "REQ_70MK0107_0152_6235C4",
+      "chunk_id": 152
+    },
+    {
+      "source": "92MY30062014FS.pdf",
+      "target": "notification no 14",
+      "relationship_type": "refers_to",
+      "domain": "General",
+      "requirement_id": "REQ_92MY3006_0157_A0882D",
+      "chunk_id": 157
+    },
+    {
+      "source": "NOTI 1520AFA79636AA41F1B43761270226A59F.pdf",
+      "target": "rbi/2016-17/11",
+      "relationship_type": "modifies",
+      "domain": "AML",
+      "requirement_id": "REQ_NOTI 152_0001_D25E1B",
+      "chunk_id": 1
+    }
+  ],
+  "statistics": {
+    "total_nodes": 14,
+    "total_edges": 19,
+    "document_nodes": 5,
+    "reference_nodes": 9,
+    "relationship_counts": {
+      "refers_to": 12,
+      "consolidates": 6,
+      "modifies": 1
+    },
+    "most_referenced_circulars": [
+      [
+        "cc no 184",
+        4
+      ],
+      [
+        "cc no 46",
+        3
+      ],
+      [
+        "cc no 231",
+        3
+      ],
+      [
+        "cc no 152",
+        2
+      ],
+      [
+        "notification no 13",
+        2
+      ],
+      [
+        "notification no 14",
+        2
+      ],
+      [
+        "cc no215",
+        1
+      ],
+      [
+        "notification no 10",
+        1
+      ],
+      [
+        "rbi/2016-17/11",
+        1
+      ]
+    ],
+    "most_connected_documents": [
+      [
+        "25KY010711F.pdf",
+        8
+      ],
+      [
+        "41YC01072013KF.pdf",
+        8
+      ],
+      [
+        "70MK010714FL.pdf",
+        1
+      ],
+      [
+        "92MY30062014FS.pdf",
+        1
+      ],
+      [
+        "NOTI 1520AFA79636AA41F1B43761270226A59F.pdf",
+        1
+      ]
+    ],
+    "top_domains": {
+      "AML": 8,
+      "Record Retention": 5,
+      "Reporting": 3,
+      "KYC": 2,
+      "General": 1
+    },
+    "graph_density": 0.104396,
+    "average_degree": 2.71,
+    "nodes_removed_as_noise": 3
+  }
+}

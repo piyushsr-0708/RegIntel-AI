@@ -1,0 +1,222 @@
+================================================================================
+GOLDEN SET EVALUATION REPORT
+================================================================================
+
+Generated: 2026-06-21 08:39:56
+SuRaksha RBI Regulatory Intelligence Platform
+
+--------------------------------------------------------------------------------
+ACCURACY METRICS
+--------------------------------------------------------------------------------
+
+Total Golden Queries: 25
+
+Top-1 Accuracy: 16.00% (4/25)
+Top-3 Accuracy: 24.00% (6/25)
+Top-5 Accuracy: 36.00% (9/25)
+
+Average Response Time: 0.413 seconds
+
+--------------------------------------------------------------------------------
+POSITION DISTRIBUTION
+--------------------------------------------------------------------------------
+
+Where expected requirement appeared in Top-5:
+  Position 1: 4 queries
+  Position 2: 1 queries
+  Position 3: 1 queries
+  Position 4: 1 queries
+  Position 5: 2 queries
+
+--------------------------------------------------------------------------------
+DOMAIN-WISE ACCURACY
+--------------------------------------------------------------------------------
+
+Reporting           : 100.0% (2/2)
+Governance          :  25.0% (1/4)
+AML                 :  20.0% (1/5)
+KYC                 :   0.0% (0/5)
+General             :   0.0% (0/2)
+Record Retention    :   0.0% (0/3)
+Risk Management     :   0.0% (0/3)
+Cybersecurity       :   0.0% (0/1)
+
+--------------------------------------------------------------------------------
+DETAILED RESULTS
+--------------------------------------------------------------------------------
+
+1. Query: suspicious transaction reporting
+   Domain: AML/STR Reporting
+   Expected: REQ_25KY0107_0004_275BD9
+   Returned: REQ_41YC0107_0073_963A9C
+   Top-1: MISS | Top-3: MISS | Top-5: MISS
+
+2. Query: cash transaction reporting deadline
+   Domain: AML/CTR Reporting
+   Expected: REQ_25KY0107_0044_5FB067
+   Returned: REQ_42AM69D4_0090_CE48F5
+   Top-1: MISS | Top-3: MISS | Top-5: MISS
+
+3. Query: electronic filing of CTR
+   Domain: AML/CTR Reporting
+   Expected: REQ_25KY0107_0044_17FA90
+   Returned: REQ_42AM69D4_0091_627F44
+   Top-1: MISS | Top-3: MISS | Top-5: MISS
+
+4. Query: customer identification requirements
+   Domain: KYC/Customer Identification
+   Expected: REQ_25KY0107_0023_7FD649
+   Returned: REQ_25KY0107_0092_E59B4C
+   Top-1: MISS | Top-3: MISS | Top-5: MISS
+
+5. Query: customer due diligence for PEP
+   Domain: KYC/Customer Due Diligence
+   Expected: REQ_25KY0107_0023_A98490
+   Returned: REQ_MD18KYCF_0130_2823BC
+   Top-1: MISS | Top-3: MISS | Top-5: MISS
+
+6. Query: beneficial ownership of PEP accounts
+   Domain: KYC/PEP
+   Expected: REQ_25KY0107_0022_E76132
+   Returned: REQ_42AM69D4_0033_276F6D
+   Top-1: MISS | Top-3: MISS | Top-5: MISS
+
+7. Query: risk management procedures for PEP
+   Domain: Risk Management/PEP Risk
+   Expected: REQ_25KY0107_0027_976711
+   Returned: REQ_42AM69D4_0060_F381E1
+   Top-1: MISS | Top-3: MISS | Top-5: [OK]
+   Position: 5
+
+8. Query: enhanced CDD for politically exposed persons
+   Domain: Risk Management/Enhanced Due Diligence
+   Expected: REQ_42AM69D4_0034_222C14
+   Returned: REQ_MD18KYCF_0055_8E013E
+   Top-1: MISS | Top-3: MISS | Top-5: MISS
+
+9. Query: record retention period requirements
+   Domain: Record Retention/Record Keeping
+   Expected: REQ_25KY0107_0042_2CDE33
+   Returned: REQ_25KY0107_0057_4B55BE
+   Top-1: MISS | Top-3: MISS | Top-5: MISS
+
+10. Query: ten year record preservation under PMLA
+   Domain: Record Retention/Record Keeping
+   Expected: REQ_25KY0107_0054_D342DA
+   Returned: REQ_42AM69D4_0078_4FE0FE
+   Top-1: MISS | Top-3: MISS | Top-5: MISS
+
+11. Query: cyber incident reporting
+   Domain: Cybersecurity/Incident Response
+   Expected: REQ_NT418020_0002_900719
+   Returned: REQ_NT418020_0016_98829C
+   Top-1: MISS | Top-3: MISS | Top-5: MISS
+
+12. Query: timeliness of regulatory reporting
+   Domain: Reporting/Regulatory Reporting
+   Expected: REQ_42AM69D4_0089_377B88
+   Returned: REQ_42AM69D4_0089_377B88
+   Top-1: [OK] | Top-3: [OK] | Top-5: [OK]
+   Position: 1
+
+13. Query: principal officer reporting to board
+   Domain: Governance/Board Oversight
+   Expected: REQ_25KY0107_0023_0E507D
+   Returned: REQ_42AM69D4_0102_ABB942
+   Top-1: MISS | Top-3: MISS | Top-5: MISS
+
+14. Query: board approval for KYC policy
+   Domain: Governance/Policy Framework
+   Expected: REQ_25KY0107_0003_6721FA
+   Returned: REQ_MD18KYCF_0121_D60DB4
+   Top-1: MISS | Top-3: MISS | Top-5: MISS
+
+15. Query: KYC compliance deadline for NBFCs
+   Domain: Governance/Policy Framework
+   Expected: REQ_25KY0107_0004_CCC7B2
+   Returned: REQ_41YC0107_0011_179B4A
+   Top-1: MISS | Top-3: MISS | Top-5: MISS
+
+16. Query: customer information relevance
+   Domain: General/Miscellaneous
+   Expected: REQ_25KY0107_0004_AF6F72
+   Returned: REQ_25KY0107_0092_987422
+   Top-1: MISS | Top-3: MISS | Top-5: MISS
+
+17. Query: account monitoring for money laundering
+   Domain: AML/Transaction Monitoring
+   Expected: REQ_70MK0107_0109_A96CE8
+   Returned: REQ_25KY0107_0096_973459
+   Top-1: MISS | Top-3: MISS | Top-5: MISS
+
+18. Query: kyc review frequency
+   Domain: KYC/Periodic Review
+   Expected: REQ_MD18KYCF_0160_E03DF8
+   Returned: REQ_42AM69D4_0164_5DC016
+   Top-1: MISS | Top-3: [OK] | Top-5: [OK]
+   Position: 3
+
+19. Query: customer identification documents
+   Domain: KYC/Customer Identification
+   Expected: REQ_25KY0107_0091_53463C
+   Returned: REQ_25KY0107_0092_E59B4C
+   Top-1: MISS | Top-3: MISS | Top-5: MISS
+
+20. Query: sanctions screening requirements
+   Domain: AML/Sanctions Screening
+   Expected: REQ_42AM69D4_0082_06F47D
+   Returned: REQ_42AM69D4_0082_06F47D
+   Top-1: [OK] | Top-3: [OK] | Top-5: [OK]
+   Position: 1
+
+21. Query: board oversight responsibilities
+   Domain: Governance/Board Oversight
+   Expected: REQ_FEM12032_0016_3796F5
+   Returned: REQ_FEM12032_0016_3796F5
+   Top-1: [OK] | Top-3: [OK] | Top-5: [OK]
+   Position: 1
+
+22. Query: risk management framework
+   Domain: Risk Management/Risk Framework
+   Expected: REQ_NT418020_0006_031A8D
+   Returned: REQ_42AM69D4_0060_F381E1
+   Top-1: MISS | Top-3: [OK] | Top-5: [OK]
+   Position: 2
+
+23. Query: CTR reporting deadline
+   Domain: Reporting/CTR Reporting
+   Expected: REQ_MD18KYCF_0141_A7C036
+   Returned: REQ_MD18KYCF_0141_A7C036
+   Top-1: [OK] | Top-3: [OK] | Top-5: [OK]
+   Position: 1
+
+24. Query: record preservation period
+   Domain: Record Retention/Record Keeping
+   Expected: REQ_41YC0107_0042_90FB03
+   Returned: REQ_42AM69D4_0078_4FE0FE
+   Top-1: MISS | Top-3: MISS | Top-5: [OK]
+   Position: 5
+
+25. Query: beneficial ownership requirements
+   Domain: General/Beneficial Ownership
+   Expected: REQ_41YC0107_0089_A4D4F2
+   Returned: REQ_42AM69D4_0043_D3BF16
+   Top-1: MISS | Top-3: MISS | Top-5: [OK]
+   Position: 4
+
+--------------------------------------------------------------------------------
+QUALITY ASSESSMENT
+--------------------------------------------------------------------------------
+
+Status: NEEDS IMPROVEMENT
+Assessment: Resolver accuracy below acceptable thresholds
+
+Benchmark Thresholds:
+  EXCELLENT:        Top-1 >= 70%, Top-3 >= 85%
+  GOOD:             Top-1 >= 50%, Top-3 >= 70%
+  ACCEPTABLE:       Top-1 >= 30%, Top-3 >= 50%
+  NEEDS IMPROVEMENT: Below acceptable thresholds
+
+================================================================================
+END OF REPORT
+================================================================================

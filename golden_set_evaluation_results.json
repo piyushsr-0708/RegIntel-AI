@@ -1,0 +1,483 @@
+{
+  "metadata": {
+    "generated_at": "2026-06-24T13:03:42.516075",
+    "total_queries": 25
+  },
+  "results": [
+    {
+      "query_id": 1,
+      "query": "suspicious transaction reporting",
+      "expected_requirement": "REQ_25KY0107_0004_275BD9",
+      "top_5_returned": [
+        "REQ_41YC0107_0073_963A9C",
+        "REQ_42AM69D4_0095_96A476",
+        "REQ_42AM69D4_0004_B4D357",
+        "REQ_42AM69D4_0095_3D3F0D",
+        "REQ_25KY0107_0080_4928E5"
+      ],
+      "top_1_match": false,
+      "top_3_match": false,
+      "top_5_match": false,
+      "position": null,
+      "response_time": 0.852,
+      "domain": "AML",
+      "subdomain": "STR Reporting"
+    },
+    {
+      "query_id": 2,
+      "query": "cash transaction reporting deadline",
+      "expected_requirement": "REQ_25KY0107_0044_5FB067",
+      "top_5_returned": [
+        "REQ_42AM69D4_0090_CE48F5",
+        "REQ_42AM69D4_0090_8AF9B6",
+        "REQ_42AM69D4_0090_2366C7",
+        "REQ_42AM69D4_0089_377B88",
+        "REQ_25KY0107_0045_6E9E8D"
+      ],
+      "top_1_match": false,
+      "top_3_match": false,
+      "top_5_match": false,
+      "position": null,
+      "response_time": 0.651,
+      "domain": "AML",
+      "subdomain": "CTR Reporting"
+    },
+    {
+      "query_id": 3,
+      "query": "electronic filing of CTR",
+      "expected_requirement": "REQ_25KY0107_0044_17FA90",
+      "top_5_returned": [
+        "REQ_42AM69D4_0091_627F44",
+        "REQ_42AM69D4_0092_05EE3E",
+        "REQ_42AM69D4_0088_BD5811",
+        "REQ_MD18KYCF_0141_69AFB7",
+        "REQ_42AM69D4_0091_755688"
+      ],
+      "top_1_match": false,
+      "top_3_match": false,
+      "top_5_match": false,
+      "position": null,
+      "response_time": 0.76,
+      "domain": "AML",
+      "subdomain": "CTR Reporting"
+    },
+    {
+      "query_id": 4,
+      "query": "customer identification requirements",
+      "expected_requirement": "REQ_25KY0107_0023_7FD649",
+      "top_5_returned": [
+        "REQ_25KY0107_0092_E59B4C",
+        "REQ_25KY0107_0092_3D9BF3",
+        "REQ_42AM69D4_0015_B50781",
+        "REQ_41YC0107_0084_D295B1",
+        "REQ_41YC0107_0084_B359C8"
+      ],
+      "top_1_match": false,
+      "top_3_match": false,
+      "top_5_match": false,
+      "position": null,
+      "response_time": 0.633,
+      "domain": "KYC",
+      "subdomain": "Customer Identification"
+    },
+    {
+      "query_id": 5,
+      "query": "customer due diligence for PEP",
+      "expected_requirement": "REQ_25KY0107_0023_A98490",
+      "top_5_returned": [
+        "REQ_MD18KYCF_0130_2823BC",
+        "REQ_25KY0107_0110_080D93",
+        "REQ_70MK0107_0041_1C4023",
+        "REQ_25KY0107_0090_2BCEF9",
+        "REQ_41YC0107_0106_F071D8"
+      ],
+      "top_1_match": false,
+      "top_3_match": false,
+      "top_5_match": false,
+      "position": null,
+      "response_time": 0.795,
+      "domain": "KYC",
+      "subdomain": "Customer Due Diligence"
+    },
+    {
+      "query_id": 6,
+      "query": "beneficial ownership of PEP accounts",
+      "expected_requirement": "REQ_25KY0107_0022_E76132",
+      "top_5_returned": [
+        "REQ_42AM69D4_0033_276F6D",
+        "REQ_MD18KYCF_0130_2823BC",
+        "REQ_42AM69D4_0033_4942C4",
+        "REQ_25KY0107_0110_080D93",
+        "REQ_92MY3006_0043_6E1FA4"
+      ],
+      "top_1_match": false,
+      "top_3_match": false,
+      "top_5_match": false,
+      "position": null,
+      "response_time": 0.764,
+      "domain": "KYC",
+      "subdomain": "PEP"
+    },
+    {
+      "query_id": 7,
+      "query": "risk management procedures for PEP",
+      "expected_requirement": "REQ_25KY0107_0027_976711",
+      "top_5_returned": [
+        "REQ_42AM69D4_0060_F381E1",
+        "REQ_42AM69D4_0034_222C14",
+        "REQ_25KY0107_0027_A9C600",
+        "REQ_42AM69D4_0060_C5C00D",
+        "REQ_25KY0107_0027_976711"
+      ],
+      "top_1_match": false,
+      "top_3_match": false,
+      "top_5_match": true,
+      "position": 5,
+      "response_time": 0.891,
+      "domain": "Risk Management",
+      "subdomain": "PEP Risk"
+    },
+    {
+      "query_id": 8,
+      "query": "enhanced CDD for politically exposed persons",
+      "expected_requirement": "REQ_42AM69D4_0034_222C14",
+      "top_5_returned": [
+        "REQ_MD18KYCF_0055_8E013E",
+        "REQ_MD18KYCF_0037_607AC5",
+        "REQ_MD18KYCF_0072_77941A",
+        "REQ_MD18KYCF_0053_6D2244",
+        "REQ_KYC09062_0014_9A67D6"
+      ],
+      "top_1_match": false,
+      "top_3_match": false,
+      "top_5_match": false,
+      "position": null,
+      "response_time": 0.627,
+      "domain": "Risk Management",
+      "subdomain": "Enhanced Due Diligence"
+    },
+    {
+      "query_id": 9,
+      "query": "record retention period requirements",
+      "expected_requirement": "REQ_25KY0107_0042_2CDE33",
+      "top_5_returned": [
+        "REQ_25KY0107_0057_4B55BE",
+        "REQ_41YC0107_0042_90FB03",
+        "REQ_42AM69D4_0078_4FE0FE",
+        "REQ_41YC0107_0041_DDEF26",
+        "REQ_42AM69D4_0079_739D82"
+      ],
+      "top_1_match": false,
+      "top_3_match": false,
+      "top_5_match": false,
+      "position": null,
+      "response_time": 1.041,
+      "domain": "Record Retention",
+      "subdomain": "Record Keeping"
+    },
+    {
+      "query_id": 10,
+      "query": "ten year record preservation under PMLA",
+      "expected_requirement": "REQ_25KY0107_0054_D342DA",
+      "top_5_returned": [
+        "REQ_42AM69D4_0078_4FE0FE",
+        "REQ_70MK0107_0103_C1E519",
+        "REQ_41YC0107_0042_90FB03",
+        "REQ_25KY0107_0058_11D893",
+        "REQ_42AM69D4_0078_EB4287"
+      ],
+      "top_1_match": false,
+      "top_3_match": false,
+      "top_5_match": false,
+      "position": null,
+      "response_time": 0.743,
+      "domain": "Record Retention",
+      "subdomain": "Record Keeping"
+    },
+    {
+      "query_id": 11,
+      "query": "cyber incident reporting",
+      "expected_requirement": "REQ_NT418020_0002_900719",
+      "top_5_returned": [
+        "REQ_NT418020_0016_98829C",
+        "REQ_NT418020_0015_6F0236",
+        "REQ_NT418020_0016_6A23BD",
+        "REQ_NT418020_0046_12872E",
+        "REQ_NT418020_0082_485F72"
+      ],
+      "top_1_match": false,
+      "top_3_match": false,
+      "top_5_match": false,
+      "position": null,
+      "response_time": 0.853,
+      "domain": "Cybersecurity",
+      "subdomain": "Incident Response"
+    },
+    {
+      "query_id": 12,
+      "query": "timeliness of regulatory reporting",
+      "expected_requirement": "REQ_42AM69D4_0089_377B88",
+      "top_5_returned": [
+        "REQ_42AM69D4_0089_377B88",
+        "REQ_42AM69D4_0089_F06745",
+        "REQ_41YC0107_0062_9259EF",
+        "REQ_42AM69D4_0090_CE48F5",
+        "REQ_42AM69D4_0089_F6442B"
+      ],
+      "top_1_match": true,
+      "top_3_match": true,
+      "top_5_match": true,
+      "position": 1,
+      "response_time": 0.801,
+      "domain": "Reporting",
+      "subdomain": "Regulatory Reporting"
+    },
+    {
+      "query_id": 13,
+      "query": "principal officer reporting to board",
+      "expected_requirement": "REQ_25KY0107_0023_0E507D",
+      "top_5_returned": [
+        "REQ_42AM69D4_0102_ABB942",
+        "REQ_92MY3006_0100_C01471",
+        "REQ_MD18KYCF_0050_8010DC",
+        "REQ_70MK0107_0097_306FAE",
+        "REQ_73IKYC01_0053_F3FD92"
+      ],
+      "top_1_match": false,
+      "top_3_match": false,
+      "top_5_match": false,
+      "position": null,
+      "response_time": 0.811,
+      "domain": "Governance",
+      "subdomain": "Board Oversight"
+    },
+    {
+      "query_id": 14,
+      "query": "board approval for KYC policy",
+      "expected_requirement": "REQ_25KY0107_0003_6721FA",
+      "top_5_returned": [
+        "REQ_MD18KYCF_0121_D60DB4",
+        "REQ_MD18KYCF_0050_499EE9",
+        "REQ_MD18KYCF_0050_51642A",
+        "REQ_70MK0107_0011_8233D5",
+        "REQ_MD18KYCF_0192_E13689"
+      ],
+      "top_1_match": false,
+      "top_3_match": false,
+      "top_5_match": false,
+      "position": null,
+      "response_time": 0.604,
+      "domain": "Governance",
+      "subdomain": "Policy Framework"
+    },
+    {
+      "query_id": 15,
+      "query": "KYC compliance deadline for NBFCs",
+      "expected_requirement": "REQ_25KY0107_0004_CCC7B2",
+      "top_5_returned": [
+        "REQ_41YC0107_0011_179B4A",
+        "REQ_25KY0107_0008_9B6BEF",
+        "REQ_25KY0107_0014_4DBEAD",
+        "REQ_25KY0107_0006_4E781B",
+        "REQ_41YC0107_0018_1D1215"
+      ],
+      "top_1_match": false,
+      "top_3_match": false,
+      "top_5_match": false,
+      "position": null,
+      "response_time": 0.633,
+      "domain": "Governance",
+      "subdomain": "Policy Framework"
+    },
+    {
+      "query_id": 16,
+      "query": "customer information relevance",
+      "expected_requirement": "REQ_25KY0107_0004_AF6F72",
+      "top_5_returned": [
+        "REQ_25KY0107_0092_987422",
+        "REQ_42AM69D4_0015_F011AD",
+        "REQ_41YC0107_0085_AF8886",
+        "REQ_92MY3006_0019_2DD381",
+        "REQ_92MY3006_0019_84BD8E"
+      ],
+      "top_1_match": false,
+      "top_3_match": false,
+      "top_5_match": false,
+      "position": null,
+      "response_time": 0.851,
+      "domain": "General",
+      "subdomain": "Miscellaneous"
+    },
+    {
+      "query_id": 17,
+      "query": "account monitoring for money laundering",
+      "expected_requirement": "REQ_70MK0107_0109_A96CE8",
+      "top_5_returned": [
+        "REQ_25KY0107_0096_973459",
+        "REQ_92MY3006_0058_5D6455",
+        "REQ_70MK0107_0060_77944F",
+        "REQ_70MK0107_0053_4844DC",
+        "REQ_42AM69D4_0138_487CE1"
+      ],
+      "top_1_match": false,
+      "top_3_match": false,
+      "top_5_match": false,
+      "position": null,
+      "response_time": 0.712,
+      "domain": "AML",
+      "subdomain": "Transaction Monitoring"
+    },
+    {
+      "query_id": 18,
+      "query": "kyc review frequency",
+      "expected_requirement": "REQ_MD18KYCF_0160_E03DF8",
+      "top_5_returned": [
+        "REQ_42AM69D4_0164_5DC016",
+        "REQ_42AM69D4_0002_B3360E",
+        "REQ_MD18KYCF_0160_E03DF8",
+        "REQ_MD18KYCF_0160_B8A126",
+        "REQ_MD18KYCF_0110_F3D1F5"
+      ],
+      "top_1_match": false,
+      "top_3_match": true,
+      "top_5_match": true,
+      "position": 3,
+      "response_time": 0.782,
+      "domain": "KYC",
+      "subdomain": "Periodic Review"
+    },
+    {
+      "query_id": 19,
+      "query": "customer identification documents",
+      "expected_requirement": "REQ_25KY0107_0091_53463C",
+      "top_5_returned": [
+        "REQ_25KY0107_0092_E59B4C",
+        "REQ_25KY0107_0092_3D9BF3",
+        "REQ_25KY0107_0092_987422",
+        "REQ_41YC0107_0084_D295B1",
+        "REQ_41YC0107_0084_B359C8"
+      ],
+      "top_1_match": false,
+      "top_3_match": false,
+      "top_5_match": false,
+      "position": null,
+      "response_time": 0.579,
+      "domain": "KYC",
+      "subdomain": "Customer Identification"
+    },
+    {
+      "query_id": 20,
+      "query": "sanctions screening requirements",
+      "expected_requirement": "REQ_42AM69D4_0082_06F47D",
+      "top_5_returned": [
+        "REQ_42AM69D4_0082_06F47D",
+        "REQ_42AM69D4_0082_5AEA8A",
+        "REQ_42AM69D4_0099_D498B0",
+        "REQ_42AM69D4_0156_A47CCE",
+        "REQ_MD18KYCF_0151_A24BAF"
+      ],
+      "top_1_match": true,
+      "top_3_match": true,
+      "top_5_match": true,
+      "position": 1,
+      "response_time": 0.533,
+      "domain": "AML",
+      "subdomain": "Sanctions Screening"
+    },
+    {
+      "query_id": 21,
+      "query": "board oversight responsibilities",
+      "expected_requirement": "REQ_FEM12032_0016_3796F5",
+      "top_5_returned": [
+        "REQ_FEM12032_0016_3796F5",
+        "REQ_FEM12032_0016_164575",
+        "REQ_FEM12032_0016_5CE825",
+        "REQ_FEM12032_0018_B53C26",
+        "REQ_C2292604_0011_03F1E7"
+      ],
+      "top_1_match": true,
+      "top_3_match": true,
+      "top_5_match": true,
+      "position": 1,
+      "response_time": 0.601,
+      "domain": "Governance",
+      "subdomain": "Board Oversight"
+    },
+    {
+      "query_id": 22,
+      "query": "risk management framework",
+      "expected_requirement": "REQ_NT418020_0006_031A8D",
+      "top_5_returned": [
+        "REQ_42AM69D4_0060_F381E1",
+        "REQ_NT418020_0006_031A8D",
+        "REQ_42AM69D4_0060_C5C00D",
+        "REQ_41YC0107_0092_973459",
+        "REQ_NT418020_0006_079240"
+      ],
+      "top_1_match": false,
+      "top_3_match": true,
+      "top_5_match": true,
+      "position": 2,
+      "response_time": 0.625,
+      "domain": "Risk Management",
+      "subdomain": "Risk Framework"
+    },
+    {
+      "query_id": 23,
+      "query": "CTR reporting deadline",
+      "expected_requirement": "REQ_MD18KYCF_0141_A7C036",
+      "top_5_returned": [
+        "REQ_MD18KYCF_0141_A7C036",
+        "REQ_42AM69D4_0090_CE48F5",
+        "REQ_42AM69D4_0089_377B88",
+        "REQ_MD18KYCF_0141_3897BE",
+        "REQ_MD18KYCF_0163_082A48"
+      ],
+      "top_1_match": true,
+      "top_3_match": true,
+      "top_5_match": true,
+      "position": 1,
+      "response_time": 0.545,
+      "domain": "Reporting",
+      "subdomain": "CTR Reporting"
+    },
+    {
+      "query_id": 24,
+      "query": "record preservation period",
+      "expected_requirement": "REQ_41YC0107_0042_90FB03",
+      "top_5_returned": [
+        "REQ_42AM69D4_0078_4FE0FE",
+        "REQ_70MK0107_0103_C1E519",
+        "REQ_73IKYC01_0058_032BE9",
+        "REQ_42AM69D4_0078_EB4287",
+        "REQ_41YC0107_0042_90FB03"
+      ],
+      "top_1_match": false,
+      "top_3_match": false,
+      "top_5_match": true,
+      "position": 5,
+      "response_time": 0.694,
+      "domain": "Record Retention",
+      "subdomain": "Record Keeping"
+    },
+    {
+      "query_id": 25,
+      "query": "beneficial ownership requirements",
+      "expected_requirement": "REQ_41YC0107_0089_A4D4F2",
+      "top_5_returned": [
+        "REQ_42AM69D4_0043_D3BF16",
+        "REQ_42AM69D4_0044_61D0D7",
+        "REQ_42AM69D4_0036_BC39D9",
+        "REQ_41YC0107_0089_A4D4F2",
+        "REQ_42AM69D4_0043_4A262F"
+      ],
+      "top_1_match": false,
+      "top_3_match": false,
+      "top_5_match": true,
+      "position": 4,
+      "response_time": 0.544,
+      "domain": "General",
+      "subdomain": "Beneficial Ownership"
+    }
+  ]
+}

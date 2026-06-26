@@ -1,0 +1,97 @@
+{
+  "total_maps": 2941,
+  "critical_maps": 69,
+  "high_maps": 1103,
+  "departments_impacted": 9,
+  "upcoming_deadlines": 74,
+  "top_risk_department": "Compliance Department",
+  "department_risk_scores": {
+    "AML Compliance Cell": 17622,
+    "Compliance Department": 48708,
+    "KYC Operations": 17776,
+    "Regulatory Reporting Department": 5941,
+    "Records Management Department": 4611,
+    "Information Security Department": 3383,
+    "Risk Management Department": 1032,
+    "Board & Compliance Department": 3849,
+    "IT Department": 3306
+  },
+  "top_critical_maps": [
+    {
+      "map_id": "MAP_MD18KYCF_0184_F36A90",
+      "task_title": "Implement Wire Transfer Controls",
+      "department": "AML Compliance Cell",
+      "impact_score": 77,
+      "deadline": "TBD"
+    },
+    {
+      "map_id": "MAP_KYC09062_0023_2367DB",
+      "task_title": "Enforce Prohibited Actions and Restrictions",
+      "department": "Compliance Department",
+      "impact_score": 75,
+      "deadline": "three months"
+    },
+    {
+      "map_id": "MAP_92MY3006_0103_AF16FB",
+      "task_title": "Appoint Designated Director for Compliance",
+      "department": "AML Compliance Cell",
+      "impact_score": 74,
+      "deadline": "TBD"
+    },
+    {
+      "map_id": "MAP_MD18KYCF_0142_BFE880",
+      "task_title": "Report Suspicious Transactions",
+      "department": "AML Compliance Cell",
+      "impact_score": 72,
+      "deadline": "TBD"
+    },
+    {
+      "map_id": "MAP_MD18KYCF_0128_EE637B",
+      "task_title": "Perform Customer Due Diligence",
+      "department": "KYC Operations",
+      "impact_score": 69,
+      "deadline": "TBD"
+    },
+    {
+      "map_id": "MAP_MD18KYCF_0161_81400D",
+      "task_title": "Verify Customer Identity and KYC Details",
+      "department": "KYC Operations",
+      "impact_score": 69,
+      "deadline": "TBD"
+    },
+    {
+      "map_id": "MAP_MD18KYCF_0165_160134",
+      "task_title": "Enforce Prohibited Actions and Restrictions",
+      "department": "Compliance Department",
+      "impact_score": 69,
+      "deadline": "three months"
+    },
+    {
+      "map_id": "MAP_92MY3006_0121_CF6279",
+      "task_title": "Verify Customer Identity and KYC Details",
+      "department": "KYC Operations",
+      "impact_score": 68,
+      "deadline": "TBD"
+    },
+    {
+      "map_id": "MAP_MD18KYCF_0055_8224BD",
+      "task_title": "Enforce Prohibited Actions and Restrictions",
+      "department": "KYC Operations",
+      "impact_score": 68,
+      "deadline": "TBD"
+    },
+    {
+      "map_id": "MAP_MD18KYCF_0133_A9554F",
+      "task_title": "Perform Customer Due Diligence",
+      "department": "KYC Operations",
+      "impact_score": 68,
+      "deadline": "TBD"
+    }
+  ],
+  "compliance_summary": {
+    "pending_tasks": 2941,
+    "in_progress_tasks": 0,
+    "completed_tasks": 0,
+    "overdue_tasks": 0
+  }
+}

@@ -1,0 +1,97 @@
+# RegIntel AI - .gitignore
+# Offline Agentic Regulatory Intelligence Platform
+
+# ==================================================
+# Python
+# ==================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual Environment (rebuildable from requirements.txt)
+venv/
+env/
+ENV/
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Unit test / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+*.cover
+
+# ==================================================
+# Node / Frontend
+# ==================================================
+# Dependencies (rebuildable from package-lock.json)
+frontend/dashboard/node_modules/
+
+# Build output (rebuildable with npm run build)
+frontend/dashboard/dist/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ==================================================
+# IDEs and Editors
+# ==================================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# ==================================================
+# OS Generated
+# ==================================================
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# ==================================================
+# Environment Variables
+# ==================================================
+.env
+.env.local
+.env.*.local
+
+# ==================================================
+# Temporary Files
+# ==================================================
+*.log
+*.tmp
+*.temp
+*.bak
+*.old
+*.orig
+
+# ==================================================
+# DO NOT IGNORE (CRITICAL FOR OFFLINE OPERATION)
+# ==================================================
+# These are intentionally tracked:
+# !data/                    - All preprocessing artifacts
+# !data/chroma_db/          - Vector database (critical)
+# !data/vector_db/          - Alternative vector DB
+# !data/chunks/             - Preprocessed chunks
+# !data/extracted_text/     - Extracted PDFs
+# !data/requirements/       - Requirement taxonomy
+# !data/requirement_db/     - Requirement vector store
+# !data/dataset/            - Source PDF documents (103 files)
+# !maps/                    - Dashboard JSON feeds
+# !archive/                 - Historical reference
+# !*.json                   - Generated data (cross_references, golden_queries, etc.)
+# !cross_references.json
+# !reference_graph_v2.json
+# !golden_queries.json
+
+# Note: Data directories are CRITICAL for offline deterministic execution
+# Vector databases and embeddings are expensive to regenerate
+# Do not add data/ to .gitignore

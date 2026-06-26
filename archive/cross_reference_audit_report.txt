@@ -1,0 +1,98 @@
+================================================================================
+CROSS-REFERENCE AUDIT REPORT
+================================================================================
+
+Generated: 2026-06-21 08:39:27
+
+--------------------------------------------------------------------------------
+SUMMARY
+--------------------------------------------------------------------------------
+
+Requirements Analyzed: 2941
+Raw References Found: 86
+Unique Raw References: 21
+Parsed References Found: 28
+Coverage: 133.33%
+Missed References: 7
+
+--------------------------------------------------------------------------------
+REFERENCE PATTERN DISTRIBUTION
+--------------------------------------------------------------------------------
+
+  RPCD                 :   35 (40.70%)
+  Master Direction     :   17 (19.77%)
+  CC No                :    6 ( 6.98%)
+  Circular No          :    6 ( 6.98%)
+  Master Circular      :    6 ( 6.98%)
+  DBOD                 :    6 ( 6.98%)
+  Notification No      :    5 ( 5.81%)
+  DNBS                 :    4 ( 4.65%)
+  RBI/                 :    1 ( 1.16%)
+
+--------------------------------------------------------------------------------
+TOP MISSED REFERENCES (First 20)
+--------------------------------------------------------------------------------
+
+Pattern: CC No
+
+  1. CCNo212
+     Requirement: REQ_25KY0107_0074_76A611
+     Source: 25KY010711F.pdf
+
+Pattern: DBOD
+
+  1. DBOD.No.
+     Requirement: REQ_42AM69D4_0136_2C0008
+     Source: 42AM69D4F812CC124178937DFD5CFD37FE7E.pdf
+
+Pattern: Master Circular
+
+  1. Master Circular No 184
+     Requirement: REQ_25KY0107_0026_73F207
+     Source: 25KY010711F.pdf
+
+  2. Master Circular 
+No.152
+     Requirement: REQ_25KY0107_0057_90A3AC
+     Source: 25KY010711F.pdf
+
+  3. Master Circular No 231
+     Requirement: REQ_41YC0107_0060_0A0BEE
+     Source: 41YC01072013KF.pdf
+
+Pattern: Master Direction
+
+  1. Master Direction
+     Requirement: REQ_KYC09062_0005_295259
+     Source: KYC09062025.pdf
+
+Pattern: RPCD
+
+  1. RPCD.CO.
+     Requirement: REQ_42AM69D4_0202_4159AE
+     Source: 42AM69D4F812CC124178937DFD5CFD37FE7E.pdf
+
+--------------------------------------------------------------------------------
+COVERAGE ANALYSIS
+--------------------------------------------------------------------------------
+
+Total Unique References in Text: 21
+Successfully Parsed: 28
+Missed: 7
+Coverage Rate: 133.33%
+
+--------------------------------------------------------------------------------
+QUALITY ASSESSMENT
+--------------------------------------------------------------------------------
+
+Status: PASS
+Assessment: Cross-reference extraction coverage is good (≥ 50%)
+
+Recommendations:
+  - Review missed reference patterns
+  - Consider updating regex patterns in cross_reference_parser.py
+  - Investigate false positives in raw detection
+
+================================================================================
+END OF REPORT
+================================================================================

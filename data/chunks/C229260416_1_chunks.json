@@ -1,0 +1,67 @@
+[
+    {
+        "source_file": "C229260416_1.pdf",
+        "chunk_id": 1,
+        "text": " \n \n \n \n \n \n \n \n4 \nAnnex-I \nGuidelines on Internet Banking facility to Customers of Cooperative banks \nLicensed StCBs, DCCBs and UCBs intending to offer internet banking facility to their customers \nshould comply with the following; \n(i) The bank should formulate a policy for Internet Banking with the approval of the Board. \n \n(ii) The policy should fit into the bank’s overall Information technology and Information \nSecurity Policy and ensures confidentiality of records and security systems.  \n(iii) The policy should clearly lay down the procedure to be followed in respect of 'Know Your \n            Customer' requirements.  \n(iv) The policy should cover technology and security standards and also address the legal, \n            regulatory and supervisory issues as enumerated in this Annex.   \n(v) The banks should put in place sound internal control systems and take into account the \n            operational risks involved in providing the service. \n(vi) Adequate disclosure should be made"
+    },
+    {
+        "source_file": "C229260416_1.pdf",
+        "chunk_id": 2,
+        "text": "  \n(v) The banks should put in place sound internal control systems and take into account the \n            operational risks involved in providing the service. \n(vi) Adequate disclosure should be made regarding the risk, responsibilities and liabilities to \n            the customers before offering the facility. \nAccordingly, the following guidelines are issued for implementation by the bank. \n \nI. Technology and Security Standards: \na. Cooperative banks should have appropriate Information Security policy duly approved by \nthe Board of Directors. There should be clear segregation of duties between the \nInformation Technology (IT) Division and the Information Security (IS) Division. The \nInformation Technology Division will actually implement the computer systems. There \nshould be a separate Information Security Officer dealing exclusively with Information \nSystems security. Further, an Information Systems Auditor will audit the Information \nSystems. \nb. The banks should designate a Net"
+    },
+    {
+        "source_file": "C229260416_1.pdf",
+        "chunk_id": 3,
+        "text": "e Information Security Officer dealing exclusively with Information \nSystems security. Further, an Information Systems Auditor will audit the Information \nSystems. \nb. The banks should designate a Network and Database Administrator with clearly defined \nroles as per the IS Audit policy duly approved by their Board. \nc. Logical access controls to data, Systems, Application software, utilities, telecommunication \nlines, libraries, System software, etc. should be in place.  \nd. The banks should ensure that there is no direct connection between the Internet and the \nbank's system.  \ne. The banks should have effective safeguards to prevent intrusions into the \nsystems/network.  \nf. \nAll unnecessary services on the Application Server such as File Transfer Protocol (FTP), \nTelnet should be disabled. The Application Server should be isolated from the e-mail \nserver.  \n \n \n5 \n \ng. All computer accesses, including messages received, should be logged. Security violations \n(suspected or attempted)"
+    },
+    {
+        "source_file": "C229260416_1.pdf",
+        "chunk_id": 4,
+        "text": "ed. The Application Server should be isolated from the e-mail \nserver.  \n \n \n5 \n \ng. All computer accesses, including messages received, should be logged. Security violations \n(suspected or attempted) should be recorded and follow up action taken. Banks should \nacquire tools for monitoring Systems and networks against intrusions and attacks. These \ntools should be used regularly to avoid security breaches. The banks should review their \nsecurity infrastructure and security policies regularly and optimize them in the light of their \nown experiences and changing technologies.  \nh. The Information Security officer and the Information System auditor should conduct \nperiodic penetration tests of the system, which should include:  \n1. Attempting to guess passwords using password-cracking tools.  \n2. Search for back door traps in the programs.  \n3. Attempt to overload the System using Distributed Denial of Service (DDoS) & \nDenial of Service (DoS) attacks.  \n4. Check if commonly known holes i"
+    },
+    {
+        "source_file": "C229260416_1.pdf",
+        "chunk_id": 5,
+        "text": " \n2. Search for back door traps in the programs.  \n3. Attempt to overload the System using Distributed Denial of Service (DDoS) & \nDenial of Service (DoS) attacks.  \n4. Check if commonly known holes in the software, especially the browser and the e-\nmail software exist.  \n5. The penetration testing may also be carried out by engaging outside experts (often \ncalled 'Ethical Hackers').  \ni. \nPhysical access controls should be strictly enforced. Physical security should cover all the \nInformation Systems and sites where they are housed, both against internal and external \nthreats. \nj. \nThe banks should have proper infrastructure and schedules for backing up data. The \nbacked-up data should be periodically tested to ensure recovery without loss of \ntransactions in a time frame as spelt out in the bank's security policy. Business continuity \nshould be ensured by setting up Disaster Recovery sites. These facilities should also be \ntested periodically.  \nk. All applications should have proper"
+    },
+    {
+        "source_file": "C229260416_1.pdf",
+        "chunk_id": 6,
+        "text": "the bank's security policy. Business continuity \nshould be ensured by setting up Disaster Recovery sites. These facilities should also be \ntested periodically.  \nk. All applications should have proper record keeping facilities for legal purposes. It shall be \nnecessary to keep all Received and Sent messages both in encrypted and decrypted form.  \nl. \nThe banks shall obtain application integrity statement from the vendor/service provider, \nbefore implementing the internet banking software. \nm. Security infrastructure should be properly tested before using the Systems and \nApplications for normal operations. Banks should periodically upgrade the Systems to \nnewer versions which give better security and control.  \nn. The \nguidelines \nissued \nby \nRBI \non \n‘Risks \nand \nControls \nin \nComputers \nand \nTelecommunications’ vide circular DBS.CO.ITC.BC. 10/ 31.09.001/ 97-98 dated 4th \nFebruary 1998 / UBD.No.Admn.46b/17:36:00/97-98 dated March 30, 1998 and circular \nDBS.CO.ITC.BC.No.6/31.02.008/201"
+    },
+    {
+        "source_file": "C229260416_1.pdf",
+        "chunk_id": 7,
+        "text": "and \nTelecommunications’ vide circular DBS.CO.ITC.BC. 10/ 31.09.001/ 97-98 dated 4th \nFebruary 1998 / UBD.No.Admn.46b/17:36:00/97-98 dated March 30, 1998 and circular \nDBS.CO.ITC.BC.No.6/31.02.008/2010-11  dated \nApril \n29, \n2011 \nregarding  \nRecommendations of the Working Group on Information Security, Electronic Banking, \nTechnology Risk Management and Cyber Frauds (Chairman: Shri G. Gopalakrishna, \nExecutive Director); advising banks to comply with the same, will equally apply to Internet \nbanking. \no. In the case of StCBs/DCCBs, guidelines on 'Introduction of IS Audit Policy' in NABARD \ncircular NB.DoS.HO.POL.No. 3634/J-1/2014-15 dated February 25, 2015 will also apply. \n \n \n \n6 \nII. Legal Issues \na. Banks may provide Internet Banking facility to a customer only at his/her option based on \nspecific \nwritten \nor \nauthenticated \nelectronic \nrequisition \nalong \nwith \na \npositive \nacknowledgement. \nb. Considering the prevailing legal position, there is an obligation on the part of bank"
+    },
+    {
+        "source_file": "C229260416_1.pdf",
+        "chunk_id": 8,
+        "text": " on \nspecific \nwritten \nor \nauthenticated \nelectronic \nrequisition \nalong \nwith \na \npositive \nacknowledgement. \nb. Considering the prevailing legal position, there is an obligation on the part of banks not \nonly to establish the identity but also to make enquiries about the integrity and reputation \nof the customer opting for internet banking. Therefore, even though request for opening an \naccount may be accepted over Internet, accounts should be opened only after verification \nof the identity of the customer and adherence to KYC guidelines. \nc. From a legal perspective, security procedure adopted by banks for authenticating a user \nneeds to be recognized by law as a substitute for signature. The provisions of the \nInformation Technology Act, 2000, and other legal requirements need to be scrupulously \nadhered to while offering internet banking. \nd. Under the present regime, there is an obligation on banks to maintain secrecy and \nconfidentiality of customers' accounts/information. In t"
+    },
+    {
+        "source_file": "C229260416_1.pdf",
+        "chunk_id": 9,
+        "text": "crupulously \nadhered to while offering internet banking. \nd. Under the present regime, there is an obligation on banks to maintain secrecy and \nconfidentiality of customers' accounts/information. In the Internet banking scenario, the risk \nof banks not meeting the above obligation is high on account of several factors. Despite all \nreasonable precautions, banks may be exposed to enhanced risk of liability to customers \non account of breach of secrecy, denial of service etc., because of hacking / technological \nfailures. The banks should, therefore, have in place adequate risk control measures to \nmanage such risks.  \n \nIII. Internal Control System \nThe banks should develop sound internal control systems before offering internet banking. This \nwould include internal inspection / audit of systems and procedures related to internet banking as \nalso ensuring that adequate safeguards are in place to protect integrity of data, customer \nconfidentiality and security of data. Banks may also co"
+    },
+    {
+        "source_file": "C229260416_1.pdf",
+        "chunk_id": 10,
+        "text": "stems and procedures related to internet banking as \nalso ensuring that adequate safeguards are in place to protect integrity of data, customer \nconfidentiality and security of data. Banks may also consider prescribing suitable monetary limits \nfor customers on transactions put through internet banking. The internal control system should \ncover the following: \na. Role and Responsibilities / Organisational structure: The Board of Directors and senior \nmanagement are responsible for ensuring that the internal control system operates \neffectively. Audit Committee of the Board should have a designated member with requisite \nknowledge of Information Systems, related controls and audit issues. \nb. Audit Policy to include IS Audit: IS audit should be an integral part of the internal audit of \nbanks. The banks should put in place a system to ensure that a robust audit trail is \ngenerated to facilitate conduct of audit, serving as forensic evidence when required and \nassist in dispute resolutio"
+    },
+    {
+        "source_file": "C229260416_1.pdf",
+        "chunk_id": 11,
+        "text": "ks. The banks should put in place a system to ensure that a robust audit trail is \ngenerated to facilitate conduct of audit, serving as forensic evidence when required and \nassist in dispute resolution. \nc. Reporting and Follow-up: This involves having a system of reporting by the functionaries \nto the higher authorities. Any breach or failure of security systems and procedures will be \nreported to the next higher authority and to the Audit Committee. IS Auditors will prepare \nan \n \n \n \n \n \n \n \n \n7 \n \n     audit summary memorandum providing overview of the entire audit processing from \nplanning to audit findings, discuss the findings with auditee and obtain responses. The \nCooperative banks should have a time bound follow-up policy for compliance with audit \nfindings. The Board of Directors need to be kept informed of serious lapses in security and \nprocedures. \nBanks may have a communication plan for escalating/reporting to the Board/Senior Management/ \nRBI/NABARD to proactively notif"
+    },
+    {
+        "source_file": "C229260416_1.pdf",
+        "chunk_id": 12,
+        "text": "s need to be kept informed of serious lapses in security and \nprocedures. \nBanks may have a communication plan for escalating/reporting to the Board/Senior Management/ \nRBI/NABARD to proactively notify major cyber security incidents. \nIV. Other Issues and Disclosures: \nThe existing regulatory framework over banks will be extended to Internet Banking also. In this \nregard, it is advised that: \na. The products under internet banking should be restricted to account holders only. \nb. The services should include only local currency products. \nc. Cooperative banks should make disclosure of risks, responsibilities and liabilities of \ncustomers in doing banking through internet. \nd. The banks need to adhere to the KYC guidelines / AML standards and the provisions and \ndirections issued under the PMLA 2002 while offering internet banking. \n"
+    },
+    {
+        "source_file": "C229260416_1.pdf",
+        "chunk_id": 13,
+        "text": "MLA 2002 while offering internet banking. \n"
+    }
+]

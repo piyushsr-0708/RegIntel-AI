@@ -1,0 +1,1563 @@
+================================================================================
+TAXONOMY AUDIT REPORT
+================================================================================
+
+Generated: 2026-06-24 13:02:54
+Source: D:\SuRaksha\data\requirements\requirements_taxonomy.json
+
+--------------------------------------------------------------------------------
+SUMMARY
+--------------------------------------------------------------------------------
+
+Total Requirements: 2941
+Potential Misclassifications: 1039
+Misclassification Rate: 35.33%
+
+--------------------------------------------------------------------------------
+DOMAIN DISTRIBUTION
+--------------------------------------------------------------------------------
+
+  General                   :  903 (30.70%)
+  AML                       :  613 (20.84%)
+  KYC                       :  468 (15.91%)
+  Reporting                 :  296 (10.06%)
+  Record Retention          :  287 ( 9.76%)
+  Governance                :  136 ( 4.62%)
+  Technology                :  117 ( 3.98%)
+  Cybersecurity             :   90 ( 3.06%)
+  Risk Management           :   31 ( 1.05%)
+
+--------------------------------------------------------------------------------
+OBLIGATION TYPE DISTRIBUTION
+--------------------------------------------------------------------------------
+
+  Mandatory                 : 1103 (37.50%)
+  Recommended               :  624 (21.22%)
+  Conditional               :  617 (20.98%)
+  Informational             :  528 (17.95%)
+  Prohibited                :   69 ( 2.35%)
+
+--------------------------------------------------------------------------------
+POTENTIAL MISCLASSIFICATIONS (Top 20)
+--------------------------------------------------------------------------------
+
+Expected Domain: AML (195 cases)
+
+1. REQ_25KY0107_0003_6721FA
+   Current Domain: Governance
+   Matched Keywords: money laundering
+   Source: 25KY010711F.pdf
+   Text: All NBFCs are, therefore, advised to 
+adopt the same with suitable modifications depending on the activity undertaken by 
+them and ensure that a proper policy framework on ‘Know Your Customer’ and Ant
+
+2. REQ_25KY0107_0004_CCC7B2
+   Current Domain: Governance
+   Matched Keywords: money laundering
+   Source: 25KY010711F.pdf
+   Text: undertaken by 
+them and ensure that a proper policy framework on ‘Know Your Customer’ and Anti-
+Money Laundering measures is formulated and put in place with the approval of the 
+Board within three mo
+
+3. REQ_25KY0107_0020_FCDEC7
+   Current Domain: KYC
+   Matched Keywords: aml
+   Source: 25KY010711F.pdf
+   Text: It may be appreciated that KYC norms/AML standards/CFT measures have 
+been prescribed to ensure that criminals are not allowed to misuse the 
+banking/financial channels.
+
+4. REQ_25KY0107_0036_D713DF
+   Current Domain: KYC
+   Matched Keywords: str, money laundering, aml
+   Source: 25KY010711F.pdf
+   Text: No 201   /03.10.42 /2010-11 dated September 22, 2010) 
+ 
+Know Your Customer (KYC) Norms/ Anti- Money Laundering (AML) Standards/ 
+Combating of Financing of Terrorism (CFT)  
+Financial Action Task Forc
+
+5. REQ_25KY0107_0042_2CDE33
+   Current Domain: Record Retention
+   Matched Keywords: str
+   Source: 25KY010711F.pdf
+   Text: Further, NBFCs should maintain for at least ten years from the date of 
+cessation of transaction between the NBFCs and the client, all necessary records of 
+transactions, both domestic or internationa
+
+6. REQ_25KY0107_0045_6E9E8D
+   Current Domain: Reporting
+   Matched Keywords: ctr, str
+   Source: 25KY010711F.pdf
+   Text: The related hardware and technical 
+requirement for preparing reports in an electronic format, the related data files and 
+data structures thereof are furnished in the instructions part of the concern
+
+7. REQ_25KY0107_0047_2B236C
+   Current Domain: Reporting
+   Matched Keywords: ctr
+   Source: 25KY010711F.pdf
+   Text: The summary should be signed by the Principal Officer and 
+submitted both for manual and electronic reporting.
+
+8. REQ_25KY0107_0048_9A452C
+   Current Domain: Record Retention
+   Matched Keywords: str
+   Source: 25KY010711F.pdf
+   Text: These instructions are issued under Sections 45K and 45L of the Reserve 
+Bank of India Act, 1934 and Rule 7 of Prevention of Money-laundering (Maintenance 
+of Records of the Nature and Value of Transa
+
+9. REQ_25KY0107_0058_377D68
+   Current Domain: Record Retention
+   Matched Keywords: str
+   Source: 25KY010711F.pdf
+   Text: on of paragraph 4 of the Master Circular 
+No.152/03.10.42/2009-10 dated July 1, 2009, NBFCs (including RNBCs)  are 
+advised to maintain for at least ten years from the date of transaction between the 
+
+10. REQ_25KY0107_0071_C53989
+   Current Domain: KYC
+   Matched Keywords: str, money laundering, aml
+   Source: 25KY010711F.pdf
+   Text: (DNBS(PD).CC.No209/03.10.42/2010-dated January 28, 2011) 
+Know Your Customer (KYC) Norms/ Anti- Money Laundering (AML) Standards/  
+Combating of Financing of Terrorism (CFT) 
+Financial Action Task For
+
+11. REQ_25KY0107_0074_76A611
+   Current Domain: KYC
+   Matched Keywords: str, money laundering, aml
+   Source: 25KY010711F.pdf
+   Text: (DNBS.(PD)CCNo212/03.10.42/2010-11dated March 8, 2011) 
+ 
+Know Your Customer (KYC) Norms/ Anti- Money Laundering (AML) Standards/ 
+Combating of Financing of Terrorism (CFT)  
+ 
+Financial Action Task F
+
+12. REQ_25KY0107_0091_53463C
+   Current Domain: KYC
+   Matched Keywords: str
+   Source: 25KY010711F.pdf
+   Text: It is important to bear in mind that the adoption of customer acceptance policy and   its 
+implementation  should  not become too restrictive and must not  result in  denial of banking 
+services to  g
+
+13. REQ_25KY0107_0117_A00B31
+   Current Domain: Governance
+   Matched Keywords: str
+   Source: 25KY010711F.pdf
+   Text: any 
+- 
+Principal place of business  
+- 
+Mailing address of the company 
+- 
+Telephone/Fax Number 
+ 
+ 
+ 
+ 
+(i) 
+Certificate 
+of 
+incorporation 
+and 
+Memorandum & Articles of Association (ii) 
+Resolutio
+
+14. REQ_41YC0107_0005_05DE71
+   Current Domain: Governance
+   Matched Keywords: money laundering
+   Source: 41YC01072013KF.pdf
+   Text: NBFCs have been 
+advised to ensure that a proper policy framework on ‘Know Your Customer’ and Anti-
+Money Laundering measures with the approval of the Board is formulated and put in 
+place.
+
+15. REQ_41YC0107_0008_DFC5F6
+   Current Domain: Governance
+   Matched Keywords: money laundering
+   Source: 41YC01072013KF.pdf
+   Text: All NBFCs are, therefore, advised to 
+adopt the same with suitable modifications depending on the activity undertaken by 
+them and ensure that a proper policy framework on ‘Know Your Customer’ and Ant
+
+16. REQ_41YC0107_0027_89C402
+   Current Domain: KYC
+   Matched Keywords: str
+   Source: 41YC01072013KF.pdf
+   Text: In terms of instructions contained in Para 15(1) of the Master Circular No 184 dated 
+July 1, 2010 in the event of an existing customer or the beneficial owner of an 
+existing account, subsequently be
+
+17. REQ_41YC0107_0032_51BD68
+   Current Domain: KYC
+   Matched Keywords: str
+   Source: 41YC01072013KF.pdf
+   Text: Accordingly, 
+apart from following the extant guidelines on customer identification procedure as 
+applicable to the proprietor, NBFCs/RNBCs should call for and verify the following 
+documents before o
+
+18. REQ_41YC0107_0040_2CDE33
+   Current Domain: Record Retention
+   Matched Keywords: str
+   Source: 41YC01072013KF.pdf
+   Text: Further, NBFCs should maintain for at least ten years from the date of 
+cessation of transaction between the NBFCs and the client, all necessary records of 
+transactions, both domestic or internationa
+
+19. REQ_41YC0107_0041_DDEF26
+   Current Domain: Record Retention
+   Matched Keywords: money laundering
+   Source: 41YC01072013KF.pdf
+   Text: In 
+terms of Sub-Section 2(a) of Section 12 of The Prevention of Money Laundering 
+(Amendment) Act, 2009 (PMLA, 2009), the records referred to in clause (a) of Sub-
+Section (1) of Section 12 shall be 
+
+20. REQ_41YC0107_0042_E859C8
+   Current Domain: Record Retention
+   Matched Keywords: str
+   Source: 41YC01072013KF.pdf
+   Text: (ii)    NBFCs (including RNBCs)  are advised to maintain for at least ten years from 
+the date of transaction between the NBFC (including RNBC)  and the client, all 
+necessary records of transactions 
+
+Expected Domain: Cybersecurity (13 cases)
+
+1. REQ_MC177DF2_0024_10141B
+   Current Domain: Risk Management
+   Matched Keywords: vulnerability
+   Source: MC177DF24D0B0964448286BC682385CDA1F3.pdf
+   Text: c) Conduct periodic risk management analysis, security vulnerability assessment of 
+the application and
+
+2. REQ_MC177DF2_0025_0829CB
+   Current Domain: Risk Management
+   Matched Keywords: vulnerability
+   Source: MC177DF24D0B0964448286BC682385CDA1F3.pdf
+   Text: c) Conduct periodic risk management analysis, security vulnerability assessment of 
+the application and network etc at least once in a year.
+
+3. REQ_MC177DF2_0025_00C449
+   Current Domain: Risk Management
+   Matched Keywords: vulnerability
+   Source: MC177DF24D0B0964448286BC682385CDA1F3.pdf
+   Text: d) Maintain proper and full documentation of security practices, guidelines, methods 
+and procedures used in mobile banking and payment systems and keep them up to 
+date based on the periodic risk man
+
+4. REQ_NT418020_0005_045CE5
+   Current Domain: Technology
+   Matched Keywords: cyber
+   Source: NT41802062016.pdf
+   Text: The size, systems, technological complexity, digital products, stakeholders and 
+threat perception vary from bank to bank and hence it is important to identify the 
+inherent risks and the controls in 
+
+5. REQ_NT418020_0006_031A8D
+   Current Domain: Risk Management
+   Matched Keywords: cyber
+   Source: NT41802062016.pdf
+   Text: While evaluating the controls, Board oversight, policies, 
+processes, cyber risk management architecture including experienced and qualified 
+resources, training and culture, threat intelligence gathe
+
+6. REQ_NT418020_0060_F7658C
+   Current Domain: Reporting
+   Matched Keywords: siem
+   Source: NT41802062016.pdf
+   Text: idence 
+ Integration of various log types and logging options into SIEM, 
+ticketing/workflow/case management, unstructured data/big data, 
+reporting/dashboard, use cases/rule design (customized based
+
+7. REQ_NT418020_0062_ECF662
+   Current Domain: Reporting
+   Matched Keywords: siem
+   Source: NT41802062016.pdf
+   Text: Need to think through by appropriately designing the  
+• 
+SIEM architecture & use cases 
+• 
+Log types and logging options (data sources, integration into SIEM) 
+• 
+Integration of various log types and
+
+8. REQ_NT418020_0069_24161D
+   Current Domain: Reporting
+   Matched Keywords: security incident
+   Source: NT41802062016.pdf
+   Text: Security Incident Reporting (SIR)  to RBI (within two to 6 hours):    
+2.
+
+9. REQ_NT41893F_0005_045CE5
+   Current Domain: Technology
+   Matched Keywords: cyber
+   Source: nt41893f697bc1d57443bb76afc7ab56272eb.pdf
+   Text: The size, systems, technological complexity, digital products, stakeholders and 
+threat perception vary from bank to bank and hence it is important to identify the 
+inherent risks and the controls in 
+
+10. REQ_NT41893F_0006_031A8D
+   Current Domain: Risk Management
+   Matched Keywords: cyber
+   Source: nt41893f697bc1d57443bb76afc7ab56272eb.pdf
+   Text: While evaluating the controls, Board oversight, policies, 
+processes, cyber risk management architecture including experienced and qualified 
+resources, training and culture, threat intelligence gathe
+
+11. REQ_NT41893F_0060_F7658C
+   Current Domain: Reporting
+   Matched Keywords: siem
+   Source: nt41893f697bc1d57443bb76afc7ab56272eb.pdf
+   Text: idence 
+ Integration of various log types and logging options into SIEM, 
+ticketing/workflow/case management, unstructured data/big data, 
+reporting/dashboard, use cases/rule design (customized based
+
+12. REQ_NT41893F_0062_ECF662
+   Current Domain: Reporting
+   Matched Keywords: siem
+   Source: nt41893f697bc1d57443bb76afc7ab56272eb.pdf
+   Text: Need to think through by appropriately designing the  
+• 
+SIEM architecture & use cases 
+• 
+Log types and logging options (data sources, integration into SIEM) 
+• 
+Integration of various log types and
+
+13. REQ_NT41893F_0069_24161D
+   Current Domain: Reporting
+   Matched Keywords: security incident
+   Source: nt41893f697bc1d57443bb76afc7ab56272eb.pdf
+   Text: Security Incident Reporting (SIR)  to RBI (within two to 6 hours):    
+2.
+
+Expected Domain: Governance (114 cases)
+
+1. REQ_25KY0107_0019_CDD940
+   Current Domain: AML
+   Matched Keywords: policy
+   Source: 25KY010711F.pdf
+   Text: NBFCs are, therefore, 
+advised to develop suitable mechanism through appropriate policy framework for 
+enhanced monitoring of accounts suspected of having terrorist links and swift 
+identification of 
+
+2. REQ_25KY0107_0022_E76132
+   Current Domain: KYC
+   Matched Keywords: senior management
+   Source: 25KY010711F.pdf
+   Text: It is further advised that in the event of an existing customer or 
+the beneficial owner of an existing account, subsequently becoming a PEP, NBFCs 
+(including RNBCs)  should obtain senior management 
+
+3. REQ_25KY0107_0026_73F207
+   Current Domain: AML
+   Matched Keywords: senior management
+   Source: 25KY010711F.pdf
+   Text: Politically Exposed Persons (PEPs) 
+In terms of instructions contained in Para 15(1) of the Master Circular No 184 dated 
+July 1, 2010 in the event of an existing customer or the beneficial owner of a
+
+4. REQ_25KY0107_0084_697965
+   Current Domain: KYC
+   Matched Keywords: policy
+   Source: 25KY010711F.pdf
+   Text: Banks should frame their KYC policies 
+incorporating the following four key elements: 
+(i) 
+Customer Acceptance Policy; 
+(ii) 
+Customer Identification Procedures; 
+(iii) 
+Monitoring of Transactions; a
+
+5. REQ_25KY0107_0084_535132
+   Current Domain: KYC
+   Matched Keywords: policy
+   Source: 25KY010711F.pdf
+   Text: For the purpose of KYC policy, a ‘Customer’ may be  defined as :  
+• 
+a person or entity that maintains an account and/or has a business relationship with 
+the bank; 
+• 
+one on whose behalf the accoun
+
+6. REQ_25KY0107_0085_C5A5F0
+   Current Domain: KYC
+   Matched Keywords: policy
+   Source: 25KY010711F.pdf
+   Text: The Customer Acceptance Policy must ensure that explicit 
+guidelines are in place  on the following aspects of customer relationship in the bank.
+
+7. REQ_25KY0107_0091_53463C
+   Current Domain: KYC
+   Matched Keywords: policy
+   Source: 25KY010711F.pdf
+   Text: It is important to bear in mind that the adoption of customer acceptance policy and   its 
+implementation  should  not become too restrictive and must not  result in  denial of banking 
+services to  g
+
+8. REQ_25KY0107_0094_CD6F6E
+   Current Domain: KYC
+   Matched Keywords: policy
+   Source: 25KY010711F.pdf
+   Text: If the 
+bank decides to accept such accounts in terms of the Customer Acceptance Policy, the bank 
+should take reasonable measures to identify the beneficial owner(s) and verify his/her/their 
+identit
+
+9. REQ_41YC0107_0026_E76132
+   Current Domain: KYC
+   Matched Keywords: senior management
+   Source: 41YC01072013KF.pdf
+   Text: It is further advised that in the event of an existing customer or 
+the beneficial owner of an existing account, subsequently becoming a PEP, NBFCs 
+(including RNBCs)  should obtain senior management 
+
+10. REQ_41YC0107_0027_89C402
+   Current Domain: KYC
+   Matched Keywords: senior management
+   Source: 41YC01072013KF.pdf
+   Text: In terms of instructions contained in Para 15(1) of the Master Circular No 184 dated 
+July 1, 2010 in the event of an existing customer or the beneficial owner of an 
+existing account, subsequently be
+
+11. REQ_41YC0107_0031_5811AC
+   Current Domain: KYC
+   Matched Keywords: policy
+   Source: 41YC01072013KF.pdf
+   Text: If the NBFCs/RNBCs decide to accept such accounts in 
+ 
+10
+terms of the Customer Acceptance Policy, the NBFC should take reasonable 
+measures to identify the beneficial owner(s) and verify his / her /
+
+12. REQ_41YC0107_0035_BAC89C
+   Current Domain: AML
+   Matched Keywords: board
+   Source: 41YC01072013KF.pdf
+   Text: Further, NBFCs (including RNBCs) should ensure that the 
+Principal Officer is able to act independently and report directly to the senior 
+management or to the Board of Directors.It was clarified that
+
+13. REQ_41YC0107_0063_9D7D5A
+   Current Domain: AML
+   Matched Keywords: policy
+   Source: 41YC01072013KF.pdf
+   Text: NBFCs are, therefore, advised to develop 
+suitable mechanism through appropriate policy framework for enhanced monitoring 
+of accounts suspected of having terrorist links and swift identification of t
+
+14. REQ_41YC0107_0076_33BE81
+   Current Domain: KYC
+   Matched Keywords: policy
+   Source: 41YC01072013KF.pdf
+   Text: Banks 
+should frame their KYC policies incorporating the following four key elements: 
+(i) 
+Customer Acceptance Policy; 
+(ii) 
+Customer Identification Procedures; 
+(iii) 
+Monitoring of Transactions; a
+
+15. REQ_41YC0107_0076_043D1C
+   Current Domain: KYC
+   Matched Keywords: policy
+   Source: 41YC01072013KF.pdf
+   Text: For the purpose of KYC policy, a ‘Customer’ may be  defined as :  
+• a person or entity that maintains an account and/or has a business 
+relationship with t
+
+16. REQ_41YC0107_0077_7B3DCF
+   Current Domain: KYC
+   Matched Keywords: policy
+   Source: 41YC01072013KF.pdf
+   Text: For the purpose of KYC policy, a ‘Customer’ may be  defined as :  
+• a person or entity that maintains an account and/or has a business 
+relationship with the bank; 
+• one on whose behalf the account 
+
+17. REQ_41YC0107_0077_0AEA12
+   Current Domain: KYC
+   Matched Keywords: policy
+   Source: 41YC01072013KF.pdf
+   Text: The Customer Acceptance Policy must ensure 
+that explicit guidelines are in place  on the following aspects of customer relationship 
+in the bank.
+
+18. REQ_41YC0107_0078_0AEA12
+   Current Domain: KYC
+   Matched Keywords: policy
+   Source: 41YC01072013KF.pdf
+   Text: The Customer Acceptance Policy must ensure 
+that explicit guidelines are in place  on the following aspects of customer relationship 
+in the bank.
+
+19. REQ_41YC0107_0083_7261FD
+   Current Domain: KYC
+   Matched Keywords: policy
+   Source: 41YC01072013KF.pdf
+   Text: It is important to bear in mind that the adoption of customer acceptance policy and   
+its implementation  should  not become too restrictive and must not  result in  denial 
+of banking services to  g
+
+20. REQ_41YC0107_0084_2FCB0B
+   Current Domain: AML
+   Matched Keywords: policy
+   Source: 41YC01072013KF.pdf
+   Text: ustomer acceptance policy and   
+its implementation  should  not become too restrictive and must not  result in  denial 
+of banking services to  general public, especially to those, who are financiall
+
+Expected Domain: KYC (120 cases)
+
+1. REQ_25KY0107_0003_6721FA
+   Current Domain: Governance
+   Matched Keywords: know your customer
+   Source: 25KY010711F.pdf
+   Text: All NBFCs are, therefore, advised to 
+adopt the same with suitable modifications depending on the activity undertaken by 
+them and ensure that a proper policy framework on ‘Know Your Customer’ and Ant
+
+2. REQ_25KY0107_0004_CCC7B2
+   Current Domain: Governance
+   Matched Keywords: know your customer
+   Source: 25KY010711F.pdf
+   Text: undertaken by 
+them and ensure that a proper policy framework on ‘Know Your Customer’ and Anti-
+Money Laundering measures is formulated and put in place with the approval of the 
+Board within three mo
+
+3. REQ_25KY0107_0017_0AC300
+   Current Domain: AML
+   Matched Keywords: kyc
+   Source: 25KY010711F.pdf
+   Text: NBFCs have been further advised in terms of extant instructions that 
+KYC/AML guidelines issued by Reserve Bank of India shall also apply to their 
+branches and majori
+
+4. REQ_25KY0107_0018_91832E
+   Current Domain: AML
+   Matched Keywords: kyc
+   Source: 25KY010711F.pdf
+   Text: NBFCs have been further advised in terms of extant instructions that 
+KYC/AML guidelines issued by Reserve Bank of India shall also apply to their 
+branches and majority owned subsidiaries located out
+
+5. REQ_25KY0107_0018_F45B03
+   Current Domain: AML
+   Matched Keywords: kyc
+   Source: 25KY010711F.pdf
+   Text: It is further clarified that in case there is a variance in 
+KYC/AML standards prescribed by the Reserve Bank and the host country 
+regulators, branches/overseas subsidiaries of NBFCs are required to 
+
+6. REQ_25KY0107_0026_73F207
+   Current Domain: AML
+   Matched Keywords: beneficial owner, cdd
+   Source: 25KY010711F.pdf
+   Text: Politically Exposed Persons (PEPs) 
+In terms of instructions contained in Para 15(1) of the Master Circular No 184 dated 
+July 1, 2010 in the event of an existing customer or the beneficial owner of a
+
+7. REQ_25KY0107_0027_A9C600
+   Current Domain: Governance
+   Matched Keywords: cdd
+   Source: 25KY010711F.pdf
+   Text: becoming a PEP, NBFCs (including RNBCS) were 
+advised to obtain senior management approval to continue the business relationship 
+and subject the account to the CDD measures as applicable to the custo
+
+8. REQ_25KY0107_0038_4247EB
+   Current Domain: AML
+   Matched Keywords: kyc
+   Source: 25KY010711F.pdf
+   Text: NBFCS were advised to strictly adhere to the guidelines on KYC/AML/CFT issued 
+from time to time and to those relating to periodical updation of customer 
+identification data after the account is open
+
+9. REQ_25KY0107_0049_7C3CDB
+   Current Domain: AML
+   Matched Keywords: know your customer
+   Source: 25KY010711F.pdf
+   Text: In terms of instructions contained in the guidelines on ‘Know Your Customer 
+Norms’ and ‘Anti-Money Laundering Measures’ of our circular dated February 21, 
+2005, NBFCs are required to prepare a profi
+
+10. REQ_25KY0107_0097_7B7A22
+   Current Domain: Governance
+   Matched Keywords: kyc
+   Source: 25KY010711F.pdf
+   Text: The Board of Directors of the bank should ensure that an effective KYC programme is put 
+in place by establishing appropriate procedures and ensuring their
+
+11. REQ_25KY0107_0098_67923F
+   Current Domain: Governance
+   Matched Keywords: kyc
+   Source: 25KY010711F.pdf
+   Text: The Board of Directors of the bank should ensure that an effective KYC programme is put 
+in place by establishing appropriate procedures and ensuring their effective implementation.
+
+12. REQ_25KY0107_0099_CF8680
+   Current Domain: Risk Management
+   Matched Keywords: kyc
+   Source: 25KY010711F.pdf
+   Text: Concurrent/ Internal Auditors should specifically check and verify the 
+application of KYC procedures at the branches and comment on the lapses observed in this 
+regard.
+
+13. REQ_25KY0107_0117_A00B31
+   Current Domain: Governance
+   Matched Keywords: officially valid document
+   Source: 25KY010711F.pdf
+   Text: any 
+- 
+Principal place of business  
+- 
+Mailing address of the company 
+- 
+Telephone/Fax Number 
+ 
+ 
+ 
+ 
+(i) 
+Certificate 
+of 
+incorporation 
+and 
+Memorandum & Articles of Association (ii) 
+Resolutio
+
+14. REQ_41YC0107_0005_05DE71
+   Current Domain: Governance
+   Matched Keywords: know your customer
+   Source: 41YC01072013KF.pdf
+   Text: NBFCs have been 
+advised to ensure that a proper policy framework on ‘Know Your Customer’ and Anti-
+Money Laundering measures with the approval of the Board is formulated and put in 
+place.
+
+15. REQ_41YC0107_0008_DFC5F6
+   Current Domain: Governance
+   Matched Keywords: know your customer
+   Source: 41YC01072013KF.pdf
+   Text: All NBFCs are, therefore, advised to 
+adopt the same with suitable modifications depending on the activity undertaken by 
+them and ensure that a proper policy framework on ‘Know Your Customer’ and Ant
+
+16. REQ_41YC0107_0022_91832E
+   Current Domain: AML
+   Matched Keywords: kyc
+   Source: 41YC01072013KF.pdf
+   Text: NBFCs have been further advised in terms of extant instructions that 
+KYC/AML guidelines issued by Reserve Bank of India shall also apply to their 
+branches and majority owned subsidiaries located out
+
+17. REQ_41YC0107_0022_F45B03
+   Current Domain: AML
+   Matched Keywords: kyc
+   Source: 41YC01072013KF.pdf
+   Text: It is further clarified that in case there is a variance in 
+KYC/AML standards prescribed by the Reserve Bank and the host country 
+regulators, branches/overseas subsidiaries of NBFCs are required to 
+
+18. REQ_41YC0107_0028_6FCC57
+   Current Domain: Governance
+   Matched Keywords: cdd
+   Source: 41YC01072013KF.pdf
+   Text: Cs (including RNBCS) were 
+ 
+9
+advised to obtain senior management approval to continue the business relationship 
+and subject the account to the CDD measures as applicable to the customers of PEP 
+ca
+
+19. REQ_41YC0107_0035_BAC89C
+   Current Domain: AML
+   Matched Keywords: kyc
+   Source: 41YC01072013KF.pdf
+   Text: Further, NBFCs (including RNBCs) should ensure that the 
+Principal Officer is able to act independently and report directly to the senior 
+management or to the Board of Directors.It was clarified that
+
+20. REQ_41YC0107_0048_7C3CDB
+   Current Domain: AML
+   Matched Keywords: know your customer
+   Source: 41YC01072013KF.pdf
+   Text: In terms of instructions contained in the guidelines on ‘Know Your Customer 
+Norms’ and ‘Anti-Money Laundering Measures’ of our circular dated February 21, 
+2005, NBFCs are required to prepare a profi
+
+Expected Domain: Record Retention (110 cases)
+
+1. REQ_25KY0107_0005_57FA78
+   Current Domain: AML
+   Matched Keywords: record
+   Source: 25KY010711F.pdf
+   Text: An obligation has been cast on the banking companies, financial institutions 
+and intermediaries, by the Prevention of Money Laundering Act, 2002 
+(Chapter IV), to comply with certain requirements in 
+
+2. REQ_25KY0107_0023_7FD649
+   Current Domain: KYC
+   Matched Keywords: record
+   Source: 25KY010711F.pdf
+   Text: With a view to enable the Principal Officer to discharge his responsibilities, it is 
+advised that the Principal Officer and other appropriate staff should have timely 
+access to customer identificati
+
+3. REQ_25KY0107_0047_9FC046
+   Current Domain: AML
+   Matched Keywords: record
+   Source: 25KY010711F.pdf
+   Text: These instructions are issued under Sections 45K and 45L of the Reserve 
+Bank of India Act, 1934 and Rule 7 of Prevention of Money-laundering (Maintenance 
+of Records of the N
+
+4. REQ_25KY0107_0081_963A9C
+   Current Domain: Reporting
+   Matched Keywords: record
+   Source: 25KY010711F.pdf
+   Text: Attempts to avoid Reporting/Record-keeping Requirements  
+(i) A customer who is reluctant to provide information needed for a mandatory report, 
+to have the report filed or to proceed with a transacti
+
+5. REQ_41YC0107_0010_4FDDE4
+   Current Domain: AML
+   Matched Keywords: record
+   Source: 41YC01072013KF.pdf
+   Text: An obligation has been cast on the banking companies, financial institutions 
+and intermediaries, by the Prevention of Money Laundering Act, 2002 
+(Chapter IV), to comply with certain requirements in 
+
+6. REQ_41YC0107_0034_14862A
+   Current Domain: KYC
+   Matched Keywords: record
+   Source: 41YC01072013KF.pdf
+   Text: With a 
+view to enable the Principal Officer to discharge his responsibilities, it is advised that 
+the Principal Officer and other appropriate staff should have timely access to 
+customer identificat
+
+7. REQ_41YC0107_0038_C69AE8
+   Current Domain: AML
+   Matched Keywords: record
+   Source: 41YC01072013KF.pdf
+   Text: Maintenance of records of transactions   
+NBFCs should introduce a system of maintaining proper record of transactions 
+prescribed under Rule 3, as mentioned below:   
+(i)  all cash transactions of th
+
+8. REQ_41YC0107_0073_963A9C
+   Current Domain: Reporting
+   Matched Keywords: record
+   Source: 41YC01072013KF.pdf
+   Text: Attempts to avoid Reporting/Record-keeping Requirements  
+(i) A customer who is reluctant to provide information needed for a mandatory report, 
+to have the report filed or to proceed with a transacti
+
+9. REQ_41YC0107_0079_4586C6
+   Current Domain: KYC
+   Matched Keywords: documentation
+   Source: 41YC01072013KF.pdf
+   Text: ategorised  even  higher; 
+ 
+(iii) 
+Documentation requirements and other information to be collected  in 
+respect of  different categories of customers depending on perceived risk and 
+keeping in mind
+
+10. REQ_42AM69D4_0002_B3360E
+   Current Domain: KYC
+   Matched Keywords: record
+   Source: 42AM69D4F812CC124178937DFD5CFD37FE7E.pdf
+   Text: Yours faithfully, 
+ 
+ 
+ 
+ 
+(Lily Vadera) 
+Chief General Manager 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Index 
+ 
+A 
+ Purpose 
+B 
+Application 
+1 
+Introduction 
+1.1 
+KYC/AML/CFT/Obligation of banks/FIs under PMLA, 200
+
+11. REQ_42AM69D4_0003_43EF1A
+   Current Domain: KYC
+   Matched Keywords: record
+   Source: 42AM69D4F812CC124178937DFD5CFD37FE7E.pdf
+   Text: anagement 
+4 
+Correspondent Banking and Shell Bank 
+5 
+Wire Transfer 
+6 
+Maintenance of KYC documents and preservation period 
+6.1 
+Maintenance of records of transactions 
+6.2 
+Preservation of Records
+
+12. REQ_42AM69D4_0076_05B595
+   Current Domain: AML
+   Matched Keywords: record
+   Source: 42AM69D4F812CC124178937DFD5CFD37FE7E.pdf
+   Text: 6.1 
+Maintenance of records of transactions 
+Banks/FIs should introduce a system of maintaining proper record of 
+transactions prescribed under Rule 3 of Prevention of Money Laundering 
+(Maintenance o
+
+13. REQ_42AM69D4_0086_72A7A8
+   Current Domain: AML
+   Matched Keywords: record
+   Source: 42AM69D4F812CC124178937DFD5CFD37FE7E.pdf
+   Text: Reporting Requirements 
+a) Reporting to Financial Intelligence Unit - India 
+(i) In terms of the Rule 3 of the PML (Maintenance of Records) Rules, 2005, 
+banks/FIs are required to furnish  information
+
+14. REQ_42AM69D4_0093_3C2FB6
+   Current Domain: AML
+   Matched Keywords: record
+   Source: 42AM69D4F812CC124178937DFD5CFD37FE7E.pdf
+   Text: to be generated in the format prescribed by FIU-IND;    
+(vi) A copy of the monthly CTR submitted to FIU-India in respect of the branches 
+should be available at the branches for production to auditor
+
+15. REQ_42AM69D4_0101_D8D775
+   Current Domain: AML
+   Matched Keywords: record
+   Source: 42AM69D4F812CC124178937DFD5CFD37FE7E.pdf
+   Text: (ix) Designated Director: 
+Banks/FIs may nominate a Director on their Boards as “designated Director”, as 
+required under provisions of the Prevention of Money Laundering (Maintenance 
+of Records) Rul
+
+16. REQ_42AM69D4_0120_827999
+   Current Domain: AML
+   Matched Keywords: record
+   Source: 42AM69D4F812CC124178937DFD5CFD37FE7E.pdf
+   Text: IS-I Division of MHA would electronically forward the designated lists to the 
+UAPA nodal officer of all States and UTs with the request to have the names of 
+the designated individuals/entities, on t
+
+17. REQ_42AM69D4_0149_FDA4FE
+   Current Domain: KYC
+   Matched Keywords: record
+   Source: 42AM69D4F812CC124178937DFD5CFD37FE7E.pdf
+   Text: 001/2009-10 dated January 
+12, 2009 
+Prevention 
+of 
+Money 
+laundering  
+(Amendment) 
+Rules 
+2009- 
+Obligation of banks 
+/Financial 
+Institutions 
+Government of India Notification 
+dated 
+November 
+12
+
+18. REQ_42AM69D4_0149_AF1D41
+   Current Domain: AML
+   Matched Keywords: record
+   Source: 42AM69D4F812CC124178937DFD5CFD37FE7E.pdf
+   Text: and date 
+Subject 
+Gist of instructions 
+concerns 
+34 
+DBOD.AML.BC.No.95/14.01.0
+01/2009-10 dated April 23, 
+2010 
+Prevention 
+of 
+Money Laundering 
+(Maintenance 
+of 
+records 
+of 
+the 
+…Intermediaries
+
+19. REQ_42AM69D4_0150_349D77
+   Current Domain: AML
+   Matched Keywords: record
+   Source: 42AM69D4F812CC124178937DFD5CFD37FE7E.pdf
+   Text: ubject 
+Gist of instructions 
+concerns 
+34 
+DBOD.AML.BC.No.95/14.01.0
+01/2009-10 dated April 23, 
+2010 
+Prevention 
+of 
+Money Laundering 
+(Maintenance 
+of 
+records 
+of 
+the 
+…Intermediaries) 
+Amendmen
+
+20. REQ_42AM69D4_0151_402ADF
+   Current Domain: AML
+   Matched Keywords: record
+   Source: 42AM69D4F812CC124178937DFD5CFD37FE7E.pdf
+   Text: 38 
+DBOD.AML.BC.No.113/14.0
+1.001/2009-10 dated June 
+29, 2010 
+Prevention of 
+Money Laundering 
+(Maintenance of 
+records of the 
+…Intermediaries) 
+Second 
+Amendment Rules 
+2010 
+Government of India N
+
+Expected Domain: Reporting (248 cases)
+
+1. REQ_25KY0107_0019_CDD940
+   Current Domain: AML
+   Matched Keywords: report
+   Source: 25KY010711F.pdf
+   Text: NBFCs are, therefore, 
+advised to develop suitable mechanism through appropriate policy framework for 
+enhanced monitoring of accounts suspected of having terrorist links and swift 
+identification of 
+
+2. REQ_25KY0107_0023_0E507D
+   Current Domain: Governance
+   Matched Keywords: report
+   Source: 25KY010711F.pdf
+   Text: Further, NBFCs (including RNBCs) should 
+ensure that the Principal Officer is able to act independently and report directly to the 
+senior management or to the Board of Directors.
+
+3. REQ_25KY0107_0024_F93965
+   Current Domain: Governance
+   Matched Keywords: report
+   Source: 25KY010711F.pdf
+   Text: NBFCs (including RNBCs) should 
+ensure that the Principal Officer is able to act independently and report directly to the 
+senior management or to the Board of Directors.
+
+4. REQ_25KY0107_0039_0C2AD0
+   Current Domain: AML
+   Matched Keywords: report, reporting
+   Source: 25KY010711F.pdf
+   Text: (DNBS.(PD)CC  No215/03.10.42/2010-11 dated April 5, 2011 ) 
+ 
+Prevention of Money Laundering Act, 2002  - Obligations of NBFCs in terms of 
+Rules notified thereunder’ 
+ 
+17 NBFCs were advised to appoi
+
+5. REQ_25KY0107_0044_5FB067
+   Current Domain: AML
+   Matched Keywords: report, reporting
+   Source: 25KY010711F.pdf
+   Text: i) Manual 
+reporting of cash transactions ii) Manual reporting of suspicious transactions iii) 
+Consolidated reporting of cash transactions by Principal Officer of the bank iv) 
+Electronic data struct
+
+6. REQ_25KY0107_0044_9E5189
+   Current Domain: AML
+   Matched Keywords: report, reporting, submission
+   Source: 25KY010711F.pdf
+   Text: The 
+reporting 
+formats 
+contain 
+detailed 
+guidelines 
+on 
+the 
+compilation 
+and 
+manner/procedure of submission of the reports to FIU-IND.
+
+7. REQ_25KY0107_0044_17FA90
+   Current Domain: AML
+   Matched Keywords: report, filing
+   Source: 25KY010711F.pdf
+   Text: It would be 
+necessary for NBFCs to initiate urgent steps to ensure electronic filing of cash 
+transaction report (CTR) as early as possible.
+
+8. REQ_25KY0107_0045_17FA90
+   Current Domain: AML
+   Matched Keywords: report, filing
+   Source: 25KY010711F.pdf
+   Text: It would be 
+necessary for NBFCs to initiate urgent steps to ensure electronic filing of cash 
+transaction report (CTR) as early as possible.
+
+9. REQ_25KY0107_0045_191C09
+   Current Domain: AML
+   Matched Keywords: report
+   Source: 25KY010711F.pdf
+   Text: However, NBFCs which are not in a position to immediately file electronic 
+reports may file manual reports to FIU-IND.
+
+10. REQ_25KY0107_0045_0DDAFF
+   Current Domain: AML
+   Matched Keywords: report, filing
+   Source: 25KY010711F.pdf
+   Text: While detailed instructions for filing all 
+types of reports are given in the instructions part of the related formats, NBFCs 
+should scrupulously adhere to the following:   
+  
+ 
+15
+(a) 
+The cash tra
+
+11. REQ_25KY0107_0045_812ABB
+   Current Domain: AML
+   Matched Keywords: report, filing
+   Source: 25KY010711F.pdf
+   Text: While filing CTR, individual 
+transactions below rupees fifty thousand may not be included;  
+ 
+(b) 
+ The Suspicious Transaction Report (STR) should be furnished within 7 
+da
+
+12. REQ_25KY0107_0046_CCE874
+   Current Domain: AML
+   Matched Keywords: report, filing
+   Source: 25KY010711F.pdf
+   Text: While filing CTR, individual 
+transactions below rupees fifty thousand may not be included;  
+ 
+(b) 
+ The Suspicious Transaction Report (STR) should be furnished within 7 
+days of arriving at a conclu
+
+13. REQ_25KY0107_0046_10E5C7
+   Current Domain: AML
+   Matched Keywords: report
+   Source: 25KY010711F.pdf
+   Text: It should be ensured that there is no 
+undue delay in arriving at such a conclusion once a suspicious transaction 
+report is received from a branch or any other office.
+
+14. REQ_25KY0107_0046_29C2E9
+   Current Domain: AML
+   Matched Keywords: report, submission, filing
+   Source: 25KY010711F.pdf
+   Text: Such report should be 
+made available to the competent authorities on request;   
+ 
+(c) 
+The Principal Officer will be responsible for timely submission of CTR 
+and STR to FIU-IND;  
+ 
+(d) 
+Utmost con
+
+15. REQ_25KY0107_0047_F8E140
+   Current Domain: AML
+   Matched Keywords: filing
+   Source: 25KY010711F.pdf
+   Text: of CTR 
+and STR to FIU-IND;  
+ 
+(d) 
+Utmost confidentiality should be maintained in filing of CTR and STR 
+with FIU-IND.
+
+16. REQ_25KY0107_0047_58F3B6
+   Current Domain: AML
+   Matched Keywords: report
+   Source: 25KY010711F.pdf
+   Text: electronic or manual;  
+ 
+(f) 
+ A summary of cash transaction report for the NBFC as a whole may 
+be compiled by the Principal Officer of the NBFC in physical form as per the 
+format specified.
+
+17. REQ_25KY0107_0050_DE90D7
+   Current Domain: AML
+   Matched Keywords: report, reporting
+   Source: 25KY010711F.pdf
+   Text: It is needless to add that a robust 
+software throwing alerts is essential for effective identification and reporting of 
+suspicious transactions.
+
+18. REQ_25KY0107_0050_990527
+   Current Domain: AML
+   Matched Keywords: report, filing
+   Source: 25KY010711F.pdf
+   Text: In paragraph 7 of our circular dated April 5, 2006, referred to above, NBFCs 
+were advised to initiate urgent steps to ensure electronic filing of cash transaction 
+report (CTR) and Suspicious Transac
+
+19. REQ_25KY0107_0050_D2E7AB
+   Current Domain: AML
+   Matched Keywords: report
+   Source: 25KY010711F.pdf
+   Text: It has been 
+reported by FIU-IND that many NBFCs are yet to file electronic reports.
+
+20. REQ_25KY0107_0051_9C8F12
+   Current Domain: AML
+   Matched Keywords: report
+   Source: 25KY010711F.pdf
+   Text: In paragraph 7(I)(a) of our circular dated April 5, 2006, referred to above, 
+NBFCs were advised to make Cash Transaction Reports (CTR) to FIU-India for 
+every month latest by 15th of the succeeding m
+
+Expected Domain: Risk Management (47 cases)
+
+1. REQ_25KY0107_0014_1A4B48
+   Current Domain: Reporting
+   Matched Keywords: risk profile
+   Source: 25KY010711F.pdf
+   Text: It was further clarified to NBFCs in April 2008 that for the purpose of Circular 
+dated February 21, 2005  the term  'being satisfied' means that the NBFC must be 
+able to satisfy the competent author
+
+2. REQ_25KY0107_0027_976711
+   Current Domain: KYC
+   Matched Keywords: risk management
+   Source: 25KY010711F.pdf
+   Text: Further, in regard to PEP accounts, it is reiterated that NBFCs 
+should have appropriate ongoing risk management procedures for identifying and 
+applying enhanced CDD to PEPs, customers who are close 
+
+3. REQ_25KY0107_0084_697965
+   Current Domain: KYC
+   Matched Keywords: risk management
+   Source: 25KY010711F.pdf
+   Text: Banks should frame their KYC policies 
+incorporating the following four key elements: 
+(i) 
+Customer Acceptance Policy; 
+(ii) 
+Customer Identification Procedures; 
+(iii) 
+Monitoring of Transactions; a
+
+4. REQ_25KY0107_0092_A7673D
+   Current Domain: Reporting
+   Matched Keywords: risk profile
+   Source: 25KY010711F.pdf
+   Text: Being satisfied means that the bank must be able to satisfy the competent 
+authorities that due diligence was observed based on the risk profile of the customer in 
+compliance with the extant guidelin
+
+5. REQ_41YC0107_0018_1A4B48
+   Current Domain: Reporting
+   Matched Keywords: risk profile
+   Source: 41YC01072013KF.pdf
+   Text: It was further clarified to NBFCs in April 2008 that for the purpose of Circular 
+dated February 21, 2005  the term  'being satisfied' means that the NBFC must be 
+able to satisfy the competent author
+
+6. REQ_41YC0107_0027_1F6F11
+   Current Domain: KYC
+   Matched Keywords: risk management
+   Source: 41YC01072013KF.pdf
+   Text: Further, in regard to PEP accounts, it is reiterated 
+that NBFCs should have appropriate ongoing risk management procedures for 
+identifying and applying enhanced CDD to PEPs, customers who are close 
+
+7. REQ_41YC0107_0076_33BE81
+   Current Domain: KYC
+   Matched Keywords: risk management
+   Source: 41YC01072013KF.pdf
+   Text: Banks 
+should frame their KYC policies incorporating the following four key elements: 
+(i) 
+Customer Acceptance Policy; 
+(ii) 
+Customer Identification Procedures; 
+(iii) 
+Monitoring of Transactions; a
+
+8. REQ_41YC0107_0085_138269
+   Current Domain: Reporting
+   Matched Keywords: risk profile
+   Source: 41YC01072013KF.pdf
+   Text: Being 
+satisfied means that the bank must be able to satisfy the competent authorities that 
+due diligence was observed based on the risk profile of the customer in compliance 
+with the extant guideli
+
+9. REQ_42AM69D4_0002_B3360E
+   Current Domain: KYC
+   Matched Keywords: risk management
+   Source: 42AM69D4F812CC124178937DFD5CFD37FE7E.pdf
+   Text: Yours faithfully, 
+ 
+ 
+ 
+ 
+(Lily Vadera) 
+Chief General Manager 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Index 
+ 
+A 
+ Purpose 
+B 
+Application 
+1 
+Introduction 
+1.1 
+KYC/AML/CFT/Obligation of banks/FIs under PMLA, 200
+
+10. REQ_42AM69D4_0012_CAC8C0
+   Current Domain: KYC
+   Matched Keywords: risk management
+   Source: 42AM69D4F812CC124178937DFD5CFD37FE7E.pdf
+   Text: KYC Policy 
+Banks/FIs should frame their KYC policies incorporating the following four key 
+elements: 
+(i) Customer Acceptance Policy (CAP); 
+(ii) Customer Identification Procedures (CIP); 
+(iii) Moni
+
+11. REQ_42AM69D4_0015_19E7DD
+   Current Domain: Reporting
+   Matched Keywords: risk profile
+   Source: 42AM69D4F812CC124178937DFD5CFD37FE7E.pdf
+   Text: The bank/FI must be able to satisfy the competent authorities that 
+due diligence was observed based on the risk profile of the customer in compliance 
+with the extant guidelines in place.
+
+12. REQ_70MK0107_0006_9C08CC
+   Current Domain: KYC
+   Matched Keywords: risk management
+   Source: 70MK010714FL.pdf
+   Text: 2.1
+General
+2.2
+KYC Policy
+2.3
+Customer Acceptance Policy
+2.4
+Customer Identification Procedure
+2.5
+Customer Identification Requirements – Indicative guidelines
+2.6
+Selling Third Party Products
+2.7
+Du
+
+13. REQ_70MK0107_0011_99B032
+   Current Domain: KYC
+   Matched Keywords: risk management
+   Source: 70MK010714FL.pdf
+   Text: KYC Policy
+Banks should frame their KYC policies incorporating the following four key
+elements:
+i) Customer Acceptance Policy;
+ii) Customer Identification Procedures;
+iii) Monitoring of Transactions; 
+
+14. REQ_70MK0107_0019_17571B
+   Current Domain: AML
+   Matched Keywords: risk assessment
+   Source: 70MK010714FL.pdf
+   Text: In this regard, banks may use for guidance in
+their own risk assessment, a Report on Parameters for Risk-Based
+Transaction Monitoring (RBTM) dated March 30, 2011 which was issued by
+Indian Banks' Asso
+
+15. REQ_70MK0107_0021_243D41
+   Current Domain: Reporting
+   Matched Keywords: risk profile
+   Source: 70MK010714FL.pdf
+   Text: Being satisfied means that the bank
+must be able to satisfy the competent authorities that due diligence was
+observed based on the risk profile of the customer in compliance with the
+extant guidelines
+
+16. REQ_70MK0107_0042_B34785
+   Current Domain: KYC
+   Matched Keywords: risk management
+   Source: 70MK010714FL.pdf
+   Text: iii)Further, banks should have appropriate ongoing risk management
+procedures for identifying and applying enhanced CDD to PEPs,
+customers who are close relatives of PEPs, and accounts of which a
+PEP 
+
+17. REQ_70MK0107_0062_5FA2D2
+   Current Domain: Reporting
+   Matched Keywords: risk profile
+   Source: 70MK010714FL.pdf
+   Text: c) Banks should exercise ongoing due diligence with respect to the business
+relationship with every client and closely examine the transactions in order to
+ensure that they are consistent with their k
+
+18. REQ_70MK0107_0063_8ACB1E
+   Current Domain: KYC
+   Matched Keywords: risk profile
+   Source: 70MK010714FL.pdf
+   Text: siness
+relationship with every client and closely examine the transactions in order to
+ensure that they are consistent with their knowledge of the client, his business
+and risk profile and where neces
+
+19. REQ_73IKYC01_0010_653CA8
+   Current Domain: KYC
+   Matched Keywords: risk management
+   Source: 73IKYC010709_F.pdf
+   Text: 2.2 KYC Policy 
+Banks should frame their KYC policies incorporating the following four key 
+elements: 
+a) Customer Acceptance Policy; 
+b) Customer Identification Procedures; 
+c) 
+Monitoring of Transac
+
+20. REQ_73IKYC01_0018_DEA5DE
+   Current Domain: Reporting
+   Matched Keywords: risk profile
+   Source: 73IKYC010709_F.pdf
+   Text: Being satisfied means that the bank must 
+be able to satisfy the competent authorities that due diligence was observed 
+based on the risk profile of the customer in compliance with the extant 
+guideli
+
+Expected Domain: Technology (192 cases)
+
+1. REQ_25KY0107_0016_F4449E
+   Current Domain: AML
+   Matched Keywords: system
+   Source: 25KY010711F.pdf
+   Text: In terms of extant instructions,  NBFCs are required to put in place a system 
+of periodical review of risk categorisation of
+
+2. REQ_25KY0107_0017_0FB3C9
+   Current Domain: AML
+   Matched Keywords: system
+   Source: 25KY010711F.pdf
+   Text: In terms of extant instructions,  NBFCs are required to put in place a system 
+of periodical review of risk categorisation of accounts and the need for applying 
+enhanced due diligence measures in cas
+
+3. REQ_25KY0107_0039_0C2AD0
+   Current Domain: AML
+   Matched Keywords: system
+   Source: 25KY010711F.pdf
+   Text: (DNBS.(PD)CC  No215/03.10.42/2010-11 dated April 5, 2011 ) 
+ 
+Prevention of Money Laundering Act, 2002  - Obligations of NBFCs in terms of 
+Rules notified thereunder’ 
+ 
+17 NBFCs were advised to appoi
+
+4. REQ_25KY0107_0040_D1DE33
+   Current Domain: Record Retention
+   Matched Keywords: system
+   Source: 25KY010711F.pdf
+   Text: Maintenance of records of transactions   
+ 
+13
+NBFCs should introduce a system of maintaining proper record of transactions 
+prescribed under Rule 3, as mentioned below:   
+9.
+
+5. REQ_25KY0107_0041_89C4C2
+   Current Domain: Record Retention
+   Matched Keywords: system
+   Source: 25KY010711F.pdf
+   Text: 20   Maintenance and Preservation of records 
+NBFCs should take appropriate steps to evolve a system for pr
+
+6. REQ_25KY0107_0042_C04F3E
+   Current Domain: Record Retention
+   Matched Keywords: system
+   Source: 25KY010711F.pdf
+   Text: 20   Maintenance and Preservation of records 
+NBFCs should take appropriate steps to evolve a system for proper maintenance 
+and preservation of account information   in a manner that allows data to b
+
+7. REQ_25KY0107_0044_5FB067
+   Current Domain: AML
+   Matched Keywords: electronic
+   Source: 25KY010711F.pdf
+   Text: i) Manual 
+reporting of cash transactions ii) Manual reporting of suspicious transactions iii) 
+Consolidated reporting of cash transactions by Principal Officer of the bank iv) 
+Electronic data struct
+
+8. REQ_25KY0107_0044_17FA90
+   Current Domain: AML
+   Matched Keywords: electronic
+   Source: 25KY010711F.pdf
+   Text: It would be 
+necessary for NBFCs to initiate urgent steps to ensure electronic filing of cash 
+transaction report (CTR) as early as possible.
+
+9. REQ_25KY0107_0045_17FA90
+   Current Domain: AML
+   Matched Keywords: electronic
+   Source: 25KY010711F.pdf
+   Text: It would be 
+necessary for NBFCs to initiate urgent steps to ensure electronic filing of cash 
+transaction report (CTR) as early as possible.
+
+10. REQ_25KY0107_0045_6E9E8D
+   Current Domain: Reporting
+   Matched Keywords: electronic
+   Source: 25KY010711F.pdf
+   Text: The related hardware and technical 
+requirement for preparing reports in an electronic format, the related data files and 
+data structures thereof are furnished in the instructions part of the concern
+
+11. REQ_25KY0107_0045_191C09
+   Current Domain: AML
+   Matched Keywords: electronic
+   Source: 25KY010711F.pdf
+   Text: However, NBFCs which are not in a position to immediately file electronic 
+reports may file manual reports to FIU-IND.
+
+12. REQ_25KY0107_0047_58F3B6
+   Current Domain: AML
+   Matched Keywords: electronic
+   Source: 25KY010711F.pdf
+   Text: electronic or manual;  
+ 
+(f) 
+ A summary of cash transaction report for the NBFC as a whole may 
+be compiled by the Principal Officer of the NBFC in physical form as per the 
+format specified.
+
+13. REQ_25KY0107_0047_2B236C
+   Current Domain: Reporting
+   Matched Keywords: electronic
+   Source: 25KY010711F.pdf
+   Text: The summary should be signed by the Principal Officer and 
+submitted both for manual and electronic reporting.
+
+14. REQ_25KY0107_0049_685405
+   Current Domain: AML
+   Matched Keywords: software
+   Source: 25KY010711F.pdf
+   Text: It is, therefore, reiterated that NBFCs, as a 
+part of transaction monitoring mechanism, are required to put in place an appropriate 
+software application to throw alerts when the transactions are inc
+
+15. REQ_25KY0107_0050_DE90D7
+   Current Domain: AML
+   Matched Keywords: software
+   Source: 25KY010711F.pdf
+   Text: It is needless to add that a robust 
+software throwing alerts is essential for effective identification and reporting of 
+suspicious transactions.
+
+16. REQ_25KY0107_0050_990527
+   Current Domain: AML
+   Matched Keywords: electronic
+   Source: 25KY010711F.pdf
+   Text: In paragraph 7 of our circular dated April 5, 2006, referred to above, NBFCs 
+were advised to initiate urgent steps to ensure electronic filing of cash transaction 
+report (CTR) and Suspicious Transac
+
+17. REQ_25KY0107_0050_D2E7AB
+   Current Domain: AML
+   Matched Keywords: electronic
+   Source: 25KY010711F.pdf
+   Text: It has been 
+reported by FIU-IND that many NBFCs are yet to file electronic reports.
+
+18. REQ_25KY0107_0097_C54E74
+   Current Domain: Reporting
+   Matched Keywords: system
+   Source: 25KY010711F.pdf
+   Text: The internal monitoring 
+system should have an inbuilt procedure for reporting of such transactions and those of 
+suspicious nature to controlling/ head office on a fortnightly  basis.
+
+19. REQ_25KY0107_0109_CBA1DE
+   Current Domain: KYC
+   Matched Keywords: system
+   Source: 25KY010711F.pdf
+   Text: Where the banks rely on the 'customer 
+ 
+51
+due diligence' (CDD) done by an intermediary, they should satisfy themselves that the 
+intermediary is regulated and supervised and has adequate systems in 
+
+20. REQ_25KY0107_0111_804F10
+   Current Domain: KYC
+   Matched Keywords: system
+   Source: 25KY010711F.pdf
+   Text: In such cases, it must be ensured that the third 
+party is a regulated and supervised entity and has adequate KYC systems in place.
+
+--------------------------------------------------------------------------------
+SAMPLE STATISTICS
+--------------------------------------------------------------------------------
+
+Sample File: D:\SuRaksha\taxonomy_audit_samples.txt
+Domains Sampled: AML, KYC, Cybersecurity, Reporting
+Requirements per Domain: 20 (or all if fewer)
+
+--------------------------------------------------------------------------------
+QUALITY ASSESSMENT
+--------------------------------------------------------------------------------
+
+Status: PASS
+Assessment: Taxonomy quality is good (< 40% cross-domain keyword matches)
+
+================================================================================
+END OF REPORT
+================================================================================

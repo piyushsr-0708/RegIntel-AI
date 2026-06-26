@@ -1,0 +1,71 @@
+================================================================================
+REGULATORY KNOWLEDGE GRAPH SUMMARY V2
+================================================================================
+
+Generated: 2026-06-20 12:44:38
+Version: 2.0 (NetworkX-based with deduplication)
+
+GRAPH STRUCTURE
+--------------------------------------------------------------------------------
+Total Nodes              : 14
+Total Edges (Unique)     : 13
+Document Nodes           : 5
+Reference Nodes          : 9
+Nodes Removed as Noise   : 3
+
+GRAPH QUALITY METRICS
+--------------------------------------------------------------------------------
+Connected Components     : 3
+Graph Density            : 0.071429
+Average Degree           : 1.86
+
+RELATIONSHIP DISTRIBUTION
+--------------------------------------------------------------------------------
+  refers_to            :  10 ( 76.9%)
+  consolidates         :   2 ( 15.4%)
+  modifies             :   1 (  7.7%)
+
+CENTRALITY ANALYSIS
+--------------------------------------------------------------------------------
+
+Most Referenced Circulars (Degree Centrality):
+   1. CC No 46                                 :   2 incoming
+   2. CC No 184                                :   2 incoming
+   3. Notification No 13                       :   2 incoming
+   4. Notification No 14                       :   2 incoming
+   5. CC No 215                                :   1 incoming
+   6. CC No 152                                :   1 incoming
+   7. Notification No 10                       :   1 incoming
+   8. CC No 231                                :   1 incoming
+   9. rbi/2016-17/11                           :   1 incoming
+
+Most Connected Documents (Degree Centrality):
+   1. 25KY010711F.pdf                          :   6 outgoing
+   2. 41YC01072013KF.pdf                       :   4 outgoing
+   3. 70MK010714FL.pdf                         :   1 outgoing
+   4. 92MY30062014FS.pdf                       :   1 outgoing
+   5. NOTI 1520AFA79636AA41F1B43761270226A59F.pdf :   1 outgoing
+
+Most Influential Nodes (Betweenness Centrality):
+   1. 25KY010711F.pdf                          : 0.0000
+   2. CC No 46                                 : 0.0000
+   3. CC No 184                                : 0.0000
+   4. CC No 215                                : 0.0000
+   5. CC No 152                                : 0.0000
+   6. Notification No 13                       : 0.0000
+   7. Notification No 10                       : 0.0000
+   8. 41YC01072013KF.pdf                       : 0.0000
+   9. CC No 231                                : 0.0000
+  10. 70MK010714FL.pdf                         : 0.0000
+
+TOP DOMAINS
+--------------------------------------------------------------------------------
+  AML                  :   5 ( 38.5%)
+  Record Retention     :   4 ( 30.8%)
+  Reporting            :   2 ( 15.4%)
+  KYC                  :   1 (  7.7%)
+  General              :   1 (  7.7%)
+
+================================================================================
+END OF SUMMARY
+================================================================================

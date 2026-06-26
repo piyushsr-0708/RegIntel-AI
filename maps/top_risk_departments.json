@@ -1,0 +1,47 @@
+[
+  {
+    "department": "Compliance Department",
+    "risk_score": 48708,
+    "map_count": 1445
+  },
+  {
+    "department": "KYC Operations",
+    "risk_score": 17776,
+    "map_count": 461
+  },
+  {
+    "department": "AML Compliance Cell",
+    "risk_score": 17622,
+    "map_count": 395
+  },
+  {
+    "department": "Regulatory Reporting Department",
+    "risk_score": 5941,
+    "map_count": 170
+  },
+  {
+    "department": "Records Management Department",
+    "risk_score": 4611,
+    "map_count": 153
+  },
+  {
+    "department": "Board & Compliance Department",
+    "risk_score": 3849,
+    "map_count": 116
+  },
+  {
+    "department": "Information Security Department",
+    "risk_score": 3383,
+    "map_count": 79
+  },
+  {
+    "department": "IT Department",
+    "risk_score": 3306,
+    "map_count": 96
+  },
+  {
+    "department": "Risk Management Department",
+    "risk_score": 1032,
+    "map_count": 26
+  }
+]

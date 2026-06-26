@@ -1,0 +1,210 @@
+{
+  "metadata": {
+    "description": "Golden set of 25 manually verified query-requirement pairs for resolver accuracy evaluation",
+    "created": "2026-06-20",
+    "total_queries": 25,
+    "domains_covered": ["AML", "KYC", "Cybersecurity", "Record Retention", "Reporting", "Governance", "Risk Management", "Technology", "General"]
+  },
+  "golden_queries": [
+    {
+      "query_id": 1,
+      "query": "suspicious transaction reporting",
+      "expected_requirement": "REQ_25KY0107_0004_275BD9",
+      "domain": "AML",
+      "subdomain": "STR Reporting",
+      "rationale": "Direct match for STR reporting compliance requirement"
+    },
+    {
+      "query_id": 2,
+      "query": "cash transaction reporting deadline",
+      "expected_requirement": "REQ_25KY0107_0044_5FB067",
+      "domain": "AML",
+      "subdomain": "CTR Reporting",
+      "rationale": "Covers CTR manual and electronic reporting requirements"
+    },
+    {
+      "query_id": 3,
+      "query": "electronic filing of CTR",
+      "expected_requirement": "REQ_25KY0107_0044_17FA90",
+      "domain": "AML",
+      "subdomain": "CTR Reporting",
+      "rationale": "Specific to electronic CTR filing urgency"
+    },
+    {
+      "query_id": 4,
+      "query": "customer identification requirements",
+      "expected_requirement": "REQ_25KY0107_0023_7FD649",
+      "domain": "KYC",
+      "subdomain": "Customer Identification",
+      "rationale": "Principal Officer access to customer identification"
+    },
+    {
+      "query_id": 5,
+      "query": "customer due diligence for PEP",
+      "expected_requirement": "REQ_25KY0107_0023_A98490",
+      "domain": "KYC",
+      "subdomain": "Customer Due Diligence",
+      "rationale": "CDD measures for politically exposed persons"
+    },
+    {
+      "query_id": 6,
+      "query": "beneficial ownership of PEP accounts",
+      "expected_requirement": "REQ_25KY0107_0022_E76132",
+      "domain": "KYC",
+      "subdomain": "PEP",
+      "rationale": "Existing customer becoming PEP"
+    },
+    {
+      "query_id": 7,
+      "query": "risk management procedures for PEP",
+      "expected_requirement": "REQ_25KY0107_0027_976711",
+      "domain": "Risk Management",
+      "subdomain": "PEP Risk",
+      "rationale": "Ongoing risk management for PEP identification"
+    },
+    {
+      "query_id": 8,
+      "query": "enhanced CDD for politically exposed persons",
+      "expected_requirement": "REQ_42AM69D4_0034_222C14",
+      "domain": "Risk Management",
+      "subdomain": "Enhanced Due Diligence",
+      "rationale": "Enhanced CDD systems for PEPs"
+    },
+    {
+      "query_id": 9,
+      "query": "record retention period requirements",
+      "expected_requirement": "REQ_25KY0107_0042_2CDE33",
+      "domain": "Record Retention",
+      "subdomain": "Record Keeping",
+      "rationale": "Ten years retention from cessation of transaction"
+    },
+    {
+      "query_id": 10,
+      "query": "ten year record preservation under PMLA",
+      "expected_requirement": "REQ_25KY0107_0054_D342DA",
+      "domain": "Record Retention",
+      "subdomain": "Record Keeping",
+      "rationale": "Explicit PMLA 2002 ten year requirement"
+    },
+    {
+      "query_id": 11,
+      "query": "cyber incident reporting",
+      "expected_requirement": "REQ_NT418020_0002_900719",
+      "domain": "Cybersecurity",
+      "subdomain": "Incident Response",
+      "rationale": "Frequency and impact of cyber incidents"
+    },
+    {
+      "query_id": 12,
+      "query": "timeliness of regulatory reporting",
+      "expected_requirement": "REQ_42AM69D4_0089_377B88",
+      "domain": "Reporting",
+      "subdomain": "Regulatory Reporting",
+      "rationale": "Timeliness of reporting requirements"
+    },
+    {
+      "query_id": 13,
+      "query": "principal officer reporting to board",
+      "expected_requirement": "REQ_25KY0107_0023_0E507D",
+      "domain": "Governance",
+      "subdomain": "Board Oversight",
+      "rationale": "Principal Officer independence and board reporting"
+    },
+    {
+      "query_id": 14,
+      "query": "board approval for KYC policy",
+      "expected_requirement": "REQ_25KY0107_0003_6721FA",
+      "domain": "Governance",
+      "subdomain": "Policy Framework",
+      "rationale": "KYC and AML policy framework board approval"
+    },
+    {
+      "query_id": 15,
+      "query": "KYC compliance deadline for NBFCs",
+      "expected_requirement": "REQ_25KY0107_0004_CCC7B2",
+      "domain": "Governance",
+      "subdomain": "Policy Framework",
+      "rationale": "Three months deadline for policy formulation"
+    },
+    {
+      "query_id": 16,
+      "query": "customer information relevance",
+      "expected_requirement": "REQ_25KY0107_0004_AF6F72",
+      "domain": "General",
+      "subdomain": "Miscellaneous",
+      "rationale": "Customer information should be risk-relevant and not intrusive"
+    },
+    {
+      "query_id": 17,
+      "query": "account monitoring for money laundering",
+      "expected_requirement": "REQ_70MK0107_0109_A96CE8",
+      "domain": "AML",
+      "subdomain": "Transaction Monitoring",
+      "rationale": "AML transaction monitoring requirement (from benchmark test)"
+    },
+    {
+      "query_id": 18,
+      "query": "kyc review frequency",
+      "expected_requirement": "REQ_MD18KYCF_0160_E03DF8",
+      "domain": "KYC",
+      "subdomain": "Periodic Review",
+      "rationale": "KYC review frequency requirement (from benchmark test)"
+    },
+    {
+      "query_id": 19,
+      "query": "customer identification documents",
+      "expected_requirement": "REQ_25KY0107_0091_53463C",
+      "domain": "KYC",
+      "subdomain": "Customer Identification",
+      "rationale": "Customer identification requirement (from benchmark test)"
+    },
+    {
+      "query_id": 20,
+      "query": "sanctions screening requirements",
+      "expected_requirement": "REQ_42AM69D4_0082_06F47D",
+      "domain": "AML",
+      "subdomain": "Sanctions Screening",
+      "rationale": "Sanctions screening requirement (from benchmark test)"
+    },
+    {
+      "query_id": 21,
+      "query": "board oversight responsibilities",
+      "expected_requirement": "REQ_FEM12032_0016_3796F5",
+      "domain": "Governance",
+      "subdomain": "Board Oversight",
+      "rationale": "Board oversight requirement (from benchmark test)"
+    },
+    {
+      "query_id": 22,
+      "query": "risk management framework",
+      "expected_requirement": "REQ_NT418020_0006_031A8D",
+      "domain": "Risk Management",
+      "subdomain": "Risk Framework",
+      "rationale": "Risk management framework requirement (from benchmark test)"
+    },
+    {
+      "query_id": 23,
+      "query": "CTR reporting deadline",
+      "expected_requirement": "REQ_MD18KYCF_0141_A7C036",
+      "domain": "Reporting",
+      "subdomain": "CTR Reporting",
+      "rationale": "CTR reporting deadline (from benchmark test)"
+    },
+    {
+      "query_id": 24,
+      "query": "record preservation period",
+      "expected_requirement": "REQ_41YC0107_0042_90FB03",
+      "domain": "Record Retention",
+      "subdomain": "Record Keeping",
+      "rationale": "Record preservation period (from benchmark test)"
+    },
+    {
+      "query_id": 25,
+      "query": "beneficial ownership requirements",
+      "expected_requirement": "REQ_41YC0107_0089_A4D4F2",
+      "domain": "General",
+      "subdomain": "Beneficial Ownership",
+      "rationale": "Beneficial ownership requirement (from benchmark test)"
+    }
+  ]
+}

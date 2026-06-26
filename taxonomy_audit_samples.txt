@@ -1,0 +1,662 @@
+================================================================================
+TAXONOMY AUDIT - SAMPLE REQUIREMENTS
+================================================================================
+
+Generated: 2026-06-24 13:02:54
+
+--------------------------------------------------------------------------------
+DOMAIN: AML (Sampled 20 requirements)
+--------------------------------------------------------------------------------
+
+1. REQ_MC177DF2_0021_46D1A4
+   Obligation: Mandatory
+   Subdomain: STR Reporting
+   Source: MC177DF24D0B0964448286BC682385CDA1F3.pdf
+   Text: Existing Customer- Mobile number not registered with the bank at all 
+Banks need to find ways of obtaining mobile numbers of the account holders first...
+
+2. REQ_FEM12032_0028_E4EE93
+   Obligation: Mandatory
+   Subdomain: STR Reporting
+   Source: FEM12032025DBB0EC477F78498CB8165E44ACD656BB.pdf
+   Text: The process of recognition of the SRO shall be robust so as to ensure adherence 
+to a set of stringent parameters essential for the critical role it i...
+
+3. REQ_MD18KYCF_0266_640745
+   Obligation: Mandatory
+   Subdomain: Sanctions Screening
+   Source: MD18KYCF6E92C82E1E1419D87323E3869BC9F13.pdf
+   Text: The concerned 
+Regulators shall take suitable action under their relevant laws, rules or regulations for 
+each violation of sanction screening obligat...
+
+4. REQ_MD18KYCF_0222_86E7ED
+   Obligation: Mandatory
+   Subdomain: STR Reporting
+   Source: MD18KYCF6E92C82E1E1419D87323E3869BC9F13.pdf
+   Text: dal Officer in the Ministry of Corporate Affairs 
+who shall in turn follow the similar procedure as laid down in paragraph 6.2 to 6.5 
+above....
+
+5. REQ_MD18KYCF_0170_072E58
+   Obligation: Mandatory
+   Subdomain: Other
+   Source: MD18KYCF6E92C82E1E1419D87323E3869BC9F13.pdf
+   Text: Banks shall assess the respondent bank’s AML/CFT controls....
+
+6. REQ_92MY3006_0052_1D63B3
+   Obligation: Conditional
+   Subdomain: STR Reporting
+   Source: 92MY30062014FS.pdf
+   Text: Further, if a bank has reason to believe that a customer is intentionally structuring a 
+transaction into a series of transactions below the threshold...
+
+7. REQ_70MK0107_0126_87EEB7
+   Obligation: Mandatory
+   Subdomain: STR Reporting
+   Source: 70MK010714FL.pdf
+   Text: (ii) 
+The Ministry of External Affairs, Department of Economic Affairs,
+Foreigners Division of MHA, FIU-IND; and RBI, SEBI, IRDA (hereinafter
+referred...
+
+8. REQ_41YC0107_0057_127497
+   Obligation: Mandatory
+   Subdomain: PEP Screening
+   Source: 41YC01072013KF.pdf
+   Text: PD)CC No 
+231/03.10.42 / 2011 -12 dated July 01, 2011 on Know Your Customer (KYC) norms 
+/Anti-Money Laundering (AML) standards/Combating of Financing...
+
+9. REQ_70MK0107_0012_C18AC6
+   Obligation: Conditional
+   Subdomain: PEP Screening
+   Source: 70MK010714FL.pdf
+   Text: Politically
+Exposed Persons (PEPs) may, if considered necessary, be categorised
+even higher;
+iii)Documentation requirements and other information to b...
+
+10. REQ_92MY3006_0147_5EBBDA
+   Obligation: Mandatory
+   Subdomain: STR Reporting
+   Source: 92MY30062014FS.pdf
+   Text: The banks stock exchanges/depositories, intermediaries regulated by SEBI, 
+insurance companies, Registrar of Immovable Properties and the State/UT nod...
+
+11. REQ_70MK0107_0033_883874
+   Obligation: Recommended
+   Subdomain: STR Reporting
+   Source: 70MK010714FL.pdf
+   Text: Banks are, therefore, advised to take a review of their extant internal
+instructions in this regard....
+
+12. REQ_MC177DF2_0009_C251CD
+   Obligation: Mandatory
+   Subdomain: STR Reporting
+   Source: MC177DF24D0B0964448286BC682385CDA1F3.pdf
+   Text: Accordingly all  
+banks shall carry out necessary changes in their respective ATM switches to enable 
+customer registration for mobile banking at all ...
+
+13. REQ_73IKYC01_0023_4F2AEE
+   Obligation: Recommended
+   Subdomain: STR Reporting
+   Source: 73IKYC010709_F.pdf
+   Text: Banks are, 
+therefore, advised to take a review of their extant internal instructions in this 
+regard....
+
+14. REQ_NT418020_0040_59C1E8
+   Obligation: Mandatory
+   Subdomain: STR Reporting
+   Source: NT41802062016.pdf
+   Text: 11.7 Further, banks have to adhere to the relevant legal and regulatory requirements 
+relating to geographical location of infrastructure and movement...
+
+15. REQ_MD18KYCF_0042_F54674
+   Obligation: Informational
+   Subdomain: STR Reporting
+   Source: MD18KYCF6E92C82E1E1419D87323E3869BC9F13.pdf
+   Text: Straight-through Processing: Straight-through processing refers to 
+payment transactions that are conducted electronically without the need 
+for manua...
+
+16. REQ_42AM69D4_0158_A562E4
+   Obligation: Recommended
+   Subdomain: STR Reporting
+   Source: 42AM69D4F812CC124178937DFD5CFD37FE7E.pdf
+   Text: 39/14.01.001/2012-13 dated 
+September 7, 2012 
+Uploading of 
+Reports in ‘Test 
+Mode’ on FINnet 
+Gateway 
+FIU-IND has advised that all banks 
+should 
+i...
+
+17. REQ_70MK0107_0098_AFC963
+   Obligation: Recommended
+   Subdomain: Other
+   Source: 70MK010714FL.pdf
+   Text: He will maintain close liaison with
+enforcement agencies, banks and any other institution which are involved in the fight
+against money laundering and...
+
+18. REQ_42AM69D4_0120_827999
+   Obligation: Conditional
+   Subdomain: Sanctions Screening
+   Source: 42AM69D4F812CC124178937DFD5CFD37FE7E.pdf
+   Text: IS-I Division of MHA would electronically forward the designated lists to the 
+UAPA nodal officer of all States and UTs with the request to have the n...
+
+19. REQ_70MK0107_0110_858A9B
+   Obligation: Conditional
+   Subdomain: Transaction Monitoring
+   Source: 70MK010714FL.pdf
+   Text: alerts is essential for effective
+identification and reporting of suspicious transaction....
+
+20. REQ_42AM69D4_0153_7994A2
+   Obligation: Recommended
+   Subdomain: Transaction Monitoring
+   Source: 42AM69D4F812CC124178937DFD5CFD37FE7E.pdf
+   Text: High risk 
+associated  with such accounts 
+should also be taken  into account  
+to identify suspicious transactions 
+for filing suspicious transaction...
+
+--------------------------------------------------------------------------------
+DOMAIN: KYC (Sampled 20 requirements)
+--------------------------------------------------------------------------------
+
+1. REQ_70MK0107_0011_99B032
+   Obligation: Recommended
+   Subdomain: Customer Identification
+   Source: 70MK010714FL.pdf
+   Text: KYC Policy
+Banks should frame their KYC policies incorporating the following four key
+elements:
+i) Customer Acceptance Policy;
+ii) Customer Identifica...
+
+2. REQ_MD18KYCF_0087_01DBF9
+   Obligation: Conditional
+   Subdomain: Other
+   Source: MD18KYCF6E92C82E1E1419D87323E3869BC9F13.pdf
+   Text: Deleted portion read as: In case the person who proposes to open an account 
+does not have an OVD as ‘proof of address’, such person shall provide OVD...
+
+3. REQ_MD18KYCF_0033_DA6B38
+   Obligation: Conditional
+   Subdomain: Beneficial Ownership
+   Source: MD18KYCF6E92C82E1E1419D87323E3869BC9F13.pdf
+   Text: c) Determining whether a customer is acting on behalf of a beneficial owner, and 
+identifying the beneficial owner and taking all steps to verify the ...
+
+4. REQ_MD18KYCF_0025_271450
+   Obligation: Conditional
+   Subdomain: Other
+   Source: MD18KYCF6E92C82E1E1419D87323E3869BC9F13.pdf
+   Text: where the OVD presented by a foreign national does not contain the details 
+of address, in such case the documents issued by the Government 
+departmen...
+
+5. REQ_25KY0107_0027_976711
+   Obligation: Recommended
+   Subdomain: Beneficial Ownership
+   Source: 25KY010711F.pdf
+   Text: Further, in regard to PEP accounts, it is reiterated that NBFCs 
+should have appropriate ongoing risk management procedures for identifying and 
+apply...
+
+6. REQ_73IKYC01_0026_90741C
+   Obligation: Mandatory
+   Subdomain: Beneficial Ownership
+   Source: 73IKYC010709_F.pdf
+   Text: are 'sub-accounts', each of them attributable to a beneficial 
+owner, all the beneficial owners must be identified....
+
+7. REQ_MD18KYCF_0053_7D73F0
+   Obligation: Conditional
+   Subdomain: Customer Due Diligence
+   Source: MD18KYCF6E92C82E1E1419D87323E3869BC9F13.pdf
+   Text: Thus, if an existing 
+KYC compliant customer of a RE desires to open another account or avail any 
+other product or service from the same RE, there sh...
+
+8. REQ_MD18KYCF_0100_16AB8D
+   Obligation: Mandatory
+   Subdomain: Beneficial Ownership
+   Source: MD18KYCF6E92C82E1E1419D87323E3869BC9F13.pdf
+   Text: 98For opening an account of a trust, certified copies of each of the following 
+documents or the equivalent e-documents thereof shall be obtained: 
+(a...
+
+9. REQ_92MY3006_0100_F52CAB
+   Obligation: Recommended
+   Subdomain: Customer Identification
+   Source: 92MY30062014FS.pdf
+   Text: With a view to enabling the 
+Principal Officer to discharge his responsibilities, it is advised that the Principal Officer 
+and other appropriate staf...
+
+10. REQ_41YC0107_0099_858619
+   Obligation: Recommended
+   Subdomain: Customer Due Diligence
+   Source: 41YC01072013KF.pdf
+   Text: However, transactions in existing  accounts should be continuously 
+monitored and any unusual pattern in the operation of the account should trigger a...
+
+11. REQ_MD18KYCF_0110_F3D1F5
+   Obligation: Mandatory
+   Subdomain: Ongoing Monitoring
+   Source: MD18KYCF6E92C82E1E1419D87323E3869BC9F13.pdf
+   Text: 112Updation / Periodic Updation of KYC 
+REs shall adopt a risk-based approach for periodic updation of KYC ensuring 
+that the information or data coll...
+
+12. REQ_42AM69D4_0021_261A1B
+   Obligation: Mandatory
+   Subdomain: Customer Identification
+   Source: 42AM69D4F812CC124178937DFD5CFD37FE7E.pdf
+   Text: es are applied, it 
+would be sufficient to obtain a certified copy of any one of the documents referred to 
+at proviso to paragraph 2.3 (i) above., wh...
+
+13. REQ_MD18KYCF_0118_E965F1
+   Obligation: Mandatory
+   Subdomain: Beneficial Ownership
+   Source: MD18KYCF6E92C82E1E1419D87323E3869BC9F13.pdf
+   Text: Further, REs shall ensure during this 
+process that Beneficial Ownership (BO) information available with them is 
+accurate and shall update the same, ...
+
+14. REQ_73IKYC01_0031_3F0B18
+   Obligation: Mandatory
+   Subdomain: Other
+   Source: 73IKYC010709_F.pdf
+   Text: 80,000/-) that appropriate 
+documents for conducting the KYC must be submitted otherwise operations in 
+the account will be stopped....
+
+15. REQ_92MY3006_0039_617CE9
+   Obligation: Conditional
+   Subdomain: Beneficial Ownership
+   Source: 92MY30062014FS.pdf
+   Text: Where the client is a person other than an individual or trust, the banking 
+company and financial institution, as the case may be, shall identify the...
+
+16. REQ_42AM69D4_0014_4CD0A7
+   Obligation: Conditional
+   Subdomain: Customer Identification
+   Source: 42AM69D4F812CC124178937DFD5CFD37FE7E.pdf
+   Text: Customer Identification Procedure (CIP) 
+3.2.1 General 
+(a) 
+Customer identification means undertaking client due diligence measures while 
+commencing...
+
+17. REQ_MD18KYCF_0133_15DA1F
+   Obligation: Mandatory
+   Subdomain: Customer Due Diligence
+   Source: MD18KYCF6E92C82E1E1419D87323E3869BC9F13.pdf
+   Text: (e) REs shall, at their discretion, rely on the 'customer due diligence' (CDD) done 
+by an intermediary, provided that the intermediary is a regulated...
+
+18. REQ_MD18KYCF_0048_113FF2
+   Obligation: Mandatory
+   Subdomain: Customer Due Diligence
+   Source: MD18KYCF6E92C82E1E1419D87323E3869BC9F13.pdf
+   Text: REs shall 
+implement a CDD programme, having regard to the ML/TF risks identified and...
+
+19. REQ_92MY3006_0038_712E39
+   Obligation: Informational
+   Subdomain: Beneficial Ownership
+   Source: 92MY30062014FS.pdf
+   Text: The term ‘Beneficial Owner’ has been defined as the natural person who ultimately 
+owns or controls a client and / or the person on whose behalf the t...
+
+20. REQ_41YC0107_0034_14862A
+   Obligation: Recommended
+   Subdomain: Customer Identification
+   Source: 41YC01072013KF.pdf
+   Text: With a 
+view to enable the Principal Officer to discharge his responsibilities, it is advised that 
+the Principal Officer and other appropriate staff ...
+
+--------------------------------------------------------------------------------
+DOMAIN: Cybersecurity (Sampled 20 requirements)
+--------------------------------------------------------------------------------
+
+1. REQ_NT418020_0048_13CF42
+   Obligation: Informational
+   Subdomain: Incident Response
+   Source: NT41802062016.pdf
+   Text: The following may be 
+considered: 
+(a) Define incidents, method of detection, methods of reporting 
+incidents by employees, vendors and customers and ...
+
+2. REQ_MD18KYCF_0074_744C8A
+   Obligation: Mandatory
+   Subdomain: Other
+   Source: MD18KYCF6E92C82E1E1419D87323E3869BC9F13.pdf
+   Text: REs opting to undertake V-CIP, shall adhere to the following minimum standards:  
+(a) V-CIP Infrastructure  
+i) 
+The RE should have complied with the ...
+
+3. REQ_NT418020_0047_3B9452
+   Obligation: Mandatory
+   Subdomain: Cyber Risk Management
+   Source: NT41802062016.pdf
+   Text: Recovery from Cyber - Incidents:  
+19.4 Bank’s BCP/DR capabilities shall adequately and effectively support the Bank’s 
+cyber resilience objectives an...
+
+4. REQ_NT418020_0058_66B95D
+   Obligation: Conditional
+   Subdomain: Security Monitoring
+   Source: NT41802062016.pdf
+   Text: processing of the logs, correlation through 
+appropriate SIEM tools, continuous monitoring of SIEM screens and finding 
+the anomalies, if any and rais...
+
+5. REQ_NT41893F_0045_2BD202
+   Obligation: Informational
+   Subdomain: Other
+   Source: nt41893f697bc1d57443bb76afc7ab56272eb.pdf
+   Text: 18.4 Findings of VA/PT and the follow up actions necessitated are to be monitored 
+closely by the Information Security/Information Technology Audit te...
+
+6. REQ_NT418020_0057_4652EA
+   Obligation: Informational
+   Subdomain: Security Monitoring
+   Source: NT41802062016.pdf
+   Text: 2 - The Cyber SoC has to take into account proactive monitoring and 
+management capabilities with sophisticated tools for detection, quick 
+response a...
+
+7. REQ_NT418020_0057_A2EA96
+   Obligation: Conditional
+   Subdomain: Security Monitoring
+   Source: NT41802062016.pdf
+   Text: 3 - The systems that are implemented currently to monitor the security 
+operation takes into account collection of the logs from each one of the point...
+
+8. REQ_MD18KYCF_0104_DEE87F
+   Obligation: Mandatory
+   Subdomain: Security Monitoring
+   Source: MD18KYCF6E92C82E1E1419D87323E3869BC9F13.pdf
+   Text: Explanation: Unregistered trusts/partnership firms shall be included under the 
+term ‘unincorporated association’....
+
+9. REQ_NT41893F_0016_6A23BD
+   Obligation: Informational
+   Subdomain: Other
+   Source: nt41893f697bc1d57443bb76afc7ab56272eb.pdf
+   Text: Such collaborative efforts will help the banks in obtaining collective 
+threat intelligence, timely alerts and adopting proactive cyber security measu...
+
+10. REQ_NT418020_0016_98829C
+   Obligation: Mandatory
+   Subdomain: Incident Response
+   Source: NT41802062016.pdf
+   Text: It is reiterated that banks need to report all unusual cyber-
+security incidents (whether they were successful or were attempts which did not 
+fructif...
+
+11. REQ_NT41893F_0007_6302FC
+   Obligation: Informational
+   Subdomain: Incident Response
+   Source: nt41893f697bc1d57443bb76afc7ab56272eb.pdf
+   Text: ources, training and culture, threat intelligence gathering arrangements, 
+monitoring and analysing the threat intelligence received vis-à-vis the sit...
+
+12. REQ_NT41893F_0058_66B95D
+   Obligation: Conditional
+   Subdomain: Security Monitoring
+   Source: nt41893f697bc1d57443bb76afc7ab56272eb.pdf
+   Text: processing of the logs, correlation through 
+appropriate SIEM tools, continuous monitoring of SIEM screens and finding 
+the anomalies, if any and rais...
+
+13. REQ_MD18KYCF_0104_5FF6D5
+   Obligation: Mandatory
+   Subdomain: Security Monitoring
+   Source: MD18KYCF6E92C82E1E1419D87323E3869BC9F13.pdf
+   Text: 107For opening account of a customer who is a juridical person (not specifically 
+covered in the earlier part) such as societies, universities and loc...
+
+14. REQ_MC177DF2_0024_661B67
+   Obligation: Mandatory
+   Subdomain: Data Protection
+   Source: MC177DF24D0B0964448286BC682385CDA1F3.pdf
+   Text: Proper level of encryption and security shall be implemented at all stages of the 
+transaction processing....
+
+15. REQ_NT418020_0066_6AF08D
+   Obligation: Mandatory
+   Subdomain: Security Monitoring
+   Source: NT41802062016.pdf
+   Text: • 
+Staffing of SOC – is it required to be 24x7x365, in shifts, business hours 
+only….etc....
+
+16. REQ_MC177DF2_0024_6B5B68
+   Obligation: Mandatory
+   Subdomain: Data Protection
+   Source: MC177DF24D0B0964448286BC682385CDA1F3.pdf
+   Text: The endeavor shall be to ensure end-to-end encryption of 
+the mobile banking transaction....
+
+17. REQ_NT41893F_0053_45A207
+   Obligation: Informational
+   Subdomain: Other
+   Source: nt41893f697bc1d57443bb76afc7ab56272eb.pdf
+   Text: 24) Customer Education and Awareness 
+ 
+ 
+ 
+ 
+ 
+24.1 Improve and maintain customer awareness and education with regard to         
+cybersecurity risks...
+
+18. REQ_NT418020_0009_2DA45D
+   Obligation: Recommended
+   Subdomain: Cyber Risk Management
+   Source: NT41802062016.pdf
+   Text: Banks should 
+proactively initiate the process of setting up of and operationalising a Security 
+Operations Centre (SOC) to monitor and manage cyber r...
+
+19. REQ_NT418020_0005_B928F6
+   Obligation: Informational
+   Subdomain: Other
+   Source: NT41802062016.pdf
+   Text: It may be ensured that the strategy deals with the following broad aspects: 
+Cyber Security Policy to be distinct from the broader IT policy / IS Secu...
+
+20. REQ_NT418020_0046_ABA6AF
+   Obligation: Informational
+   Subdomain: Other
+   Source: NT41802062016.pdf
+   Text: 18.6 Periodically and actively participate in cyber drills conducted under the aegis of 
+Cert-IN, IDRBT etc....
+
+--------------------------------------------------------------------------------
+DOMAIN: Reporting (Sampled 20 requirements)
+--------------------------------------------------------------------------------
+
+1. REQ_73IKYC01_0083_6EA72F
+   Obligation: Informational
+   Subdomain: Other
+   Source: 73IKYC010709_F.pdf
+   Text: Banks asked to submit feedback 
+on implementation of the system 
+of close monitoring of large cash 
+deposits and withdrawals of Rs.10 
+lakh and above....
+
+2. REQ_42AM69D4_0159_E7ECB2
+   Obligation: Informational
+   Subdomain: Other
+   Source: 42AM69D4F812CC124178937DFD5CFD37FE7E.pdf
+   Text: banks may discontinue 
+submission of reports in CD format 
+and use only FINnet Gateway for 
+uploading of reports in the new 
+XML reporting format....
+
+3. REQ_41YC0107_0067_BF93C4
+   Obligation: Recommended
+   Subdomain: Other
+   Source: 41YC01072013KF.pdf
+   Text: It was 
+further advised that NBFCs should, in addition to FATF Statements circulated by 
+ 
+22
+Reserve Bank of India from time to time, also consider p...
+
+4. REQ_42AM69D4_0025_A219C4
+   Obligation: Mandatory
+   Subdomain: Other
+   Source: 42AM69D4F812CC124178937DFD5CFD37FE7E.pdf
+   Text: No proof is required to be submitted by the customer for such 
+address....
+
+5. REQ_70MK0107_0143_C5984F
+   Obligation: Mandatory
+   Subdomain: Other
+   Source: 70MK010714FL.pdf
+   Text: The Joint Secretary (IS-I), MHA, being the nodal officer for (IS-I) Division
+of MHA, shall cause such verification as may be required on the basis of ...
+
+6. REQ_73IKYC01_0057_052FF7
+   Obligation: Recommended
+   Subdomain: Other
+   Source: 73IKYC010709_F.pdf
+   Text: g)   All the credit transactions in the above example would not be treated as 
+integrally connected, as the sum total of the credit transactions durin...
+
+7. REQ_KYC09062_0023_950669
+   Obligation: Conditional
+   Subdomain: Other
+   Source: KYC09062025.pdf
+   Text: What should a customer do in case the documents submitted by the 
+customer, at the time of establishing an account-based relationship (opening an 
+acc...
+
+8. REQ_70MK0107_0162_E05D77
+   Obligation: Mandatory
+   Subdomain: Other
+   Source: 70MK010714FL.pdf
+   Text: Violations  of  the  extant  Acts  or
+normal banking operations must
+be reported to  the appropriate
+authorities under the Ordinance
+under advice to R...
+
+9. REQ_MD18KYCF_0069_F64E2E
+   Obligation: Conditional
+   Subdomain: Other
+   Source: MD18KYCF6E92C82E1E1419D87323E3869BC9F13.pdf
+   Text: Explanation 1: RE shall, where its customer submits a proof of possession of 
+Aadhaar Number containing Aadhaar Number, ensure that such customer reda...
+
+10. REQ_NT41893F_0070_852EA7
+   Obligation: Informational
+   Subdomain: Other
+   Source: nt41893f697bc1d57443bb76afc7ab56272eb.pdf
+   Text: Particulars of Reporting: 
+ 
+ Name of the bank  
+ 
+ Date and Time of Reporting to RBI, CERT-
+IN, other agencies (please mention 
+separately time of ...
+
+11. REQ_25KY0107_0047_E69917
+   Obligation: Recommended
+   Subdomain: Other
+   Source: 25KY010711F.pdf
+   Text: The reports may be transmitted by speed/ registered post, fax, 
+email at the notified address;   
+ 
+(e) 
+It should be ensured that the reports for all...
+
+12. REQ_42AM69D4_0136_F3D709
+   Obligation: Informational
+   Subdomain: Other
+   Source: 42AM69D4F812CC124178937DFD5CFD37FE7E.pdf
+   Text: Doubtful 
+cases to be reported to DBOD, 
+Regional office....
+
+13. REQ_92MY3006_0085_80B988
+   Obligation: Recommended
+   Subdomain: Other
+   Source: 92MY30062014FS.pdf
+   Text: In addition to 
+FATF Statements circulated by Reserve Bank of India from time to time, banks should 
+also consider publicly available information for ...
+
+14. REQ_FEM12032_0029_2B38B7
+   Obligation: Mandatory
+   Subdomain: Other
+   Source: FEM12032025DBB0EC477F78498CB8165E44ACD656BB.pdf
+   Text: An 
+entity aspiring to function as an SRO under this framework shall be required to fulfil 
+the following requirements/ submit the following documents...
+
+15. REQ_41YC0107_0093_1CD92E
+   Obligation: Conditional
+   Subdomain: Other
+   Source: 41YC01072013KF.pdf
+   Text: It may also be ensured that transactions of 
+suspicious nature and/ or  any other type of  transaction notified under section 12 of 
+the PML Act, 2002...
+
+16. REQ_25KY0107_0079_933957
+   Obligation: Recommended
+   Subdomain: Other
+   Source: 25KY010711F.pdf
+   Text: ii)  All the credit transactions in the above example would not be treated as integrally 
+connected, as the sum total of the credit transactions durin...
+
+17. REQ_25KY0107_0045_6E9E8D
+   Obligation: Informational
+   Subdomain: Other
+   Source: 25KY010711F.pdf
+   Text: The related hardware and technical 
+requirement for preparing reports in an electronic format, the related data files and 
+data structures thereof are...
+
+18. REQ_MC177DF2_0017_BC3DFF
+   Obligation: Mandatory
+   Subdomain: Other
+   Source: MC177DF24D0B0964448286BC682385CDA1F3.pdf
+   Text: Approval of Reserve Bank of India 
+ 
+15.1 Banks wishing to provide mobile banking services shall seek prior one time 
+approval from Reserve Bank of In...
+
+19. REQ_41YC0107_0013_5ED12E
+   Obligation: Informational
+   Subdomain: Other
+   Source: 41YC01072013KF.pdf
+   Text: Compliance in this regard were to be reported to RBI by December 31, 2005....
+
+20. REQ_MD18KYCF_0183_C69276
+   Obligation: Mandatory
+   Subdomain: Other
+   Source: MD18KYCF6E92C82E1E1419D87323E3869BC9F13.pdf
+   Text: s of wire transfers, the 
+concerned REs shall be fully responsible for information, reporting and other 
+requirements and therefore shall ensure, inte...
