@@ -3,7 +3,8 @@
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Python](https://img.shields.io/badge/python-3.13-blue.svg)
 ![React](https://img.shields.io/badge/react-19.2-blue.svg)
-![Status](https://img.shields.io/badge/status-hackathon-orange.svg)
+![Status](https://img.shields.io/badge/status-active-green.svg)
+![Phase](https://img.shields.io/badge/phase-2.1-blue.svg)
 
 > An **offline-first**, deterministic AI-powered platform for RBI regulatory compliance intelligence, featuring semantic search, knowledge graphs, gap analysis, and visual analytics.
 
@@ -94,6 +95,199 @@
 - **Requirements**: 2,941 classified regulatory requirements
 - **Embeddings**: 1,410 vector embeddings
 - **Knowledge Graph**: 14 nodes, 19 cross-reference edges
+
+---
+
+## 🔐 Phase 1: Authentication & Compliance Workflow (NEW)
+
+**Status**: ✅ COMPLETE  
+**Backend**: FastAPI + SQLite (Offline)  
+**Documentation**: See `PHASE1_BACKEND_IMPLEMENTATION.md`
+
+### New Features
+
+Phase 1 adds a secure offline backend with authentication and compliance workflow management:
+
+✅ **Secure Authentication**:
+- JWT tokens with bcrypt password hashing
+- 8-hour token expiry
+- Role-based access control
+
+✅ **User Roles**:
+- **HEAD_OFFICE**: Admin account for full system access
+- **DEPARTMENT**: 9 department accounts with isolated access
+
+✅ **Compliance Workflow**:
+- Document upload management
+- Requirement assignment to departments
+- Status tracking (pending → in_progress → completed)
+- Compliance status history
+- Audit logging
+
+✅ **REST API** (25+ endpoints):
+- Authentication endpoints
+- Admin operations (upload, assign, analytics)
+- Department operations (status updates, assignments)
+- Dashboard APIs
+
+### Quick Start - Backend
+
+```bash
+# Activate environment
+venv\Scripts\activate
+
+# Install backend dependencies (if needed)
+pip install fastapi uvicorn sqlalchemy python-jose passlib python-multipart
+
+# Run backend server
+python run_backend.py
+```
+
+**Backend URL**: http://localhost:8000  
+**API Documentation**: http://localhost:8000/api/docs
+
+### Default Credentials
+
+**HEAD_OFFICE (Admin)**:
+- Username: `admin`
+- Password: `admin123`
+
+**DEPARTMENTS** (9 accounts):
+- Username: `compliance`, `risk`, `treasury`, `operations`, `cyber`, `it`, `finance`, `aml`, `legal`
+- Password: `<username>123` (e.g., `compliance123`)
+
+⚠️ **Change all passwords in production!**
+
+### Database
+
+- **Type**: SQLite (offline)
+- **Location**: `data/compliance.db` (auto-created)
+- **Tables**: 7 tables (users, departments, documents, requirements, assignments, audit_logs, status_history)
+
+### Integration with AI Pipeline
+
+Phase 1 backend integrates seamlessly with existing AI pipeline:
+1. HEAD_OFFICE uploads RBI circular via API
+2. Document saved to `uploads/` directory
+3. Existing AI pipeline processes document (manual trigger)
+4. Requirements extracted and saved to database
+5. HEAD_OFFICE assigns requirements to departments
+6. Department users update compliance status
+
+**All existing AI pipeline scripts remain unchanged!**
+
+### Documentation
+
+- **Complete Guide**: `PHASE1_BACKEND_IMPLEMENTATION.md` (680 lines)
+- **Implementation Summary**: `PHASE1_IMPLEMENTATION_SUMMARY.md` (450 lines)
+- **Interactive API Docs**: http://localhost:8000/api/docs
+
+---
+
+## 🎯 Phase 2.1: Assignment Batch Foundation (NEW)
+
+**Status**: ✅ COMPLETE  
+**Date**: 2026-06-27  
+**Backward Compatible**: ✅ Yes  
+**Documentation**: See `PHASE_2_1_IMPLEMENTATION_REPORT.md`
+
+### Overview
+
+Phase 2.1 introduces **Assignment Batch** as the central workflow object, transforming the compliance system from individual task tracking to campaign-based compliance management.
+
+### Key Features
+
+✅ **Assignment Batch Architecture**:
+- One batch per RBI circular upload
+- Batch lifecycle: Draft → Pending Approval → Published → In Progress → Completed → Closed
+- Automatic metrics tracking (requirements, MAPs, completion %)
+
+✅ **New API Endpoints** (6):
+- `POST /api/assignment-batches/create` - Create new batch
+- `GET /api/assignment-batches` - List all batches
+- `GET /api/assignment-batches/{id}` - Get batch details
+- `GET /api/assignment-batches/{id}/summary` - Get extended summary with distributions
+- `PATCH /api/assignment-batches/{id}/status` - Update batch status
+- `POST /api/assignment-batches/{id}/refresh-metrics` - Recalculate metrics
+
+✅ **Database Enhancements**:
+- New table: `assignment_batches`
+- Added `batch_id` to documents, requirements, assignments
+- 5 new indexes for performance
+
+✅ **Role-Based Access**:
+- All batch endpoints require HEAD_OFFICE role
+- DEPARTMENT users receive HTTP 403 Forbidden
+
+✅ **Backward Compatibility**:
+- 100% of Phase 1 functionality preserved
+- All existing endpoints work unchanged
+- Existing data remains accessible
+
+### Quick Start
+
+```bash
+# Login as HEAD_OFFICE
+curl -X POST http://localhost:8000/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"username":"admin","password":"admin123"}'
+
+# Create Assignment Batch
+curl -X POST http://localhost:8000/api/assignment-batches/create \
+  -H "Authorization: Bearer <token>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "batch_name": "RBI Cyber Security 2024-01",
+    "circular_name": "RBI/2024/01/CS"
+  }'
+
+# Get all batches
+curl -X GET http://localhost:8000/api/assignment-batches \
+  -H "Authorization: Bearer <token>"
+```
+
+### Documentation
+
+- **Implementation Report**: `PHASE_2_1_IMPLEMENTATION_REPORT.md` (15 pages)
+- **API Changelog**: `API_CHANGELOG.md` (12 pages)
+- **Database Migration**: `DATABASE_MIGRATION.md` (8 pages)
+- **Test Report**: `TEST_REPORT.md` (10 pages)
+- **Interactive API Docs**: http://localhost:8000/api/docs (auto-updated)
+
+### Metrics
+
+- **New Code**: ~400 lines
+- **New Endpoints**: 6
+- **New CRUD Functions**: 7
+- **Documentation**: 45 pages
+- **Backward Compatible**: ✅ 100%
+
+### What's NOT Included (Phase 2.2)
+
+Phase 2.1 is backend-only. The following are deferred to Phase 2.2:
+
+- ❌ Frontend Assignment Batch pages
+- ❌ Department Dashboard redesign
+- ❌ Notification system
+- ❌ Evidence upload
+- ❌ Verification workflow
+- ❌ PDF reports
+
+### Verification
+
+```bash
+# Verify database migration
+python -c "from backend.database import engine; from sqlalchemy import inspect; print('Tables:', inspect(engine).get_table_names())"
+
+# Verify batch endpoints
+curl http://localhost:8000/api/docs
+# Look for "Assignment Batches" tag
+
+# Verify backward compatibility
+curl -X GET http://localhost:8000/api/admin/dashboard \
+  -H "Authorization: Bearer <token>"
+# Should return Phase 1 dashboard data
+```
 
 ---
 

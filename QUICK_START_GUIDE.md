@@ -1,364 +1,375 @@
 # RegIntel AI - Quick Start Guide
-
-**Status**: ✅ Repository is GitHub-ready  
-**Date**: June 26, 2026
+## Authentication & Compliance Platform
 
 ---
 
-## 🚀 FOR IMMEDIATE GITHUB PUSH
+## 🚀 Quick Start (3 Steps)
 
-### Option 1: First Time Git Setup
-
-```bash
-# Navigate to project directory
-cd d:\SuRaksha
-
-# Initialize git (if not already done)
-git init
-
-# Add all files (.gitignore will handle exclusions)
-git add .
-
-# Commit with professional message
-git commit -m "Initial commit: RegIntel AI - Offline Regulatory Intelligence Platform"
-
-# Add your GitHub remote
-git remote add origin https://github.com/yourusername/regintel-ai.git
-
-# Push to GitHub
-git branch -M main
-git push -u origin main
-```
-
-### Option 2: Already Has Git
-
+### 1. Start Backend
 ```bash
 cd d:\SuRaksha
-
-# Add all changes
-git add .
-
-# Commit cleanup work
-git commit -m "docs: Complete repository cleanup and GitHub preparation"
-
-# Push to GitHub
-git push
+venv\Scripts\activate
+python run_backend.py
 ```
+✅ Backend running at: http://localhost:8000  
+✅ API Docs: http://localhost:8000/api/docs
 
----
-
-## ✅ WHAT'S READY
-
-### Files Created
-- ✅ `README.md` - Professional project documentation
-- ✅ `.gitignore` - Excludes rebuildable files (node_modules, venv, dist)
-- ✅ `REPOSITORY_AUDIT_REPORT.md` - Complete audit (50 pages)
-- ✅ `CLEANUP_SUMMARY.md` - Cleanup operations detail
-- ✅ `BUILD_VERIFICATION_REPORT.md` - Verification results
-- ✅ `FINAL_GITHUB_READINESS_REPORT.md` - Comprehensive summary
-- ✅ `QUICK_START_GUIDE.md` - This guide
-
-### Cleanup Completed
-- ✅ Removed `__pycache__/` (5 MB bytecode cache)
-- ✅ Removed empty `dummy_dir/`
-- ✅ All production code preserved (42 Python scripts)
-- ✅ All data preserved (450 MB)
-- ✅ All documentation preserved (60+ files)
-
-### Verification Completed
-- ✅ Frontend builds successfully (`npm run build` - 939ms)
-- ✅ Python imports work (`chromadb`, `sentence_transformers`, etc.)
-- ✅ Custom modules functional (`taxonomy_builder`, `map_generator`, etc.)
-- ✅ All data files intact (vector DBs, chunks, PDFs)
-
----
-
-## 📏 REPOSITORY SIZE
-
-| Component | Local Size | GitHub Size |
-|-----------|------------|-------------|
-| Core code + data | ~510 MB | ~510 MB |
-| node_modules | ~1.0 GB | Excluded |
-| venv | ~300 MB | Excluded |
-| **Total** | **~1.8 GB** | **~510 MB** |
-
-Users will need to run `npm install` and `pip install -r requirements.txt` after cloning.
-
----
-
-## 📋 RECOMMENDED COMMIT MESSAGE
-
-Copy and paste this for your first commit:
-
-```
-Initial commit: RegIntel AI - Offline Regulatory Intelligence Platform
-
-Complete implementation of offline agentic regulatory intelligence system:
-
-✅ Python AI Pipeline
-   - PDF ingestion & text extraction
-   - Semantic chunking with metadata
-   - Requirement extraction & classification
-   - ChromaDB vector database
-   - Semantic search with confidence scoring
-
-✅ React Dashboard
-   - Real-time regulatory intelligence visualization
-   - Interactive knowledge graph (Cytoscape.js)
-   - Department heatmaps & priority analysis
-   - Executive summary & compliance metrics
-
-✅ Knowledge Graph
-   - 2,941 classified requirements
-   - Cross-reference parser & validator
-   - Reference graph with 500+ nodes
-   - Effective requirement resolver
-
-✅ Validation Framework
-   - Taxonomy audit, cross-reference audit
-   - Resolver benchmark, golden set evaluation
-   - Phase 7 quality gate
-
-✅ Data Assets
-   - 103 RBI regulatory PDF documents
-   - Preprocessed chunks & embeddings
-   - Generated taxonomy & maps
-
-✅ Documentation
-   - 60+ markdown documentation files
-   - Complete audit reports & validation results
-   - Team handover guides
-
-Tested: Frontend builds successfully (939ms)
-Verified: All Python imports functional
-Status: Production-ready for demo
-```
-
----
-
-## 🧪 OPTIONAL PRE-PUSH TESTING
-
-### Test 1: Frontend Build (Already Passed ✅)
+### 2. Start Frontend
 ```bash
-cd frontend/dashboard
-npm run build
-# Expected: ✅ Built in 939ms
-```
-
-### Test 2: Python Imports (Already Passed ✅)
-```bash
-python -c "import chromadb; import sentence_transformers; print('OK')"
-# Expected: OK
-```
-
-### Test 3: Semantic Search (Optional)
-```bash
-python query_regintel.py
-# Enter query: "KYC documentation requirements"
-# Expected: Returns relevant requirements
-```
-
-### Test 4: Dashboard Visualization (Optional)
-```bash
-cd frontend/dashboard
+cd frontend\dashboard
 npm run dev
-# Open: http://localhost:5173
-# Expected: Dashboard loads successfully
+```
+✅ Frontend running at: http://localhost:5173
+
+### 3. Login
+Open http://localhost:5173 in your browser
+
+**Admin Login:**
+- Username: `admin`
+- Password: `admin123`
+
+**Department Login:**
+- Username: `compliance` (or risk, treasury, operations, cyber, it, finance, aml, legal)
+- Password: `<username>123` (e.g., `compliance123`)
+
+---
+
+## 🔑 All User Credentials
+
+| Username | Password | Role | Department |
+|----------|----------|------|------------|
+| admin | admin123 | Head Office | - |
+| compliance | compliance123 | Department | Compliance |
+| risk | risk123 | Department | Risk Management |
+| treasury | treasury123 | Department | Treasury |
+| operations | operations123 | Department | Operations |
+| cyber | cyber123 | Department | Cyber Security |
+| it | it123 | Department | IT |
+| finance | finance123 | Department | Finance |
+| aml | aml123 | Department | AML |
+| legal | legal123 | Department | Legal |
+
+---
+
+## 🧪 Testing Authentication
+
+### Automated Tests
+```bash
+cd d:\SuRaksha
+venv\Scripts\activate
+python test_backend.py
 ```
 
-### Test 5: Validation Suite (Optional)
-```bash
-python phase7_quality_gate.py
-# Expected: Comprehensive validation report
+### Manual API Testing
+
+**Test Login (PowerShell):**
+```powershell
+$body = "username=admin&password=admin123"
+Invoke-RestMethod -Uri "http://localhost:8000/api/auth/login" -Method Post -Body $body -ContentType "application/x-www-form-urlencoded"
+```
+
+**Test Get User Info:**
+```powershell
+$token = "<paste_token_here>"
+$headers = @{"Authorization" = "Bearer $token"}
+Invoke-RestMethod -Uri "http://localhost:8000/api/auth/me" -Method Get -Headers $headers
 ```
 
 ---
 
-## 📚 DOCUMENTATION GUIDE
+## 📚 API Endpoints
 
-### For Users Cloning Your Repository
+### Authentication
+- `POST /api/auth/login` - Login with username/password
+- `GET /api/auth/me` - Get current user info
+- `POST /api/auth/change-password` - Change password
 
-**They should follow these steps**:
+### Admin (HEAD_OFFICE only)
+- `GET /api/admin/users` - List all users
+- `POST /api/admin/users` - Create new user
+- `GET /api/admin/departments` - List departments
+- `GET /api/admin/dashboard` - Dashboard summary
+- `POST /api/admin/assignments` - Assign requirement to department
+- `GET /api/admin/assignments` - List all assignments
+- `GET /api/admin/audit-logs` - View audit logs
 
+### Department
+- `GET /api/departments/assignments` - Get department's assignments
+- `PUT /api/departments/assignments/{id}/status` - Update assignment status
+- `GET /api/departments/dashboard` - Department dashboard summary
+
+---
+
+## 🗂️ Project Structure
+
+```
+d:\SuRaksha\
+├── backend/                    # FastAPI backend
+│   ├── main.py                # Main application
+│   ├── auth.py                # Authentication logic
+│   ├── crud.py                # Database operations
+│   ├── database.py            # Database configuration
+│   ├── models.py              # Database models
+│   ├── schemas.py             # Pydantic schemas
+│   ├── security.py            # JWT & password hashing
+│   ├── routers/               # API routers
+│   │   ├── auth_router.py
+│   │   ├── admin_router.py
+│   │   └── department_router.py
+│   └── utils/                 # Utilities
+│       └── seed_data.py       # Database seeding
+├── frontend/dashboard/        # React frontend
+│   └── src/
+│       ├── pages/
+│       │   ├── Login.jsx      # Login page
+│       │   ├── Dashboard.jsx
+│       │   └── ...
+│       ├── context/
+│       │   └── AuthContext.jsx # Auth state management
+│       └── components/
+│           ├── Topbar.jsx     # Navigation with user info
+│           └── ProtectedRoute.jsx # Route protection
+├── data/
+│   ├── compliance.db          # SQLite database
+│   ├── dataset/               # Regulatory documents
+│   └── chroma_db/             # Vector database
+├── run_backend.py             # Backend startup script
+├── test_backend.py            # Automated tests
+└── requirements.txt           # Python dependencies
+```
+
+---
+
+## 🔐 Security Features
+
+✅ **JWT Authentication** - Stateless token-based auth  
+✅ **bcrypt Password Hashing** - No plaintext passwords  
+✅ **Role-Based Access Control** - HEAD_OFFICE vs DEPARTMENT  
+✅ **Protected Routes** - Frontend enforces authentication  
+✅ **CORS Protection** - Only allowed origins  
+✅ **Audit Logging** - All actions tracked  
+✅ **Session Persistence** - Token stored securely  
+✅ **8-Hour Token Expiration** - Automatic timeout  
+
+---
+
+## 🎯 User Roles
+
+### HEAD_OFFICE (Admin)
+**Capabilities:**
+- View all departments
+- Manage users
+- Assign requirements to departments
+- View all assignments
+- Access audit logs
+- Dashboard with system-wide statistics
+
+**Landing Page:** Dashboard (/)
+
+### DEPARTMENT
+**Capabilities:**
+- View assigned requirements
+- Update assignment status (pending → in_progress → completed)
+- Add remarks to assignments
+- View department-specific dashboard
+- View department statistics
+
+**Landing Page:** Department Dashboard (/departments)
+
+---
+
+## 🎨 Frontend Features
+
+### Login Page (`/login`)
+- Professional banking UI
+- RegIntel AI branding
+- Username/password inputs
+- Error messages
+- Loading states
+- Demo credentials display
+
+### Navigation (Topbar)
+- User avatar with initial
+- User full name
+- Role badge
+- Department name (for dept users)
+- Dropdown menu with:
+  - Email
+  - Role
+  - Logout button
+
+### Protected Routes
+All routes require authentication:
+- `/` - Dashboard
+- `/pipeline` - Upload Pipeline
+- `/maps` - MAP Management
+- `/departments` - Department Risk
+- `/requirements` - Requirements
+- `/graph` - Knowledge Graph
+
+---
+
+## 📊 Database Schema
+
+### Tables
+1. **users** - User accounts
+   - id, username, hashed_password, full_name, email
+   - role (head_office/department)
+   - department_id, is_active, last_login
+
+2. **departments** - Department definitions
+   - id, name, code, description
+
+3. **documents** - Uploaded documents
+   - id, filename, file_path, file_size, document_type
+   - uploaded_by, uploaded_at, processed, processed_at
+
+4. **requirements** - Compliance requirements
+   - id, requirement_id, title, description, category
+   - priority, document_id, extracted_at
+
+5. **assignments** - Dept assignments
+   - id, requirement_id, department_id, assigned_by
+   - status, remarks, assigned_at, completed_at
+
+6. **compliance_status_history** - Status tracking
+   - id, assignment_id, old_status, new_status
+   - changed_by, changed_at, remarks
+
+7. **audit_logs** - Action audit trail
+   - id, user_id, action, entity_type, entity_id
+   - details, ip_address, timestamp
+
+---
+
+## 🛠️ Troubleshooting
+
+### Backend Won't Start
 ```bash
-# 1. Clone repository
-git clone https://github.com/yourusername/regintel-ai.git
-cd regintel-ai
+# Check if virtual environment is activated
+venv\Scripts\activate
 
-# 2. Install Python dependencies
-python -m venv venv
-venv\Scripts\activate  # Windows
+# Check if dependencies are installed
 pip install -r requirements.txt
 
-# 3. Install frontend dependencies
-cd frontend/dashboard
+# Check if port 8000 is available
+netstat -ano | findstr :8000
+```
+
+### Frontend Won't Start
+```bash
+# Install dependencies
+cd frontend\dashboard
 npm install
 
-# 4. Verify setup
-python -c "import chromadb; print('Python OK')"
-npm run build
+# Clear cache and reinstall
+rm -rf node_modules package-lock.json
+npm install
 
-# 5. Run application
-python query_regintel.py  # Backend
-npm run dev  # Frontend (in frontend/dashboard/)
+# Check if port 5173 is available
+netstat -ano | findstr :5173
 ```
 
-**Installation time**: ~15 minutes
+### Login Not Working
+1. Verify backend is running (http://localhost:8000/api/health)
+2. Check browser console for errors
+3. Verify credentials (admin/admin123)
+4. Check CORS settings in backend/main.py
+5. Clear browser localStorage and try again
+
+### Token Expired
+- Tokens expire after 8 hours
+- Simply logout and login again
+- Or clear localStorage: `localStorage.clear()`
 
 ---
 
-## 🎯 WHAT TO TELL GITHUB REVIEWERS
+## 📝 Development Notes
 
-### Key Points
+### Adding New Users
+1. Use admin account
+2. Go to http://localhost:8000/api/docs
+3. Use POST /api/admin/users endpoint
+4. Provide username, password, email, role, department_id
 
-1. **Offline System**: No API keys or external dependencies required
-2. **Data Included**: 103 RBI regulatory PDFs and preprocessed artifacts
-3. **Fully Functional**: Frontend builds in 939ms, all imports work
-4. **Comprehensive Docs**: 60+ documentation files included
-5. **Validation Framework**: Complete test suite with quality gates
+### Changing Passwords
+1. Login as the user
+2. Use POST /api/auth/change-password endpoint
+3. Provide old_password and new_password
 
-### Project Highlights
-
-- **2,941 classified requirements** from RBI regulations
-- **ChromaDB vector database** for semantic search
-- **React dashboard** with interactive knowledge graph
-- **Cross-reference parser** with 500+ graph nodes
-- **Golden set evaluation** framework for accuracy testing
-- **Complete audit trail** with validation reports
-
-### Known Limitations (Be Honest)
-
-- End-to-end pipeline not tested during cleanup (recommend testing before demo)
-- Semantic search accuracy requires golden set validation
-- Dashboard visualizations need browser testing
-- Tested on Windows only (cross-platform compatibility unverified)
+### Testing API with Swagger
+1. Go to http://localhost:8000/api/docs
+2. Click "Authorize" button
+3. Login to get token
+4. Paste token in authorization dialog
+5. All endpoints now include the token
 
 ---
 
-## 📁 WHAT'S EXCLUDED FROM GIT (.gitignore)
+## 🚦 System Status Check
 
-### Rebuildable Artifacts (Excluded)
-```
-node_modules/           # npm install
-venv/                   # python -m venv venv
-frontend/dashboard/dist/  # npm run build
-__pycache__/            # Python auto-regenerates
-*.pyc                   # Python bytecode
-```
-
-### Critical Data (INCLUDED in Git)
-```
-data/                   # All preprocessing artifacts
-maps/                   # Dashboard JSON feeds
-archive/                # Historical reference
-*.json                  # Generated data files
-docs/                   # All documentation
-```
-
----
-
-## ⚠️ MANUAL REVIEW ITEMS (Low Priority)
-
-### Zip Files to Review
-
-You have 4 zip files that may contain duplicate content:
-
+### Quick Health Check
 ```bash
-# Check if these duplicate existing folders
-SuRaksha_Backup_Docs.zip          # Compare with docs/ folder
-SuRaksha_FullRepository.zip       # May be redundant with Git
+# Backend health
+curl http://localhost:8000/api/health
 
-# These should be kept
-SuRaksha_Backup_PreCleanup.zip    # Safety backup
-SuRaksha_TeamHandover.zip         # Team handover package
+# Frontend (should return HTML)
+curl http://localhost:5173
+
+# Database check
+python -c "from backend.database import engine; print(engine.table_names())"
 ```
 
-**How to check**:
-1. Extract zip to temp folder
-2. Compare contents with existing `docs/` and `archive/` folders
-3. If 100% duplicate, can remove zip file
-4. If unique content, keep the zip
-
-**Not urgent** - These don't affect GitHub push
-
----
-
-## 🎊 SUCCESS CHECKLIST
-
-Before you push, verify:
-
-- ✅ `README.md` exists and looks professional
-- ✅ `.gitignore` exists and excludes node_modules/venv
-- ✅ Frontend builds: `cd frontend/dashboard && npm run build`
-- ✅ Python imports work: `python -c "import chromadb; print('OK')"`
-- ✅ All critical data in `data/` folder present
-- ✅ All docs in `docs/` folder present
-- ✅ Git remote configured (if pushing to existing repo)
-
-**All items above**: ✅ COMPLETE
-
----
-
-## 🚀 YOU'RE READY TO PUSH!
-
-### Final Command Sequence
-
+### Run All Tests
 ```bash
 cd d:\SuRaksha
+venv\Scripts\activate
+python test_backend.py
+```
 
-# Verify everything looks good
-git status
-git log --oneline -1
-
-# Push to GitHub
-git push origin main
-
-# Or if first time:
-git push -u origin main
+Expected output:
+```
+✓ Health check passed
+✓ Login successful
+✓ Get current user successful
+✓ Correctly rejected invalid credentials
+✓ Department login successful
+✓ Swagger docs accessible
 ```
 
 ---
 
-## 📞 NEED HELP?
+## 📞 Support
 
-### Documentation References
-- **README.md** - Main documentation (installation, usage)
-- **FINAL_GITHUB_READINESS_REPORT.md** - Comprehensive summary
-- **BUILD_VERIFICATION_REPORT.md** - Verification details
-- **CLEANUP_SUMMARY.md** - What was cleaned and why
-- **PROJECT_STATE.md** - Complete project context
-- **TEAM_HANDOVER.md** - Team transition guide
+### Documentation Files
+- `AUTH_FIX_REPORT.md` - Complete authentication documentation
+- `PHASE1.1_COMPLETE.txt` - Phase 1.1 completion summary
+- `AUTH_INTEGRATION_REPORT.md` - Frontend integration details
+- `PHASE1_COMPLETE.txt` - Phase 1 implementation summary
 
-### Common Issues
-
-**Q**: Git push says repository is too large  
-**A**: Check `.gitignore` is present and `node_modules/` is listed
-
-**Q**: Users say imports don't work after cloning  
-**A**: They need to run `pip install -r requirements.txt`
-
-**Q**: Frontend won't start after cloning  
-**A**: They need to run `npm install` in frontend/dashboard/
-
-**Q**: Dashboard shows no data  
-**A**: Verify `maps/*.json` files are present (they should be in Git)
+### Log Files
+- Backend logs: Console output (stdout)
+- Database: `data/compliance.db`
+- Frontend logs: Browser console
 
 ---
 
-## 🎉 CONGRATULATIONS!
+## ✅ Verification Checklist
 
-Your RegIntel AI repository is:
-- ✅ Clean and organized
-- ✅ Fully documented
-- ✅ Build-verified
-- ✅ GitHub-ready
+Before reporting issues, verify:
 
-**Time to share your work with the world!** 🚀
+- [ ] Virtual environment activated
+- [ ] Backend running (http://localhost:8000)
+- [ ] Frontend running (http://localhost:5173)
+- [ ] Database file exists (data/compliance.db)
+- [ ] No errors in backend console
+- [ ] No errors in browser console
+- [ ] CORS configured correctly
+- [ ] Credentials typed correctly
+- [ ] Token not expired (< 8 hours)
 
 ---
 
-**Quick Start Guide**  
-**Status**: ✅ Ready for GitHub  
-**Date**: June 26, 2026
-
-*Generated as part of repository cleanup process*
+**Last Updated**: June 26, 2026  
+**Version**: 1.0.0  
+**Phase**: 1.1 Complete

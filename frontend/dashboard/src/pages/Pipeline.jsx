@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext, useRef, useMemo } from "react";
 import { DemoContext } from "../App";
 import { useNavigate } from "react-router-dom";
 import { useAnalysisSession } from "../context/AnalysisSession";
+import { useAuth } from "../context/AuthContext";
 import Breadcrumbs from "../components/Breadcrumbs";
 import { dashboardMetrics, graphData } from "../data/demo";
 
@@ -278,6 +279,7 @@ export default function Pipeline() {
   const navigate = useNavigate();
   const { isDemo } = useContext(DemoContext);
   const { session, createSession, resetSession, hasSession } = useAnalysisSession();
+  const { api } = useAuth();
 
   const [file, setFile] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -286,6 +288,8 @@ export default function Pipeline() {
   const [elapsedTimes, setElapsedTimes] = useState({});
   const [totalElapsed, setTotalElapsed] = useState(0);
   const [showResults, setShowResults] = useState(false);
+  const [uploadedDocumentId, setUploadedDocumentId] = useState(null);
+  const [error, setError] = useState(null);
 
   const fileInputRef = useRef(null);
   const timerRef = useRef(null);
@@ -330,13 +334,77 @@ export default function Pipeline() {
     setElapsedTimes({});
     setTotalElapsed(0);
     setShowResults(false);
+    setUploadedDocumentId(null);
+    setError(null);
   };
 
-  const startPipeline = () => {
-    setProcessing(true); setCurrentStage(0);
-    setTotalElapsed(0); setElapsedTimes({}); setShowResults(false);
+  const startPipeline = async () => {
+    setProcessing(true); 
+    setCurrentStage(0);
+    setTotalElapsed(0); 
+    setElapsedTimes({}); 
+    setShowResults(false);
+    setError(null);
+    
+    // Start total elapsed timer
     totalTimerRef.current = setInterval(() => setTotalElapsed(p => p + 100), 100);
-    runStage(0);
+    
+    try {
+      console.log('[PIPELINE] Starting pipeline for file:', file.name);
+      
+      // Step 1: Upload file to backend
+      console.log('[PIPELINE] Uploading file...');
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('document_type', 'RBI_Circular');
+      
+      const uploadResponse = await api.post('/admin/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      
+      const documentId = uploadResponse.data.id;
+      setUploadedDocumentId(documentId);
+      console.log('[PIPELINE] File uploaded, document ID:', documentId);
+      
+      // Step 2: Start visual stage progression
+      console.log('[PIPELINE] Starting visual stage progression...');
+      runStage(0);
+      
+      // Step 3: After stages complete, call process endpoint
+      // Wait for all stages to complete visually
+      const totalStageDuration = STAGES.length * (isDemo ? 600 : 2000);
+      
+      setTimeout(async () => {
+        try {
+          console.log('[PIPELINE] Visual stages complete, calling process endpoint...');
+          console.log('[PIPELINE] Processing document ID:', documentId);
+          
+          const processResponse = await api.post(`/admin/process-document/${documentId}`);
+          
+          console.log('[PIPELINE] Processing complete:', processResponse.data);
+          console.log('[PIPELINE] Requirements created:', processResponse.data.requirements_created);
+          console.log('[PIPELINE] Assignments created:', processResponse.data.assignments_created);
+          
+          // Pipeline complete - show success
+          console.log('[PIPELINE] Pipeline successfully completed');
+          
+        } catch (processError) {
+          console.error('[PIPELINE] Processing failed:', processError);
+          setError(processError.response?.data?.detail || 'Processing failed. Please try again.');
+          clearInterval(totalTimerRef.current);
+          setProcessing(false);
+        }
+      }, totalStageDuration);
+      
+    } catch (uploadError) {
+      console.error('[PIPELINE] Upload failed:', uploadError);
+      setError(uploadError.response?.data?.detail || 'Upload failed. Please try again.');
+      clearInterval(totalTimerRef.current);
+      setProcessing(false);
+      setCurrentStage(-1);
+    }
   };
 
   const runStage = (stageIdx) => {
@@ -428,15 +496,29 @@ export default function Pipeline() {
                   Initiate Processing Pipeline
                 </button>
               ) : (
-                <div style={{ marginTop: 24, padding: 16, background: pipelineComplete ? "rgba(16,185,129,0.12)" : "rgba(56,189,248,0.08)", border: `1px solid ${pipelineComplete ? "rgba(16,185,129,0.25)" : "rgba(56,189,248,0.2)"}`, borderRadius: 8 }}>
+                <div style={{ marginTop: 24, padding: 16, background: error ? "rgba(239,68,68,0.12)" : (pipelineComplete ? "rgba(16,185,129,0.12)" : "rgba(56,189,248,0.08)"), border: `1px solid ${error ? "rgba(239,68,68,0.25)" : (pipelineComplete ? "rgba(16,185,129,0.25)" : "rgba(56,189,248,0.2)")}`, borderRadius: 8 }}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
-                    <span style={{ fontSize: 12, color: pipelineComplete ? "#10b981" : "#38bdf8", fontWeight: 700 }}>{pipelineComplete ? "✓ ANALYSIS COMPLETE" : "PROCESSING..."}</span>
+                    <span style={{ fontSize: 12, color: error ? "#ef4444" : (pipelineComplete ? "#10b981" : "#38bdf8"), fontWeight: 700 }}>
+                      {error ? "✕ ERROR" : (pipelineComplete ? "✓ ANALYSIS COMPLETE" : "PROCESSING...")}
+                    </span>
                     <span style={{ fontSize: 12, color: "#94a3b8", fontFamily: "monospace" }}>{(totalElapsed / 1000).toFixed(1)}s</span>
                   </div>
-                  <div style={{ height: 6, background: "rgba(255,255,255,0.1)", borderRadius: 3, overflow: "hidden" }}>
-                    <div style={{ width: `${Math.min(100, (currentStage / STAGES.length) * 100)}%`, height: "100%", background: pipelineComplete ? "#10b981" : "#38bdf8", transition: "width 0.4s ease" }} />
-                  </div>
-                  {pipelineComplete && <div style={{ marginTop: 12, fontSize: 12, color: "#94a3b8", textAlign: "center" }}>Generating analysis report...</div>}
+                  {!error && (
+                    <div style={{ height: 6, background: "rgba(255,255,255,0.1)", borderRadius: 3, overflow: "hidden" }}>
+                      <div style={{ width: `${Math.min(100, (currentStage / STAGES.length) * 100)}%`, height: "100%", background: pipelineComplete ? "#10b981" : "#38bdf8", transition: "width 0.4s ease" }} />
+                    </div>
+                  )}
+                  {error && (
+                    <div style={{ marginTop: 12, fontSize: 12, color: "#f87171", textAlign: "center" }}>
+                      {error}
+                    </div>
+                  )}
+                  {pipelineComplete && !error && <div style={{ marginTop: 12, fontSize: 12, color: "#94a3b8", textAlign: "center" }}>Generating analysis report...</div>}
+                  {error && (
+                    <button onClick={startNewAnalysis} style={{ width: "100%", marginTop: 12, background: "rgba(239,68,68,0.1)", color: "#ef4444", border: "1px solid rgba(239,68,68,0.2)", padding: "8px", borderRadius: 6, fontSize: 12, fontWeight: 700, cursor: "pointer" }}>
+                      Try Again
+                    </button>
+                  )}
                 </div>
               )}
             </div>

@@ -1,9 +1,20 @@
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
-const NAV = [
+const HEAD_OFFICE_NAV = [
   {
     to: "/", label: "Executive Dashboard", icon: (
       <svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+    )
+  },
+  {
+    to: "/pipeline", label: "Pipeline", icon: (
+      <svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
+    )
+  },
+  {
+    to: "/assignment-center", label: "Assignment Center", icon: (
+      <svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg>
     )
   },
   {
@@ -28,7 +39,29 @@ const NAV = [
   },
 ];
 
+const DEPARTMENT_NAV = [
+  {
+    to: "/workspace", label: "My Assignments", icon: (
+      <svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg>
+    )
+  },
+  {
+    to: "/requirements", label: "Requirement Search", icon: (
+      <svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+    )
+  },
+  {
+    to: "/graph", label: "Knowledge Graph", icon: (
+      <svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+    )
+  },
+];
+
 export default function Sidebar() {
+  const { user } = useAuth();
+  
+  // Determine navigation based on role
+  const NAV = user?.role === 'head_office' ? HEAD_OFFICE_NAV : DEPARTMENT_NAV;
   return (
     <aside style={{
       width: 252, minHeight: "100vh", flexShrink: 0,

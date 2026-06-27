@@ -3,6 +3,7 @@ import { DemoContext } from "../App";
 import { dashboardMetrics } from "../data/demo";
 import { useAnalysisSession } from "../context/AnalysisSession";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const DONUT_COLORS = ["#ef4444", "#fbbf24", "#60a5fa", "#34d399"];
 
@@ -37,10 +38,50 @@ function KpiCard({ label, value, sub, icon, accent, delay = 0 }) {
 }
 
 export default function Dashboard() {
-  const m = dashboardMetrics;
   const { isDemo } = useContext(DemoContext);
   const { session, hasSession } = useAnalysisSession();
   const navigate = useNavigate();
+  const { api, user } = useAuth();
+  const [completionSummary, setCompletionSummary] = useState(null);
+  const [dashboardStats, setDashboardStats] = useState(null);
+
+  // Load completion summary for HEAD_OFFICE users
+  useEffect(() => {
+    if (user?.role === 'head_office') {
+      loadCompletionSummary();
+      loadDashboardStats();
+    }
+  }, [user]);
+
+  const loadCompletionSummary = async () => {
+    try {
+      const response = await api.get('/assignment-center/admin-summary');
+      setCompletionSummary(response.data);
+    } catch (error) {
+      console.error('Failed to load completion summary:', error);
+    }
+  };
+
+  const loadDashboardStats = async () => {
+    try {
+      const response = await api.get('/admin/dashboard');
+      setDashboardStats(response.data);
+    } catch (error) {
+      console.error('Failed to load dashboard stats:', error);
+    }
+  };
+
+  const m = dashboardStats ? {
+    ...dashboardMetrics,
+    total_requirements: dashboardStats.total_requirements,
+    total_maps: dashboardStats.total_assignments,
+    compliance_summary: {
+      pending: dashboardStats.pending_count,
+      in_progress: dashboardStats.in_progress_count,
+      completed: dashboardStats.completed_count,
+      overdue: dashboardMetrics.compliance_summary.overdue // Keep demo overdue as it's not in backend
+    }
+  } : dashboardMetrics;
 
   const kpis = [
     { label: "Total Requirements", value: m.total_requirements, sub: "Extracted from RBI Circulars", accent: "#60a5fa", icon: <svg width="18" height="18" fill="none" stroke="#60a5fa" strokeWidth="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg> },
@@ -220,6 +261,65 @@ export default function Dashboard() {
           ))}
         </div>
       </div>
+
+      {/* Department Assignment Status - HEAD_OFFICE only */}
+      {user?.role === 'head_office' && completionSummary && completionSummary.departments && completionSummary.departments.length > 0 && (
+        <div className="card animate-fade-up" style={{ padding: 22, marginTop: 18, animationDelay: "500ms" }}>
+          <div style={{ marginBottom: 18 }}>
+            <div style={{ fontWeight: 700, color: "#f1f5f9", fontSize: 14 }}>Department Assignment Status</div>
+            <div style={{ fontSize: 11.5, color: "#64748b", marginTop: 2 }}>Real-time completion tracking across all departments</div>
+          </div>
+          <div style={{ overflowX: 'auto' }}>
+            <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '0 8px' }}>
+              <thead>
+                <tr>
+                  <th style={{ fontSize: 11, color: '#64748b', fontWeight: 700, textAlign: 'left', padding: '8px 12px', textTransform: 'uppercase', letterSpacing: 0.5 }}>Department</th>
+                  <th style={{ fontSize: 11, color: '#64748b', fontWeight: 700, textAlign: 'center', padding: '8px 12px', textTransform: 'uppercase', letterSpacing: 0.5 }}>Assigned</th>
+                  <th style={{ fontSize: 11, color: '#64748b', fontWeight: 700, textAlign: 'center', padding: '8px 12px', textTransform: 'uppercase', letterSpacing: 0.5 }}>Completed</th>
+                  <th style={{ fontSize: 11, color: '#64748b', fontWeight: 700, textAlign: 'center', padding: '8px 12px', textTransform: 'uppercase', letterSpacing: 0.5 }}>Remaining</th>
+                  <th style={{ fontSize: 11, color: '#64748b', fontWeight: 700, textAlign: 'right', padding: '8px 12px', textTransform: 'uppercase', letterSpacing: 0.5 }}>Progress</th>
+                </tr>
+              </thead>
+              <tbody>
+                {completionSummary.departments.map((dept) => {
+                  const progress = dept.assigned > 0 ? (dept.completed / dept.assigned * 100) : 0;
+                  return (
+                    <tr key={dept.department_id} style={{ background: '#162030', borderRadius: 8 }}>
+                      <td style={{ fontSize: 13, color: '#e2e8f0', fontWeight: 600, padding: '14px 12px', borderTopLeftRadius: 8, borderBottomLeftRadius: 8 }}>
+                        {dept.department_name}
+                      </td>
+                      <td style={{ fontSize: 14, color: '#60a5fa', fontWeight: 700, textAlign: 'center', padding: '14px 12px' }}>
+                        {dept.assigned}
+                      </td>
+                      <td style={{ fontSize: 14, color: '#10b981', fontWeight: 700, textAlign: 'center', padding: '14px 12px' }}>
+                        {dept.completed}
+                      </td>
+                      <td style={{ fontSize: 14, color: '#fbbf24', fontWeight: 700, textAlign: 'center', padding: '14px 12px' }}>
+                        {dept.remaining}
+                      </td>
+                      <td style={{ padding: '14px 12px', borderTopRightRadius: 8, borderBottomRightRadius: 8 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 10, justifyContent: 'flex-end' }}>
+                          <div style={{ width: 100, height: 6, background: 'rgba(255,255,255,0.1)', borderRadius: 3, overflow: 'hidden' }}>
+                            <div style={{ 
+                              width: `${progress}%`, 
+                              height: '100%', 
+                              background: progress === 100 ? '#10b981' : progress > 50 ? '#60a5fa' : '#fbbf24',
+                              transition: 'width 0.3s'
+                            }} />
+                          </div>
+                          <span style={{ fontSize: 12, fontWeight: 700, color: '#e2e8f0', fontFamily: 'monospace', minWidth: 40, textAlign: 'right' }}>
+                            {progress.toFixed(0)}%
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
