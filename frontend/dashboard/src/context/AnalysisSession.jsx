@@ -52,12 +52,20 @@ function generateDocumentAnalysis(fileName) {
   }
 
   // Compute department breakdown from document MAPs
+  const standardDepartments = [
+    "Compliance", "Risk Management", "Treasury", "Operations", 
+    "Cyber Security", "IT", "Finance", "AML", "Legal"
+  ];
   const deptMap = {};
+  for (const name of standardDepartments) {
+    deptMap[name] = { total: 0, Critical: 0, High: 0, Medium: 0, Low: 0, impactSum: 0 };
+  }
   for (const m of docMapEntries) {
-    if (!deptMap[m.department]) deptMap[m.department] = { total: 0, Critical: 0, High: 0, Medium: 0, Low: 0, impactSum: 0 };
-    deptMap[m.department].total++;
-    deptMap[m.department][m.priority] = (deptMap[m.department][m.priority] || 0) + 1;
-    deptMap[m.department].impactSum += m.impact_score;
+    if (deptMap[m.department]) {
+      deptMap[m.department].total++;
+      deptMap[m.department][m.priority] = (deptMap[m.department][m.priority] || 0) + 1;
+      deptMap[m.department].impactSum += m.impact_score;
+    }
   }
   const docDepartments = Object.entries(deptMap).map(([name, d]) => ({
     department: name, total_maps: d.total,

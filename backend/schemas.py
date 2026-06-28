@@ -2,7 +2,7 @@
 Pydantic schemas for request/response validation
 """
 from pydantic import BaseModel, EmailStr, Field
-from typing import Optional, List
+from typing import Optional, List, Dict
 from datetime import datetime
 from enum import Enum
 
@@ -191,6 +191,19 @@ class DashboardSummary(BaseModel):
     in_progress_count: int
     completed_count: int
     completion_percentage: float
+    
+    # New operational metrics
+    published_maps: int
+    pending_assignments: int
+    completed_assignments: int
+    unpublished_assignments: int
+    
+    # Priority metrics
+    critical_assignments: int
+    high_assignments: int
+    departments_impacted: int
+    upcoming_deadlines: int
+    priority_distribution: Dict[str, int]
 
 
 class DepartmentDashboard(BaseModel):

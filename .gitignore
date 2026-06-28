@@ -28,10 +28,10 @@ htmlcov/
 # ==================================================
 # Node / Frontend
 # ==================================================
-# Dependencies (rebuildable from package-lock.json)
+node_modules/
+dist/
+build/
 frontend/dashboard/node_modules/
-
-# Build output (rebuildable with npm run build)
 frontend/dashboard/dist/
 
 # Logs
@@ -72,6 +72,11 @@ desktop.ini
 *.bak
 *.old
 *.orig
+
+# Runtime Data
+# ==================================================
+uploads/
+data/compliance.db
 
 # ==================================================
 # DO NOT IGNORE (CRITICAL FOR OFFLINE OPERATION)

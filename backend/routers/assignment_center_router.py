@@ -73,3 +73,15 @@ def get_admin_summary(
     """
     summary = crud.get_admin_completion_summary(db)
     return {"departments": summary}
+
+
+@router.get("/department-risk")
+def get_department_risk(
+    current_user: User = Depends(require_head_office),
+    db: Session = Depends(get_db)
+):
+    """
+    Get per-department risk summary computed from live Assignment data.
+    Risk scores are normalized to 0-100.
+    """
+    return crud.get_department_risk_summary(db)

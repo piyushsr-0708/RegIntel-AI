@@ -274,7 +274,16 @@ def get_audit_logs(
 def get_dashboard_summary(db: Session) -> dict:
     """Get overall dashboard summary statistics"""
     total_docs = db.query(func.count(models.Document.id)).scalar()
-    total_reqs = db.query(func.count(models.Requirement.id)).scalar()
+    
+    import json
+    import os
+    try:
+        json_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "requirements", "requirements_taxonomy.json")
+        with open(json_path, 'r', encoding='utf-8') as f:
+            total_reqs = len(json.load(f))
+    except Exception:
+        total_reqs = db.query(func.count(models.Requirement.id)).scalar()
+        
     total_assignments = db.query(func.count(models.Assignment.id)).scalar()
     
     pending = db.query(func.count(models.Assignment.id)).filter(
@@ -291,6 +300,32 @@ def get_dashboard_summary(db: Session) -> dict:
     
     completion_pct = (completed / total_assignments * 100) if total_assignments > 0 else 0.0
     
+    # New operational metrics
+    published_maps = db.query(func.count(models.Assignment.id)).filter(models.Assignment.is_published == True).scalar() or 0
+    unpublished_maps = total_assignments - published_maps
+    
+    departments_impacted = db.query(func.count(func.distinct(models.Assignment.department_id))).filter(models.Assignment.is_published == True).scalar() or 0
+    
+    # Priority logic: aggregate priority from Assignment, fallback to Requirement
+    from datetime import timedelta
+    now = datetime.utcnow()
+    upcoming_limit = now + timedelta(days=30)
+    
+    assignments = db.query(models.Assignment, models.Requirement).outerjoin(models.Requirement).all()
+    priority_dist = {"Critical": 0, "High": 0, "Medium": 0, "Low": 0}
+    upcoming_deadlines = 0
+    
+    for a, r in assignments:
+        p = a.priority if a.priority else (r.priority if r else "Medium")
+        if p in priority_dist:
+            priority_dist[p] += 1
+            
+        if a.due_date:
+            if a.due_date <= upcoming_limit:
+                upcoming_deadlines += 1
+        elif p in ["Critical", "High"]:
+            upcoming_deadlines += 1
+            
     return {
         "total_documents": total_docs or 0,
         "total_requirements": total_reqs or 0,
@@ -298,7 +333,16 @@ def get_dashboard_summary(db: Session) -> dict:
         "pending_count": pending or 0,
         "in_progress_count": in_progress or 0,
         "completed_count": completed or 0,
-        "completion_percentage": round(completion_pct, 2)
+        "completion_percentage": round(completion_pct, 2),
+        "published_maps": published_maps,
+        "pending_assignments": pending or 0,
+        "completed_assignments": completed or 0,
+        "unpublished_assignments": unpublished_maps,
+        "critical_assignments": priority_dist["Critical"],
+        "high_assignments": priority_dist["High"],
+        "departments_impacted": departments_impacted,
+        "upcoming_deadlines": upcoming_deadlines,
+        "priority_distribution": priority_dist
     }
 
 
@@ -342,34 +386,35 @@ def get_unpublished_assignment_summary(db: Session) -> dict:
     """
     Get summary of unpublished assignments grouped by department
     """
+    # Initialize all departments first to ensure 0-count departments are included
+    departments = get_all_departments(db)
+    dept_summary = {}
+    for dept in departments:
+        dept_summary[dept.id] = {
+            "department_id": dept.id,
+            "department_name": dept.name,
+            "department_code": dept.code,
+            "task_count": 0,
+            "requirements": []
+        }
+        
     # Get unpublished assignments
     assignments = db.query(models.Assignment).filter(
         models.Assignment.is_published == False
     ).all()
     
     # Group by department
-    dept_summary = {}
     for assignment in assignments:
-        dept = assignment.department
-        dept_id = dept.id
-        
-        if dept_id not in dept_summary:
-            dept_summary[dept_id] = {
-                "department_id": dept_id,
-                "department_name": dept.name,
-                "department_code": dept.code,
-                "task_count": 0,
-                "requirements": []
-            }
-        
-        dept_summary[dept_id]["task_count"] += 1
-        dept_summary[dept_id]["requirements"].append({
-            "assignment_id": assignment.id,
-            "requirement_id": assignment.requirement.id,
-            "requirement_text": assignment.requirement.text,
-            "priority": assignment.requirement.priority,
-            "domain": assignment.requirement.domain
-        })
+        dept_id = assignment.department_id
+        if dept_id in dept_summary:
+            dept_summary[dept_id]["task_count"] += 1
+            dept_summary[dept_id]["requirements"].append({
+                "assignment_id": assignment.id,
+                "requirement_id": assignment.requirement.id,
+                "requirement_text": assignment.requirement.text,
+                "priority": assignment.requirement.priority,
+                "domain": assignment.requirement.domain
+            })
     
     return dept_summary
 
@@ -444,6 +489,59 @@ def get_admin_completion_summary(db: Session) -> list:
         })
     
     return summary
+
+
+def get_department_risk_summary(db: Session) -> list:
+    """
+    Compute per-department risk from live Assignment data.
+    Risk score = Critical*40 + High*20 + Medium*5 + Low*1
+    Normalized to 0-100 across all departments.
+    """
+    PRIORITY_WEIGHTS = {"Critical": 40, "High": 20, "Medium": 5, "Low": 1}
+    departments = get_all_departments(db)
+    raw = []
+
+    for dept in departments:
+        assignments = db.query(models.Assignment).filter(
+            models.Assignment.department_id == dept.id
+        ).all()
+
+        priority_counts = {"Critical": 0, "High": 0, "Medium": 0, "Low": 0}
+        for a in assignments:
+            p = a.priority
+            if not p:
+                req = db.query(models.Requirement).filter(
+                    models.Requirement.id == a.requirement_id
+                ).first()
+                p = req.priority if req and req.priority else "Medium"
+            if p in priority_counts:
+                priority_counts[p] += 1
+
+        raw_score = sum(priority_counts[k] * PRIORITY_WEIGHTS[k] for k in priority_counts)
+        total_maps = len(assignments)
+        completed = sum(1 for a in assignments if a.status == models.ComplianceStatus.COMPLETED)
+
+        raw.append({
+            "department_id": dept.id,
+            "department": dept.name,
+            "total_maps": total_maps,
+            "critical_count": priority_counts["Critical"],
+            "high_count": priority_counts["High"],
+            "medium_count": priority_counts["Medium"],
+            "low_count": priority_counts["Low"],
+            "completed": completed,
+            "raw_score": raw_score,
+        })
+
+    # Normalize to 0-100
+    max_raw = max((d["raw_score"] for d in raw), default=1) or 1
+    for d in raw:
+        d["risk_score"] = round(d["raw_score"] / max_raw * 100, 1)
+        del d["raw_score"]
+
+    # Sort by risk_score descending
+    raw.sort(key=lambda d: d["risk_score"], reverse=True)
+    return raw
 
 
 # Assignment Batch CRUD

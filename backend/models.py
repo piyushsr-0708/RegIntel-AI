@@ -157,6 +157,10 @@ class Assignment(Base):
     # MVP Demo - Simple workflow
     is_published = Column(Boolean, default=False)  # Published to department
     
+    # Operational properties independent of Requirement
+    priority = Column(String(50), nullable=True)  # High, Medium, Low, Critical
+    due_date = Column(DateTime, nullable=True)
+    
     # Relationships
     requirement = relationship("Requirement", back_populates="assignments")
     department = relationship("Department", back_populates="assignments")

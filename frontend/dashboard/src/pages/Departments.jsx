@@ -1,6 +1,7 @@
-import { departmentSummary, departmentHeatmap } from "../data/demo";
+import { useState, useEffect } from "react";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { useAnalysisSession } from "../context/AnalysisSession";
+import { useAuth } from "../context/AuthContext";
 import Breadcrumbs from "../components/Breadcrumbs";
 
 const RISK_COLOR = (s) => s >= 85 ? "#f87171" : s >= 70 ? "#fbbf24" : s >= 55 ? "#60a5fa" : "#34d399";
@@ -98,9 +99,19 @@ function ScopedDepartmentReport({ deptId }) {
               </div>
             )) : <div style={{ color: "#94a3b8", fontSize: 13 }}>No immediate tasks assigned.</div>}
           </div>
-          <button onClick={() => navigate("/pipeline/analysis/maps")} style={{ width: "100%", marginTop: 14, padding: "8px", borderRadius: 6, background: "rgba(16,185,129,0.1)", border: "1px solid rgba(16,185,129,0.25)", color: "#34d399", fontSize: 11.5, fontWeight: 700, cursor: "pointer" }}>
-            View All {deptData.total_maps} Action Plans →
-          </button>
+        </div>
+      </div>
+
+      {/* Priority breakdown */}
+      <div className="card" style={{ padding: "24px 28px", marginBottom: 16 }}>
+        <div style={{ fontSize: 15, fontWeight: 800, color: "#f1f5f9", marginBottom: 14 }}>Priority Distribution</div>
+        <div style={{ display: "flex", gap: 12 }}>
+          {[["Critical", deptData.Critical, "#ef4444"], ["High", deptData.High, "#fbbf24"], ["Medium", deptData.Medium, "#60a5fa"], ["Low", deptData.Low, "#34d399"]].map(([label, val, color]) => (
+            <div key={label} style={{ flex: 1, padding: "14px", textAlign: "center", background: "#162030", borderRadius: 8, border: `1px solid ${color}20` }}>
+              <div style={{ fontSize: 28, fontWeight: 900, color, lineHeight: 1 }}>{val || 0}</div>
+              <div style={{ fontSize: 10.5, color: "#64748b", marginTop: 4, fontWeight: 700, letterSpacing: 0.3 }}>{label}</div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
@@ -108,12 +119,49 @@ function ScopedDepartmentReport({ deptId }) {
 }
 
 export default function Departments() {
-  const maxScore = Math.max(...departmentSummary.map(d => d.total_risk_score));
   const { pathname } = useLocation();
   const { deptId } = useParams();
-  
+  const { api } = useAuth();
+  const [deptRisk, setDeptRisk] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    loadDeptRisk();
+  }, []);
+
+  const loadDeptRisk = async () => {
+    try {
+      const response = await api.get('/assignment-center/department-risk');
+      setDeptRisk(response.data);
+    } catch (error) {
+      console.error('Failed to load department risk:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   if (pathname.includes("/pipeline/analysis/department/") && deptId) {
     return <ScopedDepartmentReport deptId={deptId} />;
+  }
+
+  const maxScore = Math.max(...deptRisk.map(d => d.risk_score), 1);
+  const totalMaps = deptRisk.reduce((a, d) => a + d.total_maps, 0);
+
+  // Build heatmap data from the same API response
+  const heatmapData = deptRisk.map(d => ({
+    department: d.department,
+    Critical: d.critical_count,
+    High: d.high_count,
+    Medium: d.medium_count,
+    Low: d.low_count,
+  }));
+
+  if (loading) {
+    return (
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: 300 }}>
+        <div style={{ color: "#94a3b8", fontSize: 14, fontWeight: 600 }}>Loading department risk data...</div>
+      </div>
+    );
   }
 
   return (
@@ -124,14 +172,14 @@ export default function Departments() {
           <h1 className="page-title">Department Risk Dashboard</h1>
         </div>
         <p className="page-subtitle" style={{ paddingLeft: 14 }}>
-          Compliance burden across <strong style={{ color: "#f1f5f9" }}>{departmentSummary.length}</strong> departments · {departmentSummary.reduce((a, d) => a + d.total_maps, 0)} total MAPs
+          Compliance burden across <strong style={{ color: "#f1f5f9" }}>{deptRisk.length}</strong> departments · {totalMaps} total MAPs
         </p>
       </div>
 
       {/* Top 3 Alert Cards */}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 14, marginBottom: 20 }}>
-        {departmentSummary.slice(0, 3).map((d, i) => {
-          const color = RISK_COLOR(d.total_risk_score);
+        {deptRisk.slice(0, 3).map((d, i) => {
+          const color = RISK_COLOR(d.risk_score);
           return (
             <div key={d.department} style={{
               borderRadius: 12, padding: "18px 20px", position: "relative", overflow: "hidden",
@@ -145,7 +193,7 @@ export default function Departments() {
               </div>
               <div style={{ fontSize: 14, fontWeight: 800, color: "#f1f5f9", marginBottom: 14, lineHeight: 1.3 }}>{d.department}</div>
               <div style={{ display: "flex", gap: 18 }}>
-                {[["Risk Score", d.total_risk_score, color], ["Critical MAPs", d.critical_count, "#f87171"], ["Total MAPs", d.total_maps, "#94a3b8"]].map(([lbl, val, c]) => (
+                {[["Risk Score", d.risk_score, color], ["Critical MAPs", d.critical_count, "#f87171"], ["Total MAPs", d.total_maps, "#94a3b8"]].map(([lbl, val, c]) => (
                   <div key={lbl}>
                     <div style={{ fontSize: 24, fontWeight: 900, color: c, lineHeight: 1 }}>{val}</div>
                     <div style={{ fontSize: 10, color: "#475569", marginTop: 2 }}>{lbl}</div>
@@ -157,12 +205,12 @@ export default function Departments() {
         })}
       </div>
 
-      {/* Bar Chart — pure SVG, zero hover */}
+      {/* Bar Chart — pure SVG */}
       <div className="card" style={{ padding: "22px 20px", marginBottom: 18 }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 18 }}>
           <div>
             <div style={{ fontWeight: 700, color: "#f1f5f9", fontSize: 14 }}>Department Risk Ranking</div>
-            <div style={{ fontSize: 11.5, color: "#64748b", marginTop: 2 }}>All 12 departments ranked by composite risk score</div>
+            <div style={{ fontSize: 11.5, color: "#64748b", marginTop: 2 }}>All {deptRisk.length} departments ranked by composite risk score (0–100)</div>
           </div>
           <div style={{ display: "flex", gap: 12 }}>
             {[["#f87171","85+"],["#fbbf24","70+"],["#60a5fa","55+"],["#34d399","Low"]].map(([c, l]) => (
@@ -173,19 +221,18 @@ export default function Departments() {
             ))}
           </div>
         </div>
-        <svg width="100%" height={320} viewBox="0 0 600 320" preserveAspectRatio="xMinYMin meet" style={{ display: "block", pointerEvents: "none" }}>
-          {departmentSummary.map((d, i) => {
-            const labelW = 160, barH = 18, gap = 8, top = 6;
-            const rowH = barH + gap;
-            const y = top + i * rowH;
-            const maxW = 380;
-            const barW = (d.total_risk_score / 100) * maxW;
-            const color = RISK_COLOR(d.total_risk_score);
+        <svg width="100%" height={Math.max(260, 10 + deptRisk.length * 32)} viewBox={`0 0 560 ${Math.max(260, 10 + deptRisk.length * 32)}`} preserveAspectRatio="xMinYMin meet" style={{ display: "block", pointerEvents: "none" }}>
+          {deptRisk.map((d, i) => {
+            const labelW = 140, barH = 18, gap = 14, top = 6;
+            const y = top + i * (barH + gap);
+            const maxBarW = 340;
+            const barW = (d.risk_score / maxScore) * maxBarW;
+            const color = RISK_COLOR(d.risk_score);
             return (
               <g key={d.department}>
-                <text x={0} y={y + barH / 2 + 4} fontSize={10.5} fill="#94a3b8">{d.department}</text>
-                <rect x={labelW} y={y} width={Math.max(barW, 4)} height={barH} rx={4} fill={color} opacity={0.8} />
-                <text x={labelW + barW + 6} y={y + barH / 2 + 4} fontSize={10.5} fill="#64748b" fontWeight="700">{d.total_risk_score}</text>
+                <text x={0} y={y + barH / 2 + 4} fontSize={11} fill="#94a3b8" fontWeight="500">{d.department}</text>
+                <rect x={labelW} y={y} width={Math.max(barW, 4)} height={barH} rx={4} fill={color} opacity={d.risk_score === 0 ? 0.25 : 0.8} />
+                <text x={labelW + Math.max(barW, 4) + 8} y={y + barH / 2 + 4} fontSize={11} fill="#64748b" fontWeight="700">{d.risk_score}</text>
               </g>
             );
           })}
@@ -207,7 +254,7 @@ export default function Departments() {
               </tr>
             </thead>
             <tbody>
-              {departmentHeatmap.map((row) => (
+              {heatmapData.map((row) => (
                 <tr key={row.department}>
                   <td style={{ padding: "5px 12px", fontSize: 12.5, color: "#94a3b8", fontWeight: 500, whiteSpace: "nowrap" }}>{row.department}</td>
                   {["Critical","High","Medium","Low"].map((p) => {
@@ -231,16 +278,16 @@ export default function Departments() {
         </div>
       </div>
 
-      {/* Cards */}
+      {/* Department Cards */}
       <div style={{ fontSize: 10.5, fontWeight: 700, color: "#475569", letterSpacing: 0.6, textTransform: "uppercase", marginBottom: 10 }}>All Departments</div>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 12 }}>
-        {departmentSummary.map((d) => {
-          const color = RISK_COLOR(d.total_risk_score);
+        {deptRisk.map((d) => {
+          const color = RISK_COLOR(d.risk_score);
           return (
             <div key={d.department} className="card" style={{ padding: "16px 18px", borderLeft: `3px solid ${color}` }}>
               <div style={{ fontSize: 13, fontWeight: 700, color: "#e2e8f0", marginBottom: 12 }}>{d.department}</div>
               <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 10 }}>
-                {[["Total MAPs", d.total_maps, "#94a3b8"], ["Risk Score", d.total_risk_score, color], ["Critical", d.critical_count, "#f87171"]].map(([lbl, val, c]) => (
+                {[["Total MAPs", d.total_maps, "#94a3b8"], ["Risk Score", d.risk_score, color], ["Critical", d.critical_count, "#f87171"]].map(([lbl, val, c]) => (
                   <div key={lbl} style={{ textAlign: "center" }}>
                     <div style={{ fontSize: 22, fontWeight: 900, color: c, lineHeight: 1 }}>{val}</div>
                     <div style={{ fontSize: 10, color: "#475569", marginTop: 2 }}>{lbl}</div>
@@ -248,7 +295,7 @@ export default function Departments() {
                 ))}
               </div>
               <div style={{ height: 3, background: "#162030", borderRadius: 2, overflow: "hidden" }}>
-                <div style={{ width: `${(d.total_risk_score / maxScore) * 100}%`, height: "100%", background: color }} />
+                <div style={{ width: `${(d.risk_score / maxScore) * 100}%`, height: "100%", background: color, minWidth: d.risk_score > 0 ? 2 : 0 }} />
               </div>
             </div>
           );

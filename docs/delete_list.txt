@@ -1,6 +1,0 @@
-__pycache__/
-tests/__pycache__/
-dummy_dir/
-print_titles.py
-remove_duplicate_files.py
-check_collections.py

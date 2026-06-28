@@ -19,8 +19,9 @@ export default function Graph() {
   const { pathname } = useLocation();
   const isDocumentScoped = pathname.includes('/pipeline/analysis');
   const { session, hasSession } = useAnalysisSession();
+  const [viewMode, setViewMode] = useState(isDocumentScoped && hasSession ? "active" : "global");
   
-  const graphData = isDocumentScoped && hasSession ? session.analysis.scopedGraph : globalGraphData;
+  const graphData = viewMode === "active" && hasSession ? session.analysis.scopedGraph : globalGraphData;
 
   const counts = {
     circular:    graphData.nodes.filter(n => n.data.type === "circular").length,
@@ -93,14 +94,29 @@ export default function Graph() {
         <div>
           <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 5 }}>
             <div style={{ width: 4, height: 28, borderRadius: 2, background: "linear-gradient(180deg,#a78bfa,#7c3aed)", boxShadow: "0 0 10px rgba(139,92,246,0.4)" }} />
-            <h1 className="page-title">{isDocumentScoped ? "Document Knowledge Graph" : "Knowledge Graph"}</h1>
+            <h1 className="page-title">{viewMode === "active" ? "Document Knowledge Graph" : "Knowledge Graph"}</h1>
           </div>
           <p className="page-subtitle" style={{ paddingLeft: 14 }}>Regulatory relationship network · RBI Circulars → Requirements → MAPs</p>
         </div>
-        {isDocumentScoped && (
-          <button onClick={() => window.location.href = "/graph"} style={{ padding: "8px 18px", borderRadius: 8, background: "rgba(167,139,250,0.12)", border: "1px solid rgba(167,139,250,0.3)", color: "#c4b5fd", fontSize: 12, fontWeight: 700, cursor: "pointer" }}>
-            Open Full Knowledge Graph
-          </button>
+        {hasSession && (
+          <div style={{ display: "flex", gap: 8, background: "rgba(10,18,32,0.6)", padding: 4, borderRadius: 10, border: "1px solid rgba(255,255,255,0.05)" }}>
+            <button 
+              onClick={() => setViewMode("global")} 
+              style={{ padding: "8px 16px", borderRadius: 7, border: "none", fontSize: 12, fontWeight: 700, cursor: "pointer", transition: "all 0.2s",
+                background: viewMode === "global" ? "rgba(167,139,250,0.15)" : "transparent",
+                color: viewMode === "global" ? "#c4b5fd" : "#64748b"
+              }}>
+              Global Graph
+            </button>
+            <button 
+              onClick={() => setViewMode("active")} 
+              style={{ padding: "8px 16px", borderRadius: 7, border: "none", fontSize: 12, fontWeight: 700, cursor: "pointer", transition: "all 0.2s",
+                background: viewMode === "active" ? "rgba(167,139,250,0.15)" : "transparent",
+                color: viewMode === "active" ? "#c4b5fd" : "#64748b"
+              }}>
+              Active Session
+            </button>
+          </div>
         )}
       </div>
 

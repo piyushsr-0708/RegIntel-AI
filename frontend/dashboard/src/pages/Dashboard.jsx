@@ -39,7 +39,7 @@ function KpiCard({ label, value, sub, icon, accent, delay = 0 }) {
 
 export default function Dashboard() {
   const { isDemo } = useContext(DemoContext);
-  const { session, hasSession } = useAnalysisSession();
+  const { session, hasSession, resetSession } = useAnalysisSession();
   const navigate = useNavigate();
   const { api, user } = useAuth();
   const [completionSummary, setCompletionSummary] = useState(null);
@@ -71,24 +71,90 @@ export default function Dashboard() {
     }
   };
 
-  const m = dashboardStats ? {
-    ...dashboardMetrics,
-    total_requirements: dashboardStats.total_requirements,
-    total_maps: dashboardStats.total_assignments,
-    compliance_summary: {
-      pending: dashboardStats.pending_count,
-      in_progress: dashboardStats.in_progress_count,
-      completed: dashboardStats.completed_count,
-      overdue: dashboardMetrics.compliance_summary.overdue // Keep demo overdue as it's not in backend
+  let m = null;
+
+  if (hasSession && session.analysis) {
+    // SESSION MODE
+    const stats = session.analysis.stats;
+    m = {
+      published_maps: 0,
+      pending_assignments: stats.totalMaps || 0,
+      completed_assignments: 0,
+      unpublished_assignments: stats.totalMaps || 0,
+      critical_maps: stats.criticalMaps || 0,
+      high_priority_maps: stats.highMaps || 0,
+      departments_impacted: stats.departmentsImpacted || 0,
+      upcoming_deadlines: stats.highMaps || 0, 
+      compliance_summary: { pending: stats.totalMaps || 0, in_progress: 0, completed: 0, overdue: 0 },
+      priority_distribution: { Critical: 0, High: 0, Medium: 0, Low: 0 },
+      top_risk_departments: []
+    };
+
+    if (session.analysis.maps) {
+      session.analysis.maps.forEach(map => {
+        const p = map.priority || "Medium";
+        m.priority_distribution[p] = (m.priority_distribution[p] || 0) + 1;
+      });
     }
-  } : dashboardMetrics;
+
+    if (session.analysis.departments) {
+      m.top_risk_departments = session.analysis.departments.map(d => ({
+        department: d.department,
+        risk_score: (d.Critical || 0) * 50 + (d.High || 0) * 20 + (d.Medium || 0) * 5 + (d.Low || 0)
+      })).sort((a, b) => b.risk_score - a.risk_score);
+    }
+  } else if (dashboardStats) {
+    // GLOBAL MODE (STRICT API)
+    m = {
+      published_maps: dashboardStats.published_maps || 0,
+      pending_assignments: dashboardStats.pending_assignments || 0,
+      completed_assignments: dashboardStats.completed_assignments || 0,
+      unpublished_assignments: dashboardStats.unpublished_assignments || 0,
+      critical_maps: dashboardStats.critical_assignments || 0,
+      high_priority_maps: dashboardStats.high_assignments || 0,
+      departments_impacted: dashboardStats.departments_impacted || 0,
+      upcoming_deadlines: dashboardStats.upcoming_deadlines || 0,
+      compliance_summary: {
+        pending: dashboardStats.pending_count || 0,
+        in_progress: dashboardStats.in_progress_count || 0,
+        completed: dashboardStats.completed_count || 0,
+        overdue: 0
+      },
+      priority_distribution: dashboardStats.priority_distribution || { Critical: 0, High: 0, Medium: 0, Low: 0 },
+      top_risk_departments: []
+    };
+    
+    if (completionSummary && completionSummary.departments) {
+      m.top_risk_departments = completionSummary.departments.map(d => ({
+        department: d.department_name,
+        risk_score: d.assigned * 10 + d.completed * 20
+      })).sort((a, b) => b.risk_score - a.risk_score);
+    }
+  } else {
+    // DEMO MODE (FALLBACK)
+    m = {
+      published_maps: dashboardMetrics.total_maps,
+      pending_assignments: dashboardMetrics.compliance_summary.pending,
+      completed_assignments: dashboardMetrics.compliance_summary.completed,
+      unpublished_assignments: 0,
+      critical_maps: dashboardMetrics.critical_maps,
+      high_priority_maps: dashboardMetrics.high_priority_maps,
+      departments_impacted: dashboardMetrics.departments_impacted,
+      upcoming_deadlines: dashboardMetrics.upcoming_deadlines,
+      compliance_summary: dashboardMetrics.compliance_summary,
+      priority_distribution: dashboardMetrics.priority_distribution,
+      top_risk_departments: dashboardMetrics.top_risk_departments
+    };
+  }
 
   const kpis = [
-    { label: "Total Requirements", value: m.total_requirements, sub: "Extracted from RBI Circulars", accent: "#60a5fa", icon: <svg width="18" height="18" fill="none" stroke="#60a5fa" strokeWidth="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg> },
-    { label: "Total MAPs Generated", value: m.total_maps, sub: "Mitigation Action Plans", accent: "#a78bfa", icon: <svg width="18" height="18" fill="none" stroke="#a78bfa" strokeWidth="2" viewBox="0 0 24 24"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg> },
-    { label: "Critical MAPs", value: m.critical_maps, sub: "Immediate action required", accent: "#ef4444", icon: <svg width="18" height="18" fill="none" stroke="#ef4444" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg> },
-    { label: "High Priority MAPs", value: m.high_priority_maps, sub: "Due within 90 days", accent: "#fbbf24", icon: <svg width="18" height="18" fill="none" stroke="#fbbf24" strokeWidth="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> },
-    { label: "Departments Impacted", value: m.departments_impacted, sub: "Across the institution", accent: "#34d399", icon: <svg width="18" height="18" fill="none" stroke="#34d399" strokeWidth="2" viewBox="0 0 24 24"><path d="M3 21h18M9 21V7l3-4 3 4v14"/></svg> },
+    { label: "Published MAPs", value: m.published_maps, sub: "Operationally active", accent: "#a78bfa", icon: <svg width="18" height="18" fill="none" stroke="#a78bfa" strokeWidth="2" viewBox="0 0 24 24"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg> },
+    { label: "Unpublished MAPs", value: m.unpublished_assignments, sub: "Drafts awaiting review", accent: "#94a3b8", icon: <svg width="18" height="18" fill="none" stroke="#94a3b8" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg> },
+    { label: "Pending Tasks", value: m.pending_assignments, sub: "Awaiting completion", accent: "#fbbf24", icon: <svg width="18" height="18" fill="none" stroke="#fbbf24" strokeWidth="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> },
+    { label: "Completed Tasks", value: m.completed_assignments, sub: "Fully resolved", accent: "#34d399", icon: <svg width="18" height="18" fill="none" stroke="#34d399" strokeWidth="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> },
+    { label: "Critical Priority", value: m.critical_maps, sub: "Immediate action required", accent: "#ef4444", icon: <svg width="18" height="18" fill="none" stroke="#ef4444" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg> },
+    { label: "High Priority", value: m.high_priority_maps, sub: "Significant risk", accent: "#f97316", icon: <svg width="18" height="18" fill="none" stroke="#f97316" strokeWidth="2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg> },
+    { label: "Depts Impacted", value: m.departments_impacted, sub: "Across the institution", accent: "#60a5fa", icon: <svg width="18" height="18" fill="none" stroke="#60a5fa" strokeWidth="2" viewBox="0 0 24 24"><path d="M3 21h18M9 21V7l3-4 3 4v14"/></svg> },
     { label: "Upcoming Deadlines", value: m.upcoming_deadlines, sub: "Within next 30 days", accent: "#fb923c", icon: <svg width="18" height="18" fill="none" stroke="#fb923c" strokeWidth="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> },
   ];
 
@@ -133,14 +199,19 @@ export default function Dashboard() {
               <span>Processing Time: <strong style={{ color: "#10b981" }}>{(session.processing.totalElapsed / 1000).toFixed(1)}s</strong></span>
             </div>
           </div>
-          <button onClick={() => navigate("/pipeline")} style={{ padding: "10px 20px", borderRadius: 8, background: "#8b5cf6", color: "#fff", border: "none", fontSize: 13, fontWeight: 700, cursor: "pointer", boxShadow: "0 4px 14px rgba(139,92,246,0.4)" }}>
-            Return to Analysis →
-          </button>
+          <div style={{ display: "flex", gap: 10 }}>
+            <button onClick={() => resetSession()} style={{ padding: "10px 20px", borderRadius: 8, background: "rgba(239,68,68,0.1)", color: "#ef4444", border: "1px solid rgba(239,68,68,0.2)", fontSize: 13, fontWeight: 700, cursor: "pointer" }}>
+              ✕ Exit Analysis
+            </button>
+            <button onClick={() => navigate("/pipeline")} style={{ padding: "10px 20px", borderRadius: 8, background: "#8b5cf6", color: "#fff", border: "none", fontSize: 13, fontWeight: 700, cursor: "pointer", boxShadow: "0 4px 14px rgba(139,92,246,0.4)" }}>
+              Return to Analysis →
+            </button>
+          </div>
         </div>
       )}
 
       {/* System Status and KPIs */}
-      <div key={isDemo ? "demo" : "norm"} style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 14, marginBottom: 22 }}>
+      <div key={isDemo ? "demo" : "norm"} style={{ display: "grid", gridTemplateColumns: "1fr 3fr", gap: 14, marginBottom: 22 }}>
         {/* System Status Panel */}
         <div className="card animate-fade-up" style={{ padding: 22 }}>
           <div style={{ fontWeight: 700, color: "#f1f5f9", fontSize: 14, marginBottom: 16 }}>System Status</div>
@@ -163,7 +234,7 @@ export default function Dashboard() {
         </div>
 
         {/* KPIs */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 14 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 14 }}>
           {kpis.map((k, i) => <KpiCard key={k.label} {...k} delay={i * 55} />)}
         </div>
       </div>
@@ -179,19 +250,22 @@ export default function Dashboard() {
             </div>
             <span style={{ background: "rgba(239,68,68,0.12)", color: "#f87171", fontSize: 10.5, fontWeight: 700, padding: "3px 9px", borderRadius: 20, border: "1px solid rgba(239,68,68,0.2)" }}>HIGH RISK</span>
           </div>
-          <svg width="100%" height={230} style={{ display: "block", pointerEvents: "none" }}>
-            {m.top_risk_departments.map((d, i) => {
-              const labelW = 138, barH = 20, gap = 26, top = 10;
-              const y = top + i * (barH + gap);
-              const barW = (d.risk_score / 100) * (560 - labelW - 30);
-              return (
-                <g key={d.department}>
-                  <text x={0} y={y + barH / 2 + 4} fontSize={11} fill="#94a3b8">{d.department}</text>
-                  <rect x={labelW} y={y} width={Math.max(barW, 4)} height={barH} rx={5} fill={barColors[i] || "#60a5fa"} opacity={0.85} />
-                  <text x={labelW + barW + 6} y={y + barH / 2 + 4} fontSize={11} fill="#64748b" fontWeight="700">{d.risk_score}</text>
-                </g>
-              );
-            })}
+          <svg width="100%" height={Math.max(230, 20 + m.top_risk_departments.length * 48)} viewBox={`0 0 520 ${Math.max(230, 20 + m.top_risk_departments.length * 48)}`} preserveAspectRatio="xMidYMin meet" style={{ display: "block", pointerEvents: "none" }}>
+            {(() => {
+              const maxRisk = Math.max(1, ...m.top_risk_departments.map(d => d.risk_score));
+              return m.top_risk_departments.map((d, i) => {
+                const barH = 14, gap = 48, top = 20;
+                const y = top + i * gap;
+                const barW = (d.risk_score / maxRisk) * 500;
+                return (
+                  <g key={d.department}>
+                    <text x={0} y={y - 6} fontSize={12.5} fill="#cbd5e1" fontWeight="600">{d.department}</text>
+                    <text x={500} y={y - 6} fontSize={12.5} fill="#f1f5f9" fontWeight="800" textAnchor="end">{d.risk_score}</text>
+                    <rect x={0} y={y} width={Math.max(barW, 4)} height={barH} rx={4} fill={barColors[i % barColors.length] || "#60a5fa"} opacity={0.85} />
+                  </g>
+                );
+              });
+            })()}
           </svg>
         </div>
 
