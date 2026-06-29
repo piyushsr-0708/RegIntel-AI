@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { requirementsTaxonomy } from "../data/demo";
+import FullTextModal from "../components/FullTextModal";
 
 const DOMAINS = [...new Set(requirementsTaxonomy.map(r => r.domain))].sort();
 const QUICK   = ["AML","STR","KYC","Wire Transfer","Sanctions","Due Diligence","Cybersecurity"];
@@ -27,7 +28,7 @@ function highlight(text, query) {
 
 const inp = { background: "#162030", border: "1.5px solid rgba(255,255,255,0.07)", borderRadius: 8, padding: "9px 13px", fontSize: 13, color: "#e2e8f0", transition: "border-color 0.15s, box-shadow 0.15s" };
 
-const RequirementCard = React.memo(({ r, query, m, i }) => {
+const RequirementCard = React.memo(({ r, query, m, i, onViewFullText }) => {
   const [expanded, setExpanded] = useState(false);
   
   return (
@@ -51,7 +52,31 @@ const RequirementCard = React.memo(({ r, query, m, i }) => {
       </div>
       <p style={{ margin: 0, fontSize: 13.5, color: "#94a3b8", lineHeight: 1.75 }}>{highlight(r.text, query)}</p>
       
-      <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 12 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", marginTop: 12 }}>
+        <button 
+          onClick={() => onViewFullText(r)} 
+          style={{ 
+            background: "rgba(96,165,250,0.1)", 
+            border: "1px solid rgba(96,165,250,0.3)", 
+            color: "#60a5fa", 
+            fontSize: 11, 
+            fontWeight: 700, 
+            padding: "5px 12px", 
+            borderRadius: 6, 
+            cursor: "pointer", 
+            transition: "all 0.2s" 
+          }} 
+          onMouseEnter={e => {
+            e.currentTarget.style.background = "rgba(96,165,250,0.15)";
+            e.currentTarget.style.borderColor = "#60a5fa";
+          }} 
+          onMouseLeave={e => {
+            e.currentTarget.style.background = "rgba(96,165,250,0.1)";
+            e.currentTarget.style.borderColor = "rgba(96,165,250,0.3)";
+          }}
+        >
+          View Full Text →
+        </button>
         <button onClick={() => setExpanded(!expanded)} style={{ background: "transparent", border: "1px solid rgba(255,255,255,0.1)", color: "#94a3b8", fontSize: 11, fontWeight: 700, padding: "5px 12px", borderRadius: 6, cursor: "pointer", transition: "all 0.2s" }} onMouseEnter={e => e.currentTarget.style.color="#f1f5f9"} onMouseLeave={e => e.currentTarget.style.color="#94a3b8"}>
           {expanded ? "Hide Traceability ↑" : "Trace Lifecycle ↓"}
         </button>
@@ -87,7 +112,19 @@ export default function Requirements() {
   const [query, setQuery]   = useState("");
   const [domain, setDomain] = useState("");
   const [page, setPage]     = useState(1);
+  const [selectedRequirement, setSelectedRequirement] = useState(null);
+  const [showFullText, setShowFullText] = useState(false);
   const itemsPerPage = 50;
+
+  const handleViewFullText = (requirement) => {
+    setSelectedRequirement(requirement);
+    setShowFullText(true);
+  };
+
+  const closeFullText = () => {
+    setShowFullText(false);
+    setSelectedRequirement(null);
+  };
 
   const results = useMemo(() => {
     const q = query.toLowerCase();
@@ -167,7 +204,7 @@ export default function Requirements() {
       </div>
 
       {results.slice((page - 1) * itemsPerPage, page * itemsPerPage).map((r, i) => (
-        <RequirementCard key={r.req_id} r={r} query={query} m={dm(r.domain)} i={i} />
+        <RequirementCard key={r.req_id} r={r} query={query} m={dm(r.domain)} i={i} onViewFullText={handleViewFullText} />
       ))}
 
       {results.length > 0 && (
@@ -188,6 +225,14 @@ export default function Requirements() {
           <button onClick={() => { setQuery(""); setDomain(""); setPage(1); }} style={{ marginTop: 18, padding: "10px 24px", background: "#10b981", color: "#fff", border: "none", borderRadius: 8, fontWeight: 700 }}>Clear Search</button>
         </div>
       )}
+
+      {/* Full Text Modal */}
+      <FullTextModal
+        isOpen={showFullText}
+        onClose={closeFullText}
+        data={selectedRequirement}
+        type="requirement"
+      />
     </div>
   );
 }

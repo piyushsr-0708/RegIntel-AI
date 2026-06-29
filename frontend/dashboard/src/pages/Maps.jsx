@@ -12,12 +12,16 @@ const MapRow = memo(({ m, navigate, isNew }) => (
       <span style={{ fontFamily: "monospace", fontSize: 11.5, fontWeight: 700, color: "#34d399", background: "rgba(52,211,153,0.1)", padding: "3px 7px", borderRadius: 5 }}>{m.map_id}</span>
       {isNew && <span style={{ marginLeft: 6, fontSize: 9, background: "#8b5cf6", color: "#fff", padding: "2px 5px", borderRadius: 4, fontWeight: 800 }}>NEW</span>}
     </td>
-    <td style={{ maxWidth: 290, color: "#d1d5db", fontWeight: 500, lineHeight: 1.4 }}>{m.title}</td>
+    <td>
+      <span style={{ fontFamily: "monospace", fontSize: 10, fontWeight: 600, color: "#60a5fa", background: "rgba(96,165,250,0.1)", padding: "2px 6px", borderRadius: 4 }}>{m.requirement_id || m.req_id}</span>
+    </td>
+    <td style={{ maxWidth: 290, color: "#d1d5db", fontWeight: 500, lineHeight: 1.4 }}>
+      {m.requirement_text ? (m.requirement_text.length > 100 ? m.requirement_text.substring(0, 100) + '...' : m.requirement_text) : (m.title || '')}
+    </td>
     <td><span style={{ fontSize: 11.5, color: "#94a3b8", background: "#162030", padding: "3px 9px", borderRadius: 6, border: "1px solid rgba(255,255,255,0.06)" }}>{m.department}</span></td>
     <td><PriorityBadge priority={m.priority} /></td>
-    <td><ImpactScore score={m.impact_score} /></td>
-    <td style={{ fontSize: 12, color: m.deadline < new Date().toISOString().split("T")[0] ? "#f87171" : "#64748b", fontWeight: m.deadline < new Date().toISOString().split("T")[0] ? 700 : 400 }}>{m.deadline}</td>
     <td><StatusBadge status={m.status} /></td>
+    <td><span style={{ fontSize: 11, color: "#94a3b8", background: "#162030", padding: "3px 8px", borderRadius: 5 }}>{m.classification || 'N/A'}</span></td>
     <td style={{ color: "#334155", fontSize: 18, paddingRight: 8 }}>›</td>
   </tr>
 ));
@@ -54,7 +58,11 @@ export default function Maps() {
   const filtered = useMemo(() => {
     const q = search.toLowerCase();
     let data = mapsOutput.filter((m) =>
-      (!q || m.map_id.toLowerCase().includes(q) || m.title.toLowerCase().includes(q) || m.department.toLowerCase().includes(q)) &&
+      (!q || (m.map_id && m.map_id.toLowerCase().includes(q)) || 
+             (m.title && m.title.toLowerCase().includes(q)) || 
+             (m.requirement_text && m.requirement_text.toLowerCase().includes(q)) ||
+             (m.requirement_id && m.requirement_id.toLowerCase().includes(q)) ||
+             (m.department && m.department.toLowerCase().includes(q))) &&
       (!dept     || m.department === dept) &&
       (!priority || m.priority   === priority) &&
       (!status   || m.status     === status)
@@ -98,7 +106,7 @@ export default function Maps() {
             </button>
           )}
           {[["Critical", mapsOutput.filter(m=>m.priority==="Critical").length, "#f87171","rgba(239,68,68,0.12)"],
-            ["Overdue",  mapsOutput.filter(m=>m.status==="Overdue").length,    "#fbbf24","rgba(251,191,36,0.1)"]].map(([lbl,val,c,bg]) => (
+            ["Pending",  mapsOutput.filter(m=>m.status==="pending").length,    "#fbbf24","rgba(251,191,36,0.1)"]].map(([lbl,val,c,bg]) => (
             <div key={lbl} style={{ background: bg, border: `1px solid ${c}25`, borderRadius: 9, padding: "9px 16px", textAlign: "center" }}>
               <div style={{ fontSize: 22, fontWeight: 900, color: c, lineHeight: 1 }}>{val}</div>
               <div style={{ fontSize: 10.5, color: "#64748b", marginTop: 2, fontWeight: 600 }}>{lbl}</div>
@@ -131,10 +139,10 @@ export default function Maps() {
         ))}
         <div style={{ width: 1, height: 26, background: "rgba(255,255,255,0.06)" }} />
         <select value={sortBy} onChange={e => { setSortBy(e.target.value); setPage(1); }} style={{ ...inp, minWidth: 148 }}>
-          <option value="impact_score">↓ Impact Score</option>
           <option value="priority">↓ Priority</option>
           <option value="department">↓ Department</option>
-          <option value="deadline">↓ Deadline</option>
+          <option value="status">↓ Status</option>
+          <option value="classification">↓ Classification</option>
         </select>
         {(search || dept || priority || status) && (
           <button onClick={() => { setSearch(""); setDept(""); setPri(""); setStatus(""); setPage(1); }}
@@ -149,7 +157,7 @@ export default function Maps() {
         <table className="data-table">
           <thead>
             <tr>
-              {[["MAP ID","map_id"],["Task Title","title"],["Department","department"],["Priority","priority"],["Impact","impact_score"],["Deadline","deadline"],["Status","status"],["",""]].map(([lbl,col]) => (
+              {[["MAP ID","map_id"],["Req ID","requirement_id"],["Requirement Summary","requirement_text"],["Department","department"],["Priority","priority"],["Status","status"],["Classification","classification"],["",""]].map(([lbl,col]) => (
                 <th key={col} onClick={() => col && toggleSort(col)}>
                   {lbl}{col && lbl && <SortIcon col={col} />}
                 </th>

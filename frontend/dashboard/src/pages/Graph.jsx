@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import cytoscape from "cytoscape";
 import { useLocation } from "react-router-dom";
-import { graphData as globalGraphData } from "../data/demo";
+import { graphData as globalGraphData, mapDetails } from "../data/demo";
 import { useAnalysisSession } from "../context/AnalysisSession";
+import { useAuth } from "../context/AuthContext";
 import Breadcrumbs from "../components/Breadcrumbs";
+import FullTextModal from "../components/FullTextModal";
 
 const NM = {
   circular:    { bg: "#1d4ed8", border: "#60a5fa", glow: "rgba(96,165,250,0.55)",  shape: "round-rectangle", label: "RBI Circular",  emoji: "📜" },
@@ -20,6 +22,10 @@ export default function Graph() {
   const isDocumentScoped = pathname.includes('/pipeline/analysis');
   const { session, hasSession } = useAnalysisSession();
   const [viewMode, setViewMode] = useState(isDocumentScoped && hasSession ? "active" : "global");
+  const { api } = useAuth();
+  const [selectedNodeData, setSelectedNodeData] = useState(null);
+  const [showFullText, setShowFullText] = useState(false);
+  const [loadingFullText, setLoadingFullText] = useState(false);
   
   const graphData = viewMode === "active" && hasSession ? session.analysis.scopedGraph : globalGraphData;
 
@@ -29,7 +35,106 @@ export default function Graph() {
     map:         graphData.nodes.filter(n => n.data.type === "map").length,
   };
 
+  const handleViewNodeFullText = async () => {
+    if (!sel || !sel.id) {
+      alert('Please select a node first');
+      return;
+    }
+    
+    setLoadingFullText(true);
+    
+    try {
+      if (sel.type === "requirement") {
+        // Always fetch from backend - no session dependency
+        console.log('[GRAPH] Fetching requirement:', sel.id);
+        const response = await api.get(`/admin/requirements/by-semantic-id/${sel.id}`);
+        
+        if (response.data) {
+          console.log('[GRAPH] Requirement fetched successfully:', response.data);
+          
+          // Fetch assignments for this requirement to show departments
+          let departments = [];
+          try {
+            const assignmentsResponse = await api.get(`/admin/assignments`);
+            const relatedAssignments = assignmentsResponse.data.filter(
+              a => a.requirement?.requirement_id === sel.id
+            );
+            departments = relatedAssignments.map(a => ({
+              name: a.department_name,
+              status: a.status
+            }));
+            console.log('[GRAPH] Related departments:', departments);
+          } catch (err) {
+            console.warn('[GRAPH] Could not fetch assignments:', err);
+          }
+          
+          // Transform database response to complete format
+          setSelectedNodeData({
+            requirement_id: response.data.requirement_id,
+            req_id: response.data.requirement_id, // Backward compatibility
+            text: response.data.text,
+            domain: response.data.domain,
+            priority: response.data.priority,
+            classification: response.data.classification,
+            source_reference: response.data.source_reference,
+            source_document: response.data.source_reference,
+            departments: departments,
+            document_id: response.data.document_id
+          });
+          setShowFullText(true);
+        }
+      } else if (sel.type === "map") {
+        // Extract assignment ID from MAP node ID (format: MAP_123)
+        const assignmentId = parseInt(sel.id.replace('MAP_', ''));
+        console.log('[GRAPH] Fetching assignment:', assignmentId);
+        
+        // Fetch assignment from backend
+        const response = await api.get(`/admin/assignments/${assignmentId}`);
+        
+        if (response.data) {
+          console.log('[GRAPH] Assignment fetched successfully:', response.data);
+          
+          // Transform to expected format
+          setSelectedNodeData({
+            id: response.data.id,
+            department_name: response.data.department_name,
+            status: response.data.status,
+            remarks: response.data.remarks,
+            priority: response.data.requirement?.priority,
+            requirement: {
+              requirement_id: response.data.requirement?.requirement_id,
+              text: response.data.requirement?.text,
+              priority: response.data.requirement?.priority,
+              classification: response.data.requirement?.classification,
+              domain: response.data.requirement?.domain,
+              source_reference: response.data.requirement?.source_reference
+            }
+          });
+          setShowFullText(true);
+        }
+      }
+    } catch (error) {
+      console.error('[GRAPH] Failed to load node details:', error);
+      console.error('[GRAPH] Error details:', error.response?.data);
+      
+      if (error.response?.status === 404) {
+        alert('Data not found in database. This may be a demo node or the data has been deleted.');
+      } else {
+        alert('Failed to load details. Check console for error details.');
+      }
+    } finally {
+      setLoadingFullText(false);
+    }
+  };
+
   useEffect(() => {
+    // Cleanup previous instance if exists
+    if (cyRef.current) {
+      cyRef.current.destroy();
+      cyRef.current = null;
+    }
+    
+    // Initialize cytoscape with current graph data
     cyRef.current = cytoscape({
       container: contRef.current,
       elements: [...graphData.nodes, ...graphData.edges],
@@ -58,6 +163,7 @@ export default function Graph() {
         }},
         { selector: "edge[label='generates']", style: { "line-color": "rgba(251,191,36,0.65)", "target-arrow-color": "rgba(251,191,36,0.65)", width: 2 }},
         { selector: "edge[label='defines']",   style: { "line-color": "rgba(96,165,250,0.65)", "target-arrow-color": "rgba(96,165,250,0.65)", width: 2 }},
+        { selector: "edge[label='assigned_to']", style: { "line-color": "rgba(167,139,250,0.65)", "target-arrow-color": "rgba(167,139,250,0.65)", width: 1.5 }},
         { selector: ".faded", style: { opacity: 0.15, "text-opacity": 0 } },
       ],
       layout: { name: "cose", idealEdgeLength: 160, nodeOverlap: 30, animate: true, animationDuration: 700, randomize: false, padding: 60, gravity: 0.15 },
@@ -65,7 +171,11 @@ export default function Graph() {
     });
 
     cyRef.current.ready(() => {
-      setTimeout(() => cyRef.current?.fit(undefined, 40), 800);
+      setTimeout(() => {
+        if (cyRef.current) {
+          cyRef.current.fit(undefined, 40);
+        }
+      }, 800);
     });
 
     cyRef.current.on("tap", "node", evt => {
@@ -73,19 +183,40 @@ export default function Graph() {
       const edges = n.connectedEdges();
       const connected = n.closedNeighborhood();
       
-      cyRef.current.elements().removeClass("faded");
-      cyRef.current.elements().not(connected).addClass("faded");
+      if (cyRef.current) {
+        cyRef.current.elements().removeClass("faded");
+        cyRef.current.elements().not(connected).addClass("faded");
+      }
 
-      setSel({ id: n.id(), label: n.data("label"), type: n.data("type"), connections: edges.connectedNodes().not(n).length, edges: edges.map(e => ({ label: e.data("label"), source: e.data("source"), target: e.data("target") })) });
+      setSel({ 
+        id: n.id(), 
+        label: n.data("label"), 
+        type: n.data("type"), 
+        connections: edges.connectedNodes().not(n).length, 
+        edges: edges.map(e => ({ 
+          label: e.data("label"), 
+          source: e.data("source"), 
+          target: e.data("target") 
+        })) 
+      });
     });
+    
     cyRef.current.on("tap", evt => { 
       if (evt.target === cyRef.current) {
-        cyRef.current.elements().removeClass("faded");
+        if (cyRef.current) {
+          cyRef.current.elements().removeClass("faded");
+        }
         setSel(null); 
       }
     });
-    return () => cyRef.current?.destroy();
-  }, []);
+    
+    return () => {
+      if (cyRef.current) {
+        cyRef.current.destroy();
+        cyRef.current = null;
+      }
+    };
+  }, [graphData]); // Re-initialize when graphData changes
 
   return (
     <div>
@@ -207,7 +338,7 @@ export default function Graph() {
               </div>
               
               {/* AI Explainability */}
-              <div style={{ padding: "12px 14px", background: "rgba(96,165,250,0.06)", border: "1px solid rgba(96,165,250,0.15)", borderRadius: 8 }}>
+              <div style={{ padding: "12px 14px", background: "rgba(96,165,250,0.06)", border: "1px solid rgba(96,165,250,0.15)", borderRadius: 8, marginBottom: 12 }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 10, color: "#60a5fa", fontWeight: 800, marginBottom: 6, letterSpacing: 0.5 }}>
                   <svg width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path d="M12 2v20m-7-7h14m-10-6h6"/></svg>
                   AI GRAPH EXPLANATION
@@ -216,6 +347,38 @@ export default function Graph() {
                   This <strong>{sel.type}</strong> node represents an extracted compliance entity. RegIntel AI deterministically linked it to <strong>{sel.connections}</strong> other entities based on semantic references discovered during the initial text processing pipeline. Highlighting this cluster isolates the localized regulatory impact graph.
                 </div>
               </div>
+
+              {/* View Full Text Button */}
+              {(sel.type === "requirement" || sel.type === "map") && (
+                <button
+                  onClick={handleViewNodeFullText}
+                  disabled={loadingFullText}
+                  style={{
+                    width: "100%",
+                    padding: "10px 16px",
+                    background: loadingFullText ? "#334155" : "linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%)",
+                    color: "#fff",
+                    border: "none",
+                    borderRadius: 8,
+                    fontSize: 12,
+                    fontWeight: 700,
+                    cursor: loadingFullText ? "not-allowed" : "pointer",
+                    transition: "all 0.2s",
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!loadingFullText) {
+                      e.currentTarget.style.transform = "translateY(-2px)";
+                      e.currentTarget.style.boxShadow = "0 4px 12px rgba(59,130,246,0.4)";
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = "translateY(0)";
+                    e.currentTarget.style.boxShadow = "none";
+                  }}
+                >
+                  {loadingFullText ? "Loading..." : "View Full Text →"}
+                </button>
+              )}
             </div>
           ) : (
             <div className="card" style={{ padding: 18 }}>
@@ -234,6 +397,17 @@ export default function Graph() {
           )}
         </div>
       </div>
+
+      {/* Full Text Modal */}
+      <FullTextModal
+        isOpen={showFullText}
+        onClose={() => {
+          setShowFullText(false);
+          setSelectedNodeData(null);
+        }}
+        data={selectedNodeData}
+        type={selectedNodeData?.requirement ? "assignment" : "requirement"}
+      />
     </div>
   );
 }

@@ -39,7 +39,7 @@ function AnalysisResults({ session }) {
   const topMaps = useMemo(() =>
     [...a.maps].sort((x, y) => {
       const po = { Critical: 0, High: 1, Medium: 2, Low: 3 };
-      return (po[x.priority] ?? 4) - (po[y.priority] ?? 4) || y.impact_score - x.impact_score;
+      return (po[x.priority] ?? 4) - (po[y.priority] ?? 4);
     }).slice(0, 8),
   [a.maps]);
 
@@ -155,12 +155,18 @@ function AnalysisResults({ session }) {
               onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(16,185,129,0.2)"; e.currentTarget.style.transform = "translateX(4px)"; }}
               onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.05)"; e.currentTarget.style.transform = "translateX(0)"; }}
             >
+              <span style={{ fontFamily: "monospace", fontSize: 10, fontWeight: 700, color: "#64748b", minWidth: 70 }}>{mp.map_id}</span>
               <span style={badge(`${priorityColors[mp.priority]}18`, priorityColors[mp.priority], `${priorityColors[mp.priority]}40`)}>{mp.priority}</span>
               <div style={{ flex: 1, overflow: "hidden" }}>
-                <div style={{ fontSize: 13, fontWeight: 600, color: "#e2e8f0", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{mp.title}</div>
+                <div style={{ fontSize: 13, fontWeight: 600, color: "#e2e8f0", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                  {mp.requirement_text && mp.requirement_text.length > 100 
+                    ? mp.requirement_text.substring(0, 100) + '...' 
+                    : mp.requirement_text}
+                </div>
+                <div style={{ fontSize: 11, color: "#64748b", marginTop: 2 }}>{mp.requirement_id}</div>
               </div>
-              <span style={{ fontSize: 11, color: "#64748b", whiteSpace: "nowrap" }}>{mp.department}</span>
-              <span style={{ fontSize: 12, fontWeight: 800, color: "#f1f5f9", fontFamily: "monospace" }}>{mp.impact_score}</span>
+              <span style={{ fontSize: 11, color: "#94a3b8", whiteSpace: "nowrap", minWidth: 100 }}>{mp.department}</span>
+              <span style={{ fontSize: 10, fontWeight: 700, color: mp.status === 'completed' ? '#34d399' : mp.status === 'in_progress' ? '#60a5fa' : '#94a3b8', textTransform: "uppercase" }}>{mp.status}</span>
               <span style={{ color: "#334155", fontSize: 16 }}>›</span>
             </div>
           ))}
@@ -290,6 +296,7 @@ export default function Pipeline() {
   const [showResults, setShowResults] = useState(false);
   const [uploadedDocumentId, setUploadedDocumentId] = useState(null);
   const [error, setError] = useState(null);
+  const [backendResponse, setBackendResponse] = useState(null);
 
   const fileInputRef = useRef(null);
   const timerRef = useRef(null);
@@ -305,12 +312,37 @@ export default function Pipeline() {
 
   // When pipeline completes, create session and show results
   useEffect(() => {
-    if (pipelineComplete && processing && !showResults && file) {
-      createSession(file, elapsedTimes, totalElapsed);
-      const t = setTimeout(() => setShowResults(true), 800);
+    if (pipelineComplete && processing && !showResults && file && uploadedDocumentId) {
+      console.log('[PIPELINE] ========== PIPELINE COMPLETE ==========');
+      console.log('[PIPELINE] Dependencies check:', {
+        pipelineComplete,
+        processing,
+        showResults,
+        hasFile: !!file,
+        uploadedDocumentId,
+        hasApi: !!api
+      });
+      console.log('[PIPELINE] Calling createSession with:', {
+        fileName: file?.name,
+        documentId: uploadedDocumentId,
+        apiDefined: !!api
+      });
+      
+      // DIAGNOSTIC: createSession is async but not awaited - this may be the bug!
+      const sessionPromise = createSession(file, uploadedDocumentId, api, elapsedTimes, totalElapsed);
+      
+      console.log('[PIPELINE] createSession returned:', sessionPromise);
+      console.log('[PIPELINE] Is it a Promise?', sessionPromise instanceof Promise);
+      
+      // Navigation happens after 800ms regardless of whether createSession completed
+      const t = setTimeout(() => {
+        console.log('[PIPELINE] Timeout fired - setting showResults to true');
+        console.log('[PIPELINE] WARNING: Session may not be created yet!');
+        setShowResults(true);
+      }, 800);
       return () => clearTimeout(t);
     }
-  }, [pipelineComplete, processing, showResults, file]);
+  }, [pipelineComplete, processing, showResults, file, uploadedDocumentId, api, createSession, elapsedTimes, totalElapsed]);
 
   const onDragOver = (e) => { e.preventDefault(); setIsDragging(true); };
   const onDragLeave = () => setIsDragging(false);
@@ -327,6 +359,7 @@ export default function Pipeline() {
   };
 
   const startNewAnalysis = () => {
+    console.log('[PIPELINE] Starting new analysis - clearing previous session');
     resetSession();
     setFile(null);
     setProcessing(false);
@@ -336,6 +369,7 @@ export default function Pipeline() {
     setShowResults(false);
     setUploadedDocumentId(null);
     setError(null);
+    setBackendResponse(null);
   };
 
   const startPipeline = async () => {
@@ -386,6 +420,9 @@ export default function Pipeline() {
           console.log('[PIPELINE] Processing complete:', processResponse.data);
           console.log('[PIPELINE] Requirements created:', processResponse.data.requirements_created);
           console.log('[PIPELINE] Assignments created:', processResponse.data.assignments_created);
+          
+          // Store backend response for session creation
+          setBackendResponse(processResponse.data);
           
           // Pipeline complete - show success
           console.log('[PIPELINE] Pipeline successfully completed');
@@ -534,11 +571,21 @@ export default function Pipeline() {
               let bg = "rgba(255,255,255,0.03)";
               if (isPast) bg = "rgba(16,185,129,0.08)";
               else if (isCurrent) bg = "rgba(56,189,248,0.08)";
-              const outputs = [
-                "1 Document Loaded", "314 pages extracted", "320 requirements found",
-                "134 Mandatory / 74 Conditional", "15 semantic links detected",
-                "32 nodes / 44 edges constructed", "7 business units mapped",
-                "320 Action Plans created", "Executive Report generated"
+              const outputs = backendResponse ? [
+                "1 Document Loaded",
+                `${backendResponse.requirements_created || 0} requirements found`,
+                `${backendResponse.assignments_created || 0} Assignments created`,
+                "Requirements classified",
+                "Cross-references analyzed",
+                "Knowledge graph constructed",
+                "Departments mapped",
+                `${backendResponse.assignments_created || 0} Assignments created`,
+                "Analysis complete"
+              ] : [
+                "1 Document Loaded", "Processing document...", "Extracting requirements...",
+                "Classifying requirements...", "Analyzing cross-references...",
+                "Constructing knowledge graph...", "Mapping departments...",
+                "Creating assignments...", "Generating report..."
               ];
               const t = elapsedTimes[idx] != null ? `${(elapsedTimes[idx] / 1000).toFixed(1)}s` : (isCurrent ? `${((elapsedTimes[idx] || 0) / 1000).toFixed(1)}s` : "--");
               return (

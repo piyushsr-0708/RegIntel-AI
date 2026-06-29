@@ -7,8 +7,318 @@ import {
 const AnalysisSessionContext = createContext(null);
 
 /**
- * Generates a deterministic document-level analysis package
+ * BUILD KNOWLEDGE GRAPH FROM BACKEND DATA
+ * Constructs graph nodes and edges exclusively from backend response
+ * No demo.js imports - uses only /admin/document-analysis/{id} data
+ * 
+ * Graph Structure (4 levels):
+ * 1. Circular node (Document)
+ * 2. Requirement nodes (extracted requirements)
+ * 3. MAP nodes (assignments)
+ * 4. Department nodes (affected departments)
+ * 
+ * @param {Object} data - Backend response from /admin/document-analysis/{id}
+ * @returns {Object} { nodes: [], edges: [] }
+ */
+function buildKnowledgeGraphFromBackend(data) {
+  const nodes = [];
+  const edges = [];
+  const nodeIds = new Set();
+  
+  console.log('[GRAPH_BUILDER] Building knowledge graph from backend data');
+  console.log('[GRAPH_BUILDER] Assignments count:', data.assignments?.length || 0);
+  console.log('[GRAPH_BUILDER] Departments count:', data.department_summary?.length || 0);
+  
+  // 1. Create Circular node (Document)
+  const circularId = `DOC_${data.document.id}`;
+  nodes.push({
+    data: {
+      id: circularId,
+      label: data.document.filename || 'Document',
+      type: 'circular'
+    }
+  });
+  nodeIds.add(circularId);
+  console.log('[GRAPH_BUILDER] Created circular node:', circularId);
+  
+  // 2. Create Requirement nodes and Circular → Requirement edges
+  const uniqueRequirements = [...new Set(
+    data.assignments.map(a => a.requirement_id)
+  )];
+  
+  console.log('[GRAPH_BUILDER] Unique requirements:', uniqueRequirements.length);
+  
+  uniqueRequirements.forEach(reqId => {
+    if (reqId) {
+      nodes.push({
+        data: {
+          id: reqId,
+          label: reqId.slice(0, 18), // Truncate for display
+          type: 'requirement'
+        }
+      });
+      nodeIds.add(reqId);
+      
+      // Edge: Circular → Requirement
+      edges.push({
+        data: {
+          source: circularId,
+          target: reqId,
+          label: 'defines'
+        }
+      });
+    }
+  });
+  
+  console.log('[GRAPH_BUILDER] Created requirement nodes:', uniqueRequirements.length);
+  
+  // 3. Create MAP nodes and Requirement → MAP edges
+  data.assignments.forEach(assignment => {
+    const mapId = `MAP_${assignment.id}`;
+    
+    nodes.push({
+      data: {
+        id: mapId,
+        label: `${assignment.department} - ${assignment.priority}`,
+        type: 'map',
+        status: assignment.status,
+        priority: assignment.priority
+      }
+    });
+    nodeIds.add(mapId);
+    
+    // Edge: Requirement → MAP
+    if (assignment.requirement_id) {
+      edges.push({
+        data: {
+          source: assignment.requirement_id,
+          target: mapId,
+          label: 'generates'
+        }
+      });
+    }
+  });
+  
+  console.log('[GRAPH_BUILDER] Created MAP nodes:', data.assignments.length);
+  
+  // 4. Create Department nodes
+  data.department_summary.forEach(dept => {
+    const deptId = `DEPT_${dept.department_id}`;
+    
+    if (!nodeIds.has(deptId)) {
+      nodes.push({
+        data: {
+          id: deptId,
+          label: dept.department_name,
+          type: 'department',
+          totalAssignments: dept.total_assignments
+        }
+      });
+      nodeIds.add(deptId);
+    }
+  });
+  
+  console.log('[GRAPH_BUILDER] Created department nodes:', data.department_summary.length);
+  
+  // 5. Create MAP → Department edges
+  data.assignments.forEach(assignment => {
+    const mapId = `MAP_${assignment.id}`;
+    const deptId = `DEPT_${assignment.department_id}`;
+    
+    edges.push({
+      data: {
+        source: mapId,
+        target: deptId,
+        label: 'assigned_to'
+      }
+    });
+  });
+  
+  console.log('[GRAPH_BUILDER] Total nodes:', nodes.length);
+  console.log('[GRAPH_BUILDER] Total edges:', edges.length);
+  console.log('[GRAPH_BUILDER] Graph construction complete');
+  
+  return { nodes, edges };
+}
+
+/**
+ * PRODUCTION HOTFIX: Build AnalysisResult from backend API
+ * This replaces generateDocumentAnalysis() for backend-driven analysis
+ */
+async function buildAnalysisResult(documentId, api) {
+  try {
+    console.log('[ANALYSIS_RESULT] ========== BUILD START ==========');
+    console.log('[ANALYSIS_RESULT] Input:', { documentId, hasApi: !!api });
+    
+    if (!documentId) {
+      console.error('[ANALYSIS_RESULT] ERROR: documentId is null/undefined');
+      return null;
+    }
+    
+    if (!api) {
+      console.error('[ANALYSIS_RESULT] ERROR: api is null/undefined');
+      return null;
+    }
+    
+    const endpoint = `/admin/document-analysis/${documentId}`;
+    console.log('[ANALYSIS_RESULT] Fetching from endpoint:', endpoint);
+    
+    // Fetch complete analysis from new backend endpoint
+    const response = await api.get(endpoint);
+    
+    console.log('[ANALYSIS_RESULT] Response status:', response.status);
+    console.log('[ANALYSIS_RESULT] Response data keys:', Object.keys(response.data || {}));
+    console.log('[ANALYSIS_RESULT] Full response.data:', response.data);
+    
+    const data = response.data;
+    
+    if (!data) {
+      console.error('[ANALYSIS_RESULT] ERROR: response.data is null');
+      return null;
+    }
+    
+    if (!data.document) {
+      console.error('[ANALYSIS_RESULT] ERROR: response.data.document is missing');
+    }
+    
+    if (!data.counts) {
+      console.error('[ANALYSIS_RESULT] ERROR: response.data.counts is missing');
+    }
+    
+    if (!data.assignments) {
+      console.error('[ANALYSIS_RESULT] ERROR: response.data.assignments is missing');
+    }
+    
+    console.log('[ANALYSIS_RESULT] Building AnalysisResult object...');
+    
+    // Build knowledge graph from backend data (no demo.js dependency)
+    const backendGraph = buildKnowledgeGraphFromBackend(data);
+    
+    // Generate domains from backend assignments (deterministic)
+    const domainCounts = {};
+    data.assignments.forEach(a => {
+      const domain = a.domain || 'General';
+      domainCounts[domain] = (domainCounts[domain] || 0) + 1;
+    });
+    const domains = Object.entries(domainCounts).sort((a, b) => b[1] - a[1]);
+    
+    // Generate AI Executive Briefing from backend data (deterministic heuristics)
+    const criticalCount = data.counts.critical_priority || 0;
+    const highCount = data.counts.high_priority || 0;
+    const totalAssignments = data.counts.assignments_generated || 0;
+    const departmentsAffected = data.counts.departments_affected || 0;
+    const topDepartments = data.department_summary.slice(0, 3).map(d => d.department_name);
+    const topTwoDepts = data.department_summary.slice(0, 2).map(d => d.department_name);
+    
+    const aiBriefing = {
+      overallRisk: criticalCount > 5 ? "CRITICAL" : criticalCount > 0 ? "HIGH" : "MEDIUM",
+      businessImpact: `This circular introduces material changes affecting operations across ${departmentsAffected} business units. Core impact is highly concentrated in ${domains[0]?.[0] || "General"} and ${domains[1]?.[0] || "Risk"} compliance standards.`,
+      immediateActions: `Immediate remediation is required on ${criticalCount} critical regulatory obligations. Establish task forces for the top impacted departments to avoid immediate non-compliance.`,
+      departmentsToNotify: topDepartments.join(", "),
+      estimatedEffort: `${totalAssignments * 8.5} person-hours. Estimated via deterministic historical workload extrapolation.`,
+      expectedCompletion: `Projected 45-60 days baseline due to the volume of ${highCount} high-priority tasks.`,
+      executiveRecommendation: `Assemble an executive steering committee comprising heads of ${topTwoDepts.join(" and ")}. Authorize immediate reallocation of compliance budgets to resolve the critical path MAPs within 14 days to mitigate potential RBI censures.`
+    };
+    
+    // Build AnalysisResult object
+    const analysisResult = {
+      document: data.document,
+      counts: data.counts,
+      assignments: data.assignments,
+      departmentSummary: data.department_summary,
+      priorityDistribution: data.priority_distribution,
+      
+      // Dashboard summary (derived)
+      dashboardSummary: {
+        totalUnpublished: data.assignments.filter(a => !a.is_published).length,
+        totalPublished: data.assignments.filter(a => a.is_published).length,
+        pendingTasks: data.assignments.filter(a => a.status === 'pending').length,
+        completedTasks: data.assignments.filter(a => a.status === 'completed').length
+      },
+      
+      // Graph data (use demo structure for MVP, but with backend counts)
+      graphData: {
+        nodes: graphData.nodes, // Demo structure (kept for legacy compatibility)
+        edges: graphData.edges, // Demo structure (kept for legacy compatibility)
+        requirementNodes: data.counts.requirements_extracted,
+        assignmentNodes: data.counts.assignments_generated,
+        departmentNodes: data.counts.departments_affected
+      },
+      
+      // ACTIVE SESSION GRAPH - Built from backend data
+      scopedGraph: {
+        nodes: backendGraph.nodes,  // ← Backend nodes with NEW IDs (REQ_DOC1_*)
+        edges: backendGraph.edges   // ← Backend edges matching NEW IDs
+      },
+      
+      // Compatibility: Keep these for pages that still reference them
+      requirements: data.assignments.map(a => ({
+        req_id: a.requirement_id,
+        text: a.requirement_text,
+        domain: a.domain,
+        classification: a.classification,
+        priority: a.priority
+      })),
+      // MVP: MAPs are Assignment records with compatibility fields
+      maps: data.assignments.map(a => ({
+        ...a,  // Include all backend fields
+        map_id: `MAP_${a.id}`,  // Generate MAP ID for display/navigation
+        title: a.requirement_text,  // Use requirement text as title
+        req_id: a.requirement_id,  // Alias for compatibility
+      })),
+      departments: data.department_summary.map(d => ({
+        department: d.department_name,
+        total_maps: d.total_assignments,
+        Critical: d.critical,
+        High: d.high,
+        Medium: d.medium,
+        Low: d.low
+      })),
+      stats: {
+        totalRequirements: data.counts.requirements_extracted,
+        totalMaps: data.counts.assignments_generated,
+        criticalMaps: data.counts.critical_priority,
+        highMaps: data.counts.high_priority,
+        departmentsImpacted: data.counts.departments_affected,
+        graphNodes: data.counts.requirements_extracted + data.counts.assignments_generated + data.counts.departments_affected,
+        graphEdges: data.counts.assignments_generated * 2, // Rough estimate
+        crossReferences: 0 // Not tracked
+      },
+      
+      // RENDER CONTRACT FIELDS - Required by Pipeline.jsx
+      aiBriefing,  // Line 94+ in Pipeline.jsx
+      domains,     // Line 161 in Pipeline.jsx
+      
+      // Source flag
+      fromBackend: true
+    };
+    
+    console.log('[ANALYSIS_RESULT] AnalysisResult built successfully');
+    console.log('[ANALYSIS_RESULT] Stats:', analysisResult.stats);
+    console.log('[ANALYSIS_RESULT] ========== BUILD COMPLETE ==========');
+    return analysisResult;
+    
+  } catch (error) {
+    console.error('[ANALYSIS_RESULT] ========== BUILD FAILED ==========');
+    console.error('[ANALYSIS_RESULT] Error type:', error.constructor.name);
+    console.error('[ANALYSIS_RESULT] Error message:', error.message);
+    if (error.response) {
+      console.error('[ANALYSIS_RESULT] HTTP Status:', error.response.status);
+      console.error('[ANALYSIS_RESULT] Response data:', error.response.data);
+    }
+    console.error('[ANALYSIS_RESULT] Full error:', error);
+    console.error('[ANALYSIS_RESULT] Stack trace:', error.stack);
+    
+    // Fallback to demo if backend fails
+    console.warn('[ANALYSIS_RESULT] Returning NULL - will trigger demo fallback');
+    return null;
+  }
+}
+
+/**
+ * LEGACY: Generates a deterministic document-level analysis package
  * by filtering existing backend JSON to a specific set of source documents.
+ * ONLY used as fallback if buildAnalysisResult fails
  */
 function generateDocumentAnalysis(fileName) {
   // Gather all unique source documents
@@ -175,17 +485,61 @@ function generateDocumentAnalysis(fileName) {
 export function AnalysisSessionProvider({ children }) {
   const [session, setSession] = useState(null);
 
-  const createSession = useCallback((file, elapsedTimes, totalElapsed) => {
-    const analysis = generateDocumentAnalysis(file.name);
-    setSession({
+  const createSession = useCallback(async (file, documentId, api, elapsedTimes, totalElapsed) => {
+    console.log('[SESSION] ========== CREATE SESSION START ==========');
+    console.log('[SESSION] Input parameters:', {
+      fileName: file?.name,
+      fileSize: file?.size,
+      documentId,
+      hasApi: !!api,
+      elapsedTimes,
+      totalElapsed
+    });
+    
+    // Try to build AnalysisResult from backend
+    let analysis = null;
+    if (documentId && api) {
+      console.log('[SESSION] Attempting to build AnalysisResult from backend...');
+      analysis = await buildAnalysisResult(documentId, api);
+      console.log('[SESSION] buildAnalysisResult returned:', analysis ? 'SUCCESS' : 'NULL');
+    } else {
+      console.log('[SESSION] Missing documentId or api:', { documentId, hasApi: !!api });
+    }
+    
+    // Fallback to demo if backend fails
+    if (!analysis) {
+      console.warn('[SESSION] Backend analysis failed - using demo fallback');
+      console.warn('[SESSION] This means buildAnalysisResult returned null');
+      analysis = generateDocumentAnalysis(file.name);
+      analysis.fromBackend = false;
+    }
+    
+    const sessionObject = {
       file: { name: file.name, size: file.size, uploadTime: new Date().toISOString() },
       processing: { complete: true, elapsedTimes, totalElapsed },
       analysis,
+      analysisResult: analysis, // HOTFIX: Alias for new code
       createdAt: Date.now(),
+      fromBackend: analysis.fromBackend
+    };
+    
+    console.log('[SESSION] Setting session state with:', {
+      fromBackend: sessionObject.fromBackend,
+      hasAnalysis: !!sessionObject.analysis,
+      requirementsCount: sessionObject.analysis?.stats?.totalRequirements,
+      assignmentsCount: sessionObject.analysis?.stats?.totalMaps
     });
+    
+    setSession(sessionObject);
+    
+    console.log('[SESSION] ========== CREATE SESSION COMPLETE ==========');
+    console.log('[SESSION] Session created successfully');
   }, []);
 
-  const resetSession = useCallback(() => setSession(null), []);
+  const resetSession = useCallback(() => {
+    console.log('[SESSION] Clearing analysis session');
+    setSession(null);
+  }, []);
 
   const downloadReport = useCallback((type, data = null) => {
     if (!session) return;

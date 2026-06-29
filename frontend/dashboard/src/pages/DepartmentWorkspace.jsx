@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
+import FullTextModal from '../components/FullTextModal';
 
 export default function DepartmentWorkspace() {
   const { api, user } = useAuth();
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [completing, setCompleting] = useState({});
+  const [selectedTask, setSelectedTask] = useState(null);
+  const [showFullText, setShowFullText] = useState(false);
 
   useEffect(() => {
     loadTasks();
@@ -20,6 +23,16 @@ export default function DepartmentWorkspace() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleViewFullText = (task) => {
+    setSelectedTask(task);
+    setShowFullText(true);
+  };
+
+  const closeFullText = () => {
+    setShowFullText(false);
+    setSelectedTask(null);
   };
 
   const handleMarkCompleted = async (assignmentId) => {
@@ -187,8 +200,37 @@ export default function DepartmentWorkspace() {
             )}
 
             {/* Requirement Text */}
-            <div style={{ fontSize: 15, color: '#e2e8f0', lineHeight: 1.6, marginBottom: 16 }}>
-              {task.requirement_text}
+            <div 
+              onClick={() => handleViewFullText(task)}
+              style={{ 
+                fontSize: 15, 
+                color: '#e2e8f0', 
+                lineHeight: 1.6, 
+                marginBottom: 16,
+                cursor: 'pointer',
+                padding: 12,
+                background: 'rgba(255,255,255,0.02)',
+                borderRadius: 8,
+                border: '1px solid transparent',
+                transition: 'all 0.2s'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'rgba(96,165,250,0.08)';
+                e.currentTarget.style.borderColor = 'rgba(96,165,250,0.2)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'rgba(255,255,255,0.02)';
+                e.currentTarget.style.borderColor = 'transparent';
+              }}
+            >
+              {task.requirement_text && task.requirement_text.length > 200
+                ? `${task.requirement_text.substring(0, 200)}...`
+                : task.requirement_text || 'No description available'}
+              {task.requirement_text && task.requirement_text.length > 200 && (
+                <div style={{ marginTop: 8, fontSize: 12, color: '#60a5fa', fontWeight: 600 }}>
+                  Click to view full text →
+                </div>
+              )}
             </div>
 
             {/* Footer */}
@@ -244,6 +286,25 @@ export default function DepartmentWorkspace() {
           </div>
         ))}
       </div>
+
+      {/* Full Text Modal */}
+      <FullTextModal
+        isOpen={showFullText}
+        onClose={closeFullText}
+        data={selectedTask ? {
+          requirement: {
+            requirement_id: selectedTask.requirement_id || 'N/A',
+            text: selectedTask.requirement_text,
+            priority: selectedTask.priority,
+            domain: selectedTask.domain,
+          },
+          department_name: user?.department?.name,
+          status: selectedTask.status,
+          assigned_at: selectedTask.assigned_at,
+          completed_at: selectedTask.completed_at,
+        } : null}
+        type="assignment"
+      />
     </div>
   );
 }

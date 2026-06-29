@@ -1,25 +1,53 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { useAnalysisSession } from '../context/AnalysisSession';
+import FullTextModal from '../components/FullTextModal';
 
 export default function AssignmentCenter() {
   const { api } = useAuth();
+  const { hasSession, resetSession } = useAnalysisSession();
   const [summary, setSummary] = useState(null);
   const [loading, setLoading] = useState(true);
   const [publishing, setPublishing] = useState({});
+  const [selectedAssignment, setSelectedAssignment] = useState(null);
+  const [showFullText, setShowFullText] = useState(false);
+  const [loadingFullText, setLoadingFullText] = useState(false);
 
   useEffect(() => {
+    console.log('[ASSIGNMENT_CENTER] Loading summary from backend (session state:', hasSession, ')');
     loadSummary();
-  }, []);
+  }, [hasSession]); // Reload when session state changes
 
   const loadSummary = async () => {
+    setLoading(true);
     try {
       const response = await api.get('/assignment-center/summary');
+      console.log('[ASSIGNMENT_CENTER] Summary loaded:', response.data);
       setSummary(response.data);
     } catch (error) {
       console.error('Failed to load assignment summary:', error);
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleViewFullText = async (assignmentId) => {
+    setLoadingFullText(true);
+    try {
+      const response = await api.get(`/admin/assignments/${assignmentId}`);
+      setSelectedAssignment(response.data);
+      setShowFullText(true);
+    } catch (error) {
+      console.error('Failed to load assignment details:', error);
+      alert('Failed to load full text');
+    } finally {
+      setLoadingFullText(false);
+    }
+  };
+
+  const closeFullText = () => {
+    setShowFullText(false);
+    setSelectedAssignment(null);
   };
 
   const handlePublish = async (departmentId) => {
@@ -102,7 +130,7 @@ export default function AssignmentCenter() {
               {summary.total_maps}
             </div>
             <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.8)' }}>
-              Total MAPs Across {summary.departments.length} Departments
+              Pending MAPs (Assignments) Across {summary.departments.length} Departments
             </div>
           </div>
         </div>
@@ -185,15 +213,32 @@ export default function AssignmentCenter() {
                 {dept.requirements.slice(0, 3).map((req, idx) => (
                   <div
                     key={idx}
+                    onClick={() => handleViewFullText(req.assignment_id)}
                     style={{
                       fontSize: 13,
                       color: '#cbd5e1',
                       marginBottom: 6,
                       paddingLeft: 12,
-                      borderLeft: '2px solid rgba(59,130,246,0.3)'
+                      borderLeft: '2px solid rgba(59,130,246,0.3)',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s',
+                      padding: '8px 12px',
+                      borderRadius: 6,
+                      background: 'transparent'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = 'rgba(59,130,246,0.1)';
+                      e.currentTarget.style.borderLeftColor = '#3b82f6';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = 'transparent';
+                      e.currentTarget.style.borderLeftColor = 'rgba(59,130,246,0.3)';
                     }}
                   >
-                    {req.requirement_text.substring(0, 120)}...
+                    {req.requirement_text.substring(0, 200)}...
+                    <div style={{ fontSize: 11, color: '#60a5fa', marginTop: 4 }}>
+                      Click to view full text →
+                    </div>
                   </div>
                 ))}
                 {dept.requirements.length > 3 && (
@@ -206,6 +251,14 @@ export default function AssignmentCenter() {
           </div>
         ))}
       </div>
+
+      {/* Full Text Modal */}
+      <FullTextModal
+        isOpen={showFullText}
+        onClose={closeFullText}
+        data={selectedAssignment}
+        type="assignment"
+      />
     </div>
   );
 }

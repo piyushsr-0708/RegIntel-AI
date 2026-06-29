@@ -72,22 +72,24 @@ export default function Dashboard() {
   };
 
   let m = null;
+  const isSessionMode = hasSession && session.analysis;
 
-  if (hasSession && session.analysis) {
-    // SESSION MODE
+  if (isSessionMode) {
+    // SESSION MODE - Analysis Preview (not operational data)
     const stats = session.analysis.stats;
     m = {
       published_maps: 0,
-      pending_assignments: stats.totalMaps || 0,
+      pending_assignments: 0, // Session doesn't track operational status
       completed_assignments: 0,
-      unpublished_assignments: stats.totalMaps || 0,
+      unpublished_assignments: stats.totalMaps || 0, // Assignments generated
       critical_maps: stats.criticalMaps || 0,
       high_priority_maps: stats.highMaps || 0,
       departments_impacted: stats.departmentsImpacted || 0,
       upcoming_deadlines: stats.highMaps || 0, 
-      compliance_summary: { pending: stats.totalMaps || 0, in_progress: 0, completed: 0, overdue: 0 },
+      compliance_summary: { pending: 0, in_progress: 0, completed: 0, overdue: 0 },
       priority_distribution: { Critical: 0, High: 0, Medium: 0, Low: 0 },
-      top_risk_departments: []
+      top_risk_departments: [],
+      total_requirements: stats.totalRequirements || 0 // Add requirements count for session
     };
 
     if (session.analysis.maps) {
@@ -147,9 +149,15 @@ export default function Dashboard() {
     };
   }
 
-  const kpis = [
-    { label: "Published MAPs", value: m.published_maps, sub: "Operationally active", accent: "#a78bfa", icon: <svg width="18" height="18" fill="none" stroke="#a78bfa" strokeWidth="2" viewBox="0 0 24 24"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg> },
-    { label: "Unpublished MAPs", value: m.unpublished_assignments, sub: "Drafts awaiting review", accent: "#94a3b8", icon: <svg width="18" height="18" fill="none" stroke="#94a3b8" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg> },
+  const kpis = isSessionMode ? [
+    { label: "Requirements Extracted", value: m.total_requirements, sub: "From current document", accent: "#a78bfa", icon: <svg width="18" height="18" fill="none" stroke="#a78bfa" strokeWidth="2" viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg> },
+    { label: "Assignments Generated", value: m.unpublished_assignments, sub: "Awaiting review & publish", accent: "#94a3b8", icon: <svg width="18" height="18" fill="none" stroke="#94a3b8" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg> },
+    { label: "Critical Priority", value: m.critical_maps, sub: "Immediate action required", accent: "#ef4444", icon: <svg width="18" height="18" fill="none" stroke="#ef4444" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg> },
+    { label: "High Priority", value: m.high_priority_maps, sub: "Significant risk", accent: "#f97316", icon: <svg width="18" height="18" fill="none" stroke="#f97316" strokeWidth="2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg> },
+    { label: "Departments Impacted", value: m.departments_impacted, sub: "Require assignments", accent: "#60a5fa", icon: <svg width="18" height="18" fill="none" stroke="#60a5fa" strokeWidth="2" viewBox="0 0 24 24"><path d="M3 21h18M9 21V7l3-4 3 4v14"/></svg> },
+  ] : [
+    { label: "Published Assignments", value: m.published_maps, sub: "Operationally active", accent: "#a78bfa", icon: <svg width="18" height="18" fill="none" stroke="#a78bfa" strokeWidth="2" viewBox="0 0 24 24"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg> },
+    { label: "Draft Assignments", value: m.unpublished_assignments, sub: "Awaiting review", accent: "#94a3b8", icon: <svg width="18" height="18" fill="none" stroke="#94a3b8" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg> },
     { label: "Pending Tasks", value: m.pending_assignments, sub: "Awaiting completion", accent: "#fbbf24", icon: <svg width="18" height="18" fill="none" stroke="#fbbf24" strokeWidth="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> },
     { label: "Completed Tasks", value: m.completed_assignments, sub: "Fully resolved", accent: "#34d399", icon: <svg width="18" height="18" fill="none" stroke="#34d399" strokeWidth="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> },
     { label: "Critical Priority", value: m.critical_maps, sub: "Immediate action required", accent: "#ef4444", icon: <svg width="18" height="18" fill="none" stroke="#ef4444" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg> },
@@ -176,14 +184,25 @@ export default function Dashboard() {
         <div>
           <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 5 }}>
             <div style={{ width: 4, height: 28, borderRadius: 2, background: "linear-gradient(180deg,#10b981,#059669)", boxShadow: "0 0 10px rgba(16,185,129,0.5)" }} />
-            <h1 className="page-title">Executive Dashboard</h1>
+            <h1 className="page-title">{isSessionMode ? "Analysis Dashboard" : "Executive Dashboard"}</h1>
           </div>
-          <p className="page-subtitle" style={{ paddingLeft: 14 }}>RBI Compliance Intelligence · Real-time Regulatory Analytics</p>
+          <p className="page-subtitle" style={{ paddingLeft: 14 }}>
+            {isSessionMode 
+              ? `Document Analysis Preview · ${session.file.name}` 
+              : "RBI Compliance Intelligence · Real-time Regulatory Analytics"
+            }
+          </p>
         </div>
         <div style={{ background: "#1a2332", border: "1px solid rgba(16,185,129,0.2)", borderRadius: 9, padding: "9px 16px", textAlign: "right" }}>
-          <div style={{ fontSize: 9.5, color: "#475569", fontWeight: 700, letterSpacing: 0.5 }}>LAST UPDATED</div>
-          <div style={{ fontSize: 12.5, fontWeight: 700, color: "#f1f5f9", marginTop: 2 }}>{new Date().toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" })}</div>
-          <div style={{ fontSize: 10, color: "#10b981", marginTop: 1, fontWeight: 700 }}>● Live</div>
+          <div style={{ fontSize: 9.5, color: "#475569", fontWeight: 700, letterSpacing: 0.5 }}>
+            {isSessionMode ? "ANALYSIS MODE" : "LAST UPDATED"}
+          </div>
+          <div style={{ fontSize: 12.5, fontWeight: 700, color: "#f1f5f9", marginTop: 2 }}>
+            {isSessionMode ? "Preview Only" : new Date().toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" })}
+          </div>
+          <div style={{ fontSize: 10, color: "#10b981", marginTop: 1, fontWeight: 700 }}>
+            {isSessionMode ? "● Analysis" : "● Live"}
+          </div>
         </div>
       </div>
 

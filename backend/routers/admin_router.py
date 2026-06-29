@@ -8,7 +8,7 @@ import os
 import shutil
 from datetime import datetime
 from ..database import get_db
-from ..auth import require_head_office
+from ..auth import require_head_office, get_current_active_user
 from ..models import User
 from .. import crud, schemas
 
@@ -139,15 +139,31 @@ async def process_document(
     created_count = 0
     assignment_count = 0
     
+    # DIAGNOSTIC: Log document details
+    print(f"[PROCESS] ========== PROCESSING DOCUMENT_ID={document_id} ==========")
+    print(f"[PROCESS] original_filename: {document.original_filename}")
+    print(f"[PROCESS] filename prefix (first 10 chars): {document.original_filename[:10].upper()}")
+    
     # Create requirements and assignments
     for idx, req_data in enumerate(sample_requirements):
-        # Create requirement
-        req_id = f"REQ_{document.original_filename[:10].upper()}_{idx:04d}"
+        # Create requirement with document_id in requirement_id to ensure uniqueness across documents
+        req_id = f"REQ_DOC{document_id}_{idx:04d}"
         
-        # Check if requirement already exists
+        print(f"[PROCESS] --- Requirement {idx} ---")
+        print(f"[PROCESS] Generated req_id: {req_id}")
+        
+        # Check if requirement already exists FOR THIS DOCUMENT
+        # This prevents duplicate requirements within the same document during reprocessing
         existing_req = crud.get_requirement_by_requirement_id(db, req_id)
+        
         if existing_req:
+            print(f"[PROCESS] ⚠️  DUPLICATE FOUND: {req_id} already exists!")
+            print(f"[PROCESS]     Existing requirement.id: {existing_req.id}")
+            print(f"[PROCESS]     Existing requirement.document_id: {existing_req.document_id}")
+            print(f"[PROCESS]     SKIPPING creation for this requirement")
             continue
+        else:
+            print(f"[PROCESS] ✓ No duplicate found, creating requirement: {req_id}")
         
         requirement = crud.create_requirement(db, schemas.RequirementCreate(
             requirement_id=req_id,
@@ -159,6 +175,8 @@ async def process_document(
             source_reference=document.original_filename
         ))
         created_count += 1
+        
+        print(f"[PROCESS] ✓ Requirement created: {req_id} (id={requirement.id}, document_id={requirement.document_id})")
         
         # Determine department and create assignment
         dept_name = dept_mapping.get(req_data["domain"], "Compliance")
@@ -173,6 +191,12 @@ async def process_document(
                 assigned_by=current_user.id
             )
             assignment_count += 1
+            print(f"[PROCESS] ✓ Assignment created: id={assignment.id}, requirement_id={assignment.requirement_id}, dept={department.name}")
+    
+    print(f"[PROCESS] ========== PROCESSING COMPLETE ==========")
+    print(f"[PROCESS] FINAL created_count: {created_count}")
+    print(f"[PROCESS] FINAL assignment_count: {assignment_count}")
+    print(f"[PROCESS] ==========================================")
     
     # Mark document as processed
     crud.mark_document_processed(db, document_id)
@@ -234,6 +258,21 @@ def get_unassigned_requirements(
     """
     requirements = crud.get_unassigned_requirements(db)
     return requirements
+
+
+@router.get("/requirements/by-semantic-id/{semantic_id}", response_model=schemas.RequirementResponse)
+def get_requirement_by_semantic_id(
+    semantic_id: str,
+    current_user: User = Depends(get_current_active_user),
+    db: Session = Depends(get_db)
+):
+    """
+    Get requirement by semantic requirement_id (e.g., REQ_CIRCULAR_0001)
+    """
+    requirement = crud.get_requirement_by_requirement_id(db, semantic_id)
+    if not requirement:
+        raise HTTPException(status_code=404, detail="Requirement not found")
+    return requirement
 
 
 @router.post("/assignments", response_model=schemas.AssignmentResponse)
@@ -341,6 +380,52 @@ def get_all_assignments(
     return assignments
 
 
+@router.get("/assignments/{assignment_id}", response_model=schemas.AssignmentDetail)
+def get_assignment_detail(
+    assignment_id: int,
+    current_user: User = Depends(require_head_office),
+    db: Session = Depends(get_db)
+):
+    """
+    Get detailed information about a specific assignment including requirement text
+    """
+    assignment = crud.get_assignment_by_id(db, assignment_id)
+    
+    if not assignment:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Assignment not found"
+        )
+    
+    # Get requirement details
+    requirement = crud.get_requirement_by_id(db, assignment.requirement_id)
+    
+    if not requirement:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Associated requirement not found"
+        )
+    
+    # Get department name
+    department = crud.get_department_by_id(db, assignment.department_id)
+    department_name = department.name if department else "Unknown"
+    
+    # Build AssignmentDetail response
+    return schemas.AssignmentDetail(
+        id=assignment.id,
+        requirement_id=assignment.requirement_id,
+        department_id=assignment.department_id,
+        assigned_by=assignment.assigned_by,
+        assigned_at=assignment.assigned_at,
+        status=assignment.status,
+        remarks=assignment.remarks,
+        updated_at=assignment.updated_at,
+        completed_at=assignment.completed_at,
+        requirement=requirement,
+        department_name=department_name
+    )
+
+
 @router.get("/departments", response_model=List[schemas.DepartmentResponse])
 def get_departments(
     current_user: User = Depends(require_head_office),
@@ -365,3 +450,118 @@ def get_audit_logs(
     """
     logs = crud.get_audit_logs(db, skip=skip, limit=limit)
     return logs
+
+
+@router.get("/document-analysis/{document_id}")
+def get_document_analysis(
+    document_id: int,
+    current_user: User = Depends(require_head_office),
+    db: Session = Depends(get_db)
+):
+    """
+    Get complete analysis data for a processed document
+    Returns requirements, assignments, and aggregated stats
+    """
+    print(f"[BACKEND] ========== GET DOCUMENT ANALYSIS START ==========")
+    print(f"[BACKEND] document_id: {document_id}")
+    
+    # Get document
+    document = crud.get_document_by_id(db, document_id)
+    if not document:
+        print(f"[BACKEND] ERROR: Document not found for id={document_id}")
+        raise HTTPException(status_code=404, detail="Document not found")
+    
+    print(f"[BACKEND] Document found: {document.original_filename}")
+    
+    # Get requirements for this document
+    requirements = crud.get_requirements_by_document(db, document_id)
+    print(f"[BACKEND] Requirements fetched: {len(requirements)} rows")
+    
+    # Get assignments for this document (via requirements)
+    requirement_ids = [r.id for r in requirements]
+    print(f"[BACKEND] Requirement IDs: {requirement_ids}")
+    
+    assignments = crud.get_assignments_by_requirements(db, requirement_ids)
+    print(f"[BACKEND] Assignments fetched: {len(assignments)} rows")
+    
+    # Build assignment details with requirement and department info
+    assignment_details = []
+    for assignment in assignments:
+        requirement = next((r for r in requirements if r.id == assignment.requirement_id), None)
+        department = crud.get_department_by_id(db, assignment.department_id)
+        
+        if requirement and department:
+            assignment_details.append({
+                "id": assignment.id,
+                "requirement_id": requirement.requirement_id,
+                "requirement_text": requirement.text,
+                "department": department.name,
+                "department_id": department.id,
+                "priority": requirement.priority or "Medium",
+                "domain": requirement.domain or "General",
+                "classification": requirement.classification or "Mandatory",
+                "is_published": assignment.is_published,
+                "status": assignment.status.value if assignment.status else "pending"
+            })
+    
+    print(f"[BACKEND] Assignment details built: {len(assignment_details)} items")
+    
+    # Aggregate stats
+    from collections import Counter
+    priority_counts = Counter([a["priority"] for a in assignment_details])
+    department_counts = Counter([a["department"] for a in assignment_details])
+    
+    print(f"[BACKEND] Priority counts: {dict(priority_counts)}")
+    print(f"[BACKEND] Department counts: {dict(department_counts)}")
+    
+    # Build department summary
+    department_summary = []
+    for dept_name, total in department_counts.items():
+        dept_assignments = [a for a in assignment_details if a["department"] == dept_name]
+        dept_id = dept_assignments[0]["department_id"] if dept_assignments else 0
+        
+        department_summary.append({
+            "department_id": dept_id,
+            "department_name": dept_name,
+            "total_assignments": total,
+            "critical": sum(1 for a in dept_assignments if a["priority"] == "Critical"),
+            "high": sum(1 for a in dept_assignments if a["priority"] == "High"),
+            "medium": sum(1 for a in dept_assignments if a["priority"] == "Medium"),
+            "low": sum(1 for a in dept_assignments if a["priority"] == "Low")
+        })
+    
+    print(f"[BACKEND] Department summary built: {len(department_summary)} departments")
+    
+    response_data = {
+        "document": {
+            "id": document.id,
+            "filename": document.original_filename,
+            "uploaded_at": document.uploaded_at.isoformat() if document.uploaded_at else None,
+            "processed_at": document.processed_at.isoformat() if document.processed_at else None
+        },
+        "counts": {
+            "requirements_extracted": len(requirements),
+            "assignments_generated": len(assignments),
+            "departments_affected": len(department_counts),
+            "critical_priority": priority_counts.get("Critical", 0),
+            "high_priority": priority_counts.get("High", 0),
+            "medium_priority": priority_counts.get("Medium", 0),
+            "low_priority": priority_counts.get("Low", 0)
+        },
+        "assignments": assignment_details,
+        "department_summary": department_summary,
+        "priority_distribution": {
+            "Critical": priority_counts.get("Critical", 0),
+            "High": priority_counts.get("High", 0),
+            "Medium": priority_counts.get("Medium", 0),
+            "Low": priority_counts.get("Low", 0)
+        }
+    }
+    
+    print(f"[BACKEND] Response prepared with:")
+    print(f"[BACKEND]   - requirements_extracted: {response_data['counts']['requirements_extracted']}")
+    print(f"[BACKEND]   - assignments_generated: {response_data['counts']['assignments_generated']}")
+    print(f"[BACKEND]   - departments_affected: {response_data['counts']['departments_affected']}")
+    print(f"[BACKEND] ========== GET DOCUMENT ANALYSIS COMPLETE ==========")
+    
+    return response_data

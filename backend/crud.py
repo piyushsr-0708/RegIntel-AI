@@ -148,6 +148,20 @@ def get_all_requirements(db: Session, skip: int = 0, limit: int = 100) -> List[m
     return db.query(models.Requirement).offset(skip).limit(limit).all()
 
 
+def get_requirements_by_document(db: Session, document_id: int) -> List[models.Requirement]:
+    """Get all requirements for a specific document"""
+    return db.query(models.Requirement).filter(
+        models.Requirement.document_id == document_id
+    ).all()
+
+
+def get_assignments_by_requirements(db: Session, requirement_ids: List[int]) -> List[models.Assignment]:
+    """Get all assignments for a list of requirement IDs"""
+    return db.query(models.Assignment).filter(
+        models.Assignment.requirement_id.in_(requirement_ids)
+    ).all()
+
+
 def get_unassigned_requirements(db: Session) -> List[models.Requirement]:
     """Get requirements that haven't been assigned to any department"""
     assigned_req_ids = db.query(models.Assignment.requirement_id).distinct()
@@ -274,29 +288,24 @@ def get_audit_logs(
 def get_dashboard_summary(db: Session) -> dict:
     """Get overall dashboard summary statistics"""
     total_docs = db.query(func.count(models.Document.id)).scalar()
-    
-    import json
-    import os
-    try:
-        json_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "requirements", "requirements_taxonomy.json")
-        with open(json_path, 'r', encoding='utf-8') as f:
-            total_reqs = len(json.load(f))
-    except Exception:
-        total_reqs = db.query(func.count(models.Requirement.id)).scalar()
-        
+    total_reqs = db.query(func.count(models.Requirement.id)).scalar()
     total_assignments = db.query(func.count(models.Assignment.id)).scalar()
     
+    # Operational metrics - only published assignments
     pending = db.query(func.count(models.Assignment.id)).filter(
-        models.Assignment.status == "pending"
-    ).scalar()
+        models.Assignment.status == "pending",
+        models.Assignment.is_published == True
+    ).scalar() or 0
     
     in_progress = db.query(func.count(models.Assignment.id)).filter(
-        models.Assignment.status == "in_progress"
-    ).scalar()
+        models.Assignment.status == "in_progress",
+        models.Assignment.is_published == True
+    ).scalar() or 0
     
     completed = db.query(func.count(models.Assignment.id)).filter(
-        models.Assignment.status == "completed"
-    ).scalar()
+        models.Assignment.status == "completed",
+        models.Assignment.is_published == True
+    ).scalar() or 0
     
     completion_pct = (completed / total_assignments * 100) if total_assignments > 0 else 0.0
     
@@ -306,12 +315,14 @@ def get_dashboard_summary(db: Session) -> dict:
     
     departments_impacted = db.query(func.count(func.distinct(models.Assignment.department_id))).filter(models.Assignment.is_published == True).scalar() or 0
     
-    # Priority logic: aggregate priority from Assignment, fallback to Requirement
+    # Priority logic: aggregate priority from Assignment, fallback to Requirement - only published
     from datetime import timedelta
     now = datetime.utcnow()
     upcoming_limit = now + timedelta(days=30)
     
-    assignments = db.query(models.Assignment, models.Requirement).outerjoin(models.Requirement).all()
+    assignments = db.query(models.Assignment, models.Requirement).filter(
+        models.Assignment.is_published == True
+    ).outerjoin(models.Requirement).all()
     priority_dist = {"Critical": 0, "High": 0, "Medium": 0, "Low": 0}
     upcoming_deadlines = 0
     
@@ -320,10 +331,8 @@ def get_dashboard_summary(db: Session) -> dict:
         if p in priority_dist:
             priority_dist[p] += 1
             
-        if a.due_date:
-            if a.due_date <= upcoming_limit:
-                upcoming_deadlines += 1
-        elif p in ["Critical", "High"]:
+        # Only count assignments with actual due_date within 30 days
+        if a.due_date and a.due_date <= upcoming_limit:
             upcoming_deadlines += 1
             
     return {

@@ -102,9 +102,15 @@ export default function MapDetail() {
             <div style={{ fontSize: 10, color: "#475569", fontWeight: 700, marginBottom: 7 }}>CONFIDENCE SCORE</div>
             <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
               <div style={{ flex: 1, height: 8, background: "#162030", borderRadius: 4, overflow: "hidden" }}>
-                <div style={{ width: `${data.department.confidence * 100}%`, height: "100%", background: "linear-gradient(90deg,#10b981,#34d399)", borderRadius: 4 }} />
+                <div style={{ width: `${(() => {
+                  const conf = data.department.confidence > 1 ? data.department.confidence / 100 : data.department.confidence;
+                  return conf * 100;
+                })()}%`, height: "100%", background: "linear-gradient(90deg,#10b981,#34d399)", borderRadius: 4 }} />
               </div>
-              <span style={{ fontSize: 14, fontWeight: 800, color: "#34d399" }}>{(data.department.confidence * 100).toFixed(0)}%</span>
+              <span style={{ fontSize: 14, fontWeight: 800, color: "#34d399" }}>{(() => {
+                const conf = data.department.confidence > 1 ? data.department.confidence / 100 : data.department.confidence;
+                return (conf * 100).toFixed(0);
+              })()}%</span>
             </div>
           </div>
           <div>
